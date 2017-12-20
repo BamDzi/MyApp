@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Rejestracja</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        .navbar a {
+            /*float: left;*/
+            display: block;
+            color: #f2f2f2;
+            /*text-align: center;*/
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .main {
+            margin-top: 100px;
+        }
+
+        .jumbotron {
+            margin-bottom: 10;
+        }
+
+        .btn-group button {
+            background-color: #4CAF50;
+            /* Green background */
+            border: 1px solid green;
+            /* Green border */
+            color: white;
+            /* White text */
+            padding: 10px 24px;
+            /* Some padding */
+            cursor: pointer;
+            /* Pointer/hand icon */
+            width: 100%;
+            /* Set a width if needed */
+            display: block;
+            /* Make the buttons appear below each other */
+        }
+
+        .btn-group button:not(:last-child) {
+            border-bottom: none;
+            /* Prevent double borders */
+        }
+
+        /* Add a background color on hover */
+
+        .btn-group button:hover {
+            background-color: lightgreen;
+        }
+
+        footer {
+            /* background-color: #555;
+      color: white;
+      padding: 15px;*/
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <!-- <li><a href="#">Home</a></li> -->
+                    <li>
+                        <a href="#">O nas</a>
+                    </li>
+                    <li>
+                        <a href="#">Punkty odbioru</a>
+                    </li>
+                    <li>
+                        <a href="#">Kontakt</a>
+                    </li>
+                </ul>
+                <!-- <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logowanie/Rejestracja</a></li>
+      </ul> -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- <div class="jumbotron main">
+  <div class="container text-center">
+    <h1>My Portfolio</h1>      
+    <p>Some text that represents "Me"...</p>
+  </div>
+</div> -->
+
+    <div class="container main">
+        <h1 class="text-center">Rejestracja</h1>
+        <form action="/action_page.php">
+            <div class="form-group">
+                <label for="email">E-mail (login)</label>
+                <input type="email" class="form-control" id="email" placeholder="Wpisz e-mail" name="email" />
+            </div>
+            <div class="form-group">
+                <label for="pwd">Hasło</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd" />
+            </div>
+            <p>Minimalnie 6 znaków</p>
+            <div class="form-group">
+                <label for="pwd">Powtórz Hasło</label>
+                <input type="password" class="form-control" id="pwd" placeholder="Powtórz hasło" name="pwd" />
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember" /> Akceptuję
+                    <a href="">regulamin</a>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-default">Zarejestruj</button>
+        </form>
+    </div>
+    <br/>
+    <br/>
+
+
+    <!-- 
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+  <p>Pomoc    FAQ     Regulamin    Sprzedawcy</p>
+</footer> -->
+</body>
+
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <title>Rejestracja</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+</head>
+<body>
+<div class="container">
+<br>
+<form>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+    </div>
+    <br>
+    <div class="input-group">
+      <span class="input-group-addon">Text</span>
+      <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+    </div>
+  </form>
+  <h2>Vertical (basic) form</h2>
+  <form action="/action_page.php">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+    </div>
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Remember me</label>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+
+
+</div>
+</body>
+</html> -->
