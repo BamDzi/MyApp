@@ -92,7 +92,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <!-- <li><a href="#">Home</a></li> -->
+
                     <li>
                         <a href="#">O nas</a>
                     </li>
@@ -103,104 +103,130 @@
                         <a href="#">Kontakt</a>
                     </li>
                 </ul>
-                <!-- <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Logowanie/Rejestracja</a></li>
-      </ul> -->
+
             </div>
         </div>
     </nav>
 
-    <!-- <div class="jumbotron main">
-  <div class="container text-center">
-    <h1>My Portfolio</h1>      
-    <p>Some text that represents "Me"...</p>
-  </div>
-</div> -->
 
-    <div class="container main">
-        <h1 class="text-center">Rejestracja</h1>
-        <form action="/action_page.php">
-            <div class="form-group">
-                <label for="email">E-mail (login)</label>
-                <input type="email" class="form-control" id="email" placeholder="Wpisz e-mail" name="email" />
-            </div>
-            <div class="form-group">
-                <label for="pwd">Hasło</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd" />
-            </div>
-            <p>Minimalnie 6 znaków</p>
+
+    <!-- <div class="container main"> -->
+    <div> class="container"
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+                <!-- <form action="/action_page.php"> -->
+                <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="form-horizontal"
+                    role="form">
+                    <h1 class="text-center">Rejestracja</h1>
+                   <!--  <div class="form-group">
+                        <label for="email">E-mail (login)</label>
+                        <input type="email" class="form-control" id="email" placeholder="Wpisz e-mail" name="email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Hasło</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Wpisz hasło" name="pwd" />
+                    </div> -->
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="email" th:field="*{email}" placeholder="Email" class="form-control" />
+                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-9">
+                            <input type="password" th:field="*{password}" placeholder="Password" class="form-control" />
+                            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
+                        </div>
+                    </div>
+                    <!-- <p>Minimum 6 znaków</p>
             <div class="form-group">
                 <label for="pwd">Powtórz Hasło</label>
                 <input type="password" class="form-control" id="pwd" placeholder="Powtórz hasło" name="pwd" />
+            </div> -->
+                   <!--  <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember" /> Akceptuję
+                            <a href="" th:href="@{/regulations}">regulamin</a>
+                        </label>
+                    </div> -->
+                    <!-- <div class="form-group">
+                        <div class="col-sm-9">
+                            <button type="submit" class="btn btn-default">Zarejestruj</button>
+                        </div>
+                    </div> -->
+                    
+                    <div class="form-group">
+						<div class="col-sm-9">
+							<button type="submit" class="btn btn-primary btn-block">Register
+								User</button>
+						</div>
+					</div>
+
+                    <span th:utext="${successMessage}"></span>
+
+                </form>
             </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="remember" /> Akceptuję
-                    <a href="">regulamin</a>
-                </label>
-            </div>
-            <button type="submit" class="btn btn-default">Zarejestruj</button>
-        </form>
+        </div>
     </div>
     <br/>
     <br/>
 
 
-    <!-- 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-  <p>Pomoc    FAQ     Regulamin    Sprzedawcy</p>
-</footer> -->
+    <footer class="container-fluid text-center">
+        <p>Footer Text</p>
+        <p>Pomoc FAQ Regulamin Sprzedawcy</p>
+    </footer>
 </body>
 
 </html>
 
 
-
-
-
-
-<!-- <!DOCTYPE html>
+<!-- 
+<!DOCTYPE html>
 <html>
 <head>
   <title>Rejestracja</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
 </head>
 <body>
 <div class="container">
-<br>
+<br/>
 <form>
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input id="email" type="text" class="form-control" name="email" placeholder="Email">
+      <input id="email" type="text" class="form-control" name="email" placeholder="Email" />
     </div>
     <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-      <input id="password" type="password" class="form-control" name="password" placeholder="Password">
+      <input id="password" type="password" class="form-control" name="password" placeholder="Password" />
     </div>
-    <br>
+    <br/>
     <div class="input-group">
       <span class="input-group-addon">Text</span>
-      <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info">
+      <input id="msg" type="text" class="form-control" name="msg" placeholder="Additional Info" />
     </div>
   </form>
   <h2>Vertical (basic) form</h2>
   <form action="/action_page.php">
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" />
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd" />
     </div>
     <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
+      <label><input type="checkbox" name="remember" /> Remember me</label>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
