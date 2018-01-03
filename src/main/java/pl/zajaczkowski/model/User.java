@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+//import javax.validation.constraints.Min;
+//import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -25,10 +28,13 @@ public class User {
 	@GeneratedValue
 	@Column(name="user_id")
 	private Long id;
-	@Column(name = "email")
+	@Column(name = "email", nullable = false, unique = true)
 	@Email(message = "*Proszę wprowadzić prawidłowo adres e-mail")
 	@NotEmpty(message = "*Proszę wprowadzić adres e-mail")
 	private String email;
+//	@NotNull
+//	@Min(7)
+//	@Size(min=2, max=8)
 	@Column(name = "password")
 	@Length(min = 8, message = "*Twoje hasło musi posiadać conajmniej 8 znaków")
 	@NotEmpty(message = "*Proszę wprowadzić swoje hasło")
@@ -39,7 +45,9 @@ public class User {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
-	
+	@Column(name = "confirmation_token")
+	private String confirmationToken;
+
 	public Long getId() {
 		return id;
 	}
@@ -70,6 +78,10 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	
-	
+	public String getConfirmationToken() {
+		return confirmationToken;
+	}
+	public void setConfirmationToken(String confirmationToken) {
+		this.confirmationToken = confirmationToken;
+	}
 }

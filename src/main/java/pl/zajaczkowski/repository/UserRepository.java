@@ -9,4 +9,6 @@ import pl.zajaczkowski.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	User findByEmail(String email);
+	User findByConfirmationToken(String confirmationToken);
+    User findById(Long id);
 }
