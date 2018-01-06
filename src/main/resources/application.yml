@@ -1,0 +1,94 @@
+spring:
+  datasource:                                     # = DATA SOURCE
+    url: jdbc:mysql://172.17.0.2:3306/MyApp
+    username: root
+    password: pass
+    driverClassName: com.mysql.jdbc.Driver
+    tomcat:
+      maxWait: 10000
+      initial-size: 7
+      minIdle: 5
+      maxIdle: 5
+      maxActive: 10
+      testOnBorrow: true
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:                                            # = JPA / HIBERNATE
+      showSql: true
+      hibernate:
+        ddlAuto: update
+        naming:
+          strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL5Dialect
+  thymeleaf:                                       # = Thymeleaf configurations   
+    mode: HTML5
+    cache: false
+  mail:                                           # SMTP EMAIL
+    host: aspmx.l.google.com
+    port: 25
+    username: programowanie11
+    password: nTuV0SGT890jiZ5kFtME
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  queries:                                         # = Spring Security / Queries for AuthenticationManagerBuilder
+    usersQuery: select email, password, active from user where email=?
+    rolesQuery: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+
+# ===============================
+# TOMCAT
+# ===============================
+server:
+  address: 127.0.0.1
+  error:
+    whitelabel:
+      enabled: false
+  tomcat:
+    accesslog:
+      enabled: true
+
+# ===============================
+# = LOGGING
+# ===============================
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+      hibernate: ERROR   
+  
+# ==============================================================
+  
+
+#security:
+#     ignored: /**
+#     oauth2:
+google:
+  client:
+    clientId: 816808026805-i8a4jksobgs3ogb6gb81r21kvgpr3u3t.apps.googleusercontent.com
+    clientSecret: 7UTR8LixN5FozdqYfn_Wq41I
+    accessTokenUri: https://www.googleapis.com/oauth2/v3/token
+    userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+    scope: profile
+  resource:
+    userInfoUri: https://www.googleapis.com/userinfo/v2/me
+    preferTokenInfo: false
+facebook:                                                 # = FACEBOOK
+  client:
+    clientId: 233668646673605
+    clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+    accessTokenUri: https://graph.facebook.com/oauth/access_token
+    userAuthorizationUri: https://www.facebook.com/dialog/oauth
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://graph.facebook.com/me

@@ -1,5 +1,8 @@
 package pl.zajaczkowski.configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.Filter;
 import javax.sql.DataSource;
 
@@ -26,6 +29,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.filter.CompositeFilter;
 
 @Configuration
 @EnableOAuth2Client
@@ -41,10 +45,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
-	@Value("${spring.queries.users-query}")
+	@Value("${spring.queries.usersQuery}")
 	private String usersQuery;
 	
-	@Value("${spring.queries.roles-query}")
+	@Value("${spring.queries.rolesQuery}")
 	private String rolesQuery;
 
 	@Override
@@ -105,15 +109,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
 
-	private Filter ssoFilter() {
+	private Filter ssoFacebookFilter() {
 		OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter(
 				"/login/facebook");
 		OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook(), oauth2ClientContext);
 		facebookFilter.setRestTemplate(facebookTemplate);
-		UserInfoTokenServices tokenServices = new UserInfoTokenServices(facebookResource().getUserInfoUri(),
-				facebook().getClientId());
-		tokenServices.setRestTemplate(facebookTemplate);
-		facebookFilter.setTokenServices(tokenServices);
+		facebookFilter.setTokenServices(new UserInfoTokenServices(facebookResource().getUserInfoUri(),
+				facebook().getClientId()));
+//		UserInfoTokenServices tokenServices = new UserInfoTokenServices(facebookResource().getUserInfoUri(),
+//				facebook().getClientId());
+//		tokenServices.setRestTemplate(facebookTemplate);
+//		facebookFilter.setTokenServices(tokenServices);
 		return facebookFilter;
 	}
 
@@ -137,5 +143,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		return registration;
 	}
 
+	@Bean
+	@ConfigurationProperties("google.client")		//("security.oauth2.google.client")
+	public AuthorizationCodeResourceDetails google() {
+	    return new AuthorizationCodeResourceDetails();
+	}
+
+	@Bean
+	@ConfigurationProperties("google.resource")		//("security.oauth2.google.resource")
+	public ResourceServerProperties googleResource() {
+	    return new ResourceServerProperties();
+	}
+
+	private Filter ssoGoogleFilter() {
+	    OAuth2ClientAuthenticationProcessingFilter googleFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/google");
+	    OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google(), oauth2ClientContext);
+	    googleFilter.setRestTemplate(googleTemplate);
+	    googleFilter.setTokenServices(new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId()));
+	    return googleFilter;
+	}
+	
+	private Filter ssoFilter() {
+	     List<Filter> filters = new ArrayList<>();
+	     filters.add(ssoGoogleFilter());
+	     filters.add(ssoFacebookFilter());
+	 
+	     CompositeFilter filter = new CompositeFilter();
+	     filter.setFilters(filters);
+	     return filter;
+	}
 
 }

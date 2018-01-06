@@ -1,0 +1,222 @@
+{"properties": [
+  {
+    "name": "spring.queries.users-query",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.queries.users-query'"
+  },
+  {
+    "name": "spring.queries.roles-query",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.queries.roles-query'"
+  },
+  {
+    "name": "spring.datasources.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.url'"
+  },
+  {
+    "name": "spring.datasources.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.username'"
+  },
+  {
+    "name": "spring.datasources.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.password'"
+  },
+  {
+    "name": "spring.datasources.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.driver-class-name'"
+  },
+  {
+    "name": "spring.datasources.tomcat.max-wait",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.tomcat.max-wait'"
+  },
+  {
+    "name": "spring.datasources.test-while-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.test-while-idle'"
+  },
+  {
+    "name": "spring.datasources.tomcat.test-on-borrow",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.tomcat.test-on-borrow'"
+  },
+  {
+    "name": "spring.datasources.tomcat.max-active",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.tomcat.max-active'"
+  },
+  {
+    "name": "spring.datasources.tomcat.max-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.tomcat.max-idle'"
+  },
+  {
+    "name": "spring.datasources.tomcat.min-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.tomcat.min-idle'"
+  },
+  {
+    "name": "spring.datasources.tomcat.initial-size",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.tomcat.initial-size'"
+  },
+  {
+    "name": "spring.datasources.validation-query",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasources.validation-query'"
+  },
+  {
+    "name": "spring.datasource.test-while-idle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.test-while-idle'"
+  },
+  {
+    "name": "spring.datasource.validation-query",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.validation-query'"
+  },
+  {
+    "name": "security.oauth2.google.client.client-id",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.client-id'"
+  },
+  {
+    "name": "security.oauth2.google.client.client-secret",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.client-secret'"
+  },
+  {
+    "name": "security.oauth2.google.client.access-token-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.access-token-uri'"
+  },
+  {
+    "name": "security.oauth2.google.client.user-authorization-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.user-authorization-uri'"
+  },
+  {
+    "name": "security.oauth2.google.client.token-name",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.token-name'"
+  },
+  {
+    "name": "security.oauth2.google.client.authentication-scheme",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.authentication-scheme'"
+  },
+  {
+    "name": "security.oauth2.google.client.client-authentication-scheme",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.client-authentication-scheme'"
+  },
+  {
+    "name": "security.oauth2.google.client.scope",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.client.scope'"
+  },
+  {
+    "name": "security.oauth2.google.resource.user-info-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.resource.user-info-uri'"
+  },
+  {
+    "name": "security.oauth2.google.resource.prefer-token-info",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.google.resource.prefer-token-info'"
+  },
+  {
+    "name": "security.oauth2.facebook.client.client-id",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.client.client-id'"
+  },
+  {
+    "name": "security.oauth2.facebook.client.client-secret",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.client.client-secret'"
+  },
+  {
+    "name": "security.oauth2.facebook.client.access-token-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.client.access-token-uri'"
+  },
+  {
+    "name": "security.oauth2.facebook.client.user-authorization-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.client.user-authorization-uri'"
+  },
+  {
+    "name": "security.oauth2.facebook.client.token-name",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.client.token-name'"
+  },
+  {
+    "name": "security.oauth2.facebook.client.authentication-scheme",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.client.authentication-scheme'"
+  },
+  {
+    "name": "security.oauth2.facebook.client.client-authentication-scheme",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.client.client-authentication-scheme'"
+  },
+  {
+    "name": "security.oauth2.facebook.resource.user-info-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'security.oauth2.facebook.resource.user-info-uri'"
+  },
+  {
+    "name": "google.client.client-id",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.client-id'"
+  },
+  {
+    "name": "google.client.client-secret",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.client-secret'"
+  },
+  {
+    "name": "google.client.access-token-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.access-token-uri'"
+  },
+  {
+    "name": "google.client.user-authorization-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.user-authorization-uri'"
+  },
+  {
+    "name": "google.client.token-name",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.token-name'"
+  },
+  {
+    "name": "google.client.authentication-scheme",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.authentication-scheme'"
+  },
+  {
+    "name": "google.client.client-authentication-scheme",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.client-authentication-scheme'"
+  },
+  {
+    "name": "google.client.scope",
+    "type": "java.lang.String",
+    "description": "A description for 'google.client.scope'"
+  },
+  {
+    "name": "google.resource.user-info-uri",
+    "type": "java.lang.String",
+    "description": "A description for 'google.resource.user-info-uri'"
+  },
+  {
+    "name": "google.resource.prefer-token-info",
+    "type": "java.lang.String",
+    "description": "A description for 'google.resource.prefer-token-info'"
+  }
+]}
