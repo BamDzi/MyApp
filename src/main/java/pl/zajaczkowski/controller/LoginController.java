@@ -119,6 +119,11 @@ public class LoginController {
 		return "admin/adminpage";
 	}
 	
+	@GetMapping("/access-denied")
+	public String denied() {
+		return "denied";
+	}
+	
 	@GetMapping("online")
 	public String helloPage() {
 		return "online";

@@ -1,78 +1,84 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Login</title>
-<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 	<form th:action="@{/registration}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go
-			To Registration Page</button>
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
 	</form>
 
 	<div class="container">
-		<img th:src="@{/images/logo.jpeg}" class="img-responsive center-block"
-			width="300" height="300" alt="Logo" />
+		<img th:src="@{/images/logo.jpeg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
 		<form th:action="@{/login}" method="POST" class="form-signin">
 			<h3 class="form-signin-heading" th:text="Welcome"></h3>
-			<br /> <input type="text" id="email" name="email"
-				th:placeholder="Email" class="form-control" /> <br /> <input
-				type="password" th:placeholder="Password" id="password"
-				name="password" class="form-control" /> <br />
+			<br />
+			<input type="text" id="email" name="email" th:placeholder="Email" class="form-control" />
+			<br />
+			<input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
+			<br />
 
 			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email or Password
-					invalid, please verify</p>
+				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
 			</div>
-			<button class="btn btn-lg btn-primary btn-block" name="Submit"
-				value="Login" type="Submit" th:text="Login"></button>
+			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
 		</form>
 	</div>
 	<div class="container unauthenticated" ng-show="!home.authenticated">
 		<div>
-			With Facebook: <a href="/login/facebook">click here</a>
+			With Facebook:
+			<a href="/login/facebook">click here</a>
 		</div>
 		<div>
-			With Google: <a href="/login/google">click here</a>
+			With Google:
+			<a href="/login/google">click here</a>
 		</div>
 	</div>
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</h1>
+	<form th:action="@{/logout}" method="POST" >
 	<div class="container" ng-show="home.authenticated">
 		Logged in as: <span ng-bind="home.user"></span>
 		<div>
 			<button ng-click="home.logout()" class="btn btn-primary">Logout</button>
 		</div>
 	</div>
+	</form>
+	<!-- <div class="container authenticated">
+		Logged in as:
+		<span id="user"></span>
+		<div>
+			<button onClick="logout()" class="btn btn-primary">Logout</button>
+		</div>
+	</div> -->
 	<!-- <script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script> -->
 	<script type="text/javascript">
 		angular.module("app", []).controller("home",
-				function($http, $location) {
-					var self = this;
-					$http.get("/user").success(function(data) {
-						self.user = data.userAuthentication.details.name;
-						self.authenticated = true;
-					}).error(function() {
-						self.user = "N/A";
-						self.authenticated = false;
-					});
-					self.logout = function() {
-						$http.post('/logout', {}).success(function() {
-							self.authenticated = false;
-							$location.path("/");
-						}).error(function(data) {
-							console.log("Logout failed")
-							self.authenticated = false;
-						});
-					};
+			function ($http, $location) {
+				var self = this;
+				$http.get("/user").success(function (data) {
+					self.user = data.userAuthentication.details.name;
+					self.authenticated = true;
+				}).error(function () {
+					self.user = "N/A";
+					self.authenticated = false;
 				});
+ 				 self.logout = function() {
+				 	$http.post('/logout', {}).success(function() {
+				 		self.authenticated = false;
+				 		$location.path("/");
+				 	}).error(function(data) {
+				 		console.log("Logout failed")
+				 		self.authenticated = false;
+				 	});
+				 };
+			});
 	</script>
 </body>
+
 </html>

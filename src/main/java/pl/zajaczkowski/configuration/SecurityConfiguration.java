@@ -1,9 +1,13 @@
 package pl.zajaczkowski.configuration;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
@@ -26,6 +31,7 @@ import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticat
 import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -84,20 +90,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/login", "/registration", "/confirm", "/update").permitAll() //paths are configured to not require any authentication
 				.antMatchers("/admin/**").hasAuthority("ADMIN")	//require admin role
 				.anyRequest().authenticated()//All other paths must be authenticated
-				.and()
-				//.csrf().disable()		//CSRF protection is enabled by default
-				.formLogin().loginPage("/login")	//supported method 'POST' for request /login!!!!!!
-													//When a user successfully logs in, they will be redirected to the previously 
-													//requested page that required authentication.
+				.and().formLogin().loginPage("/login")	//supported method 'POST' for request /login!!!!!!
+     													//When a user successfully logs in, they will be redirected to the previously 
+	    												//requested page that required authentication.
 //				.failureUrl("/login?error=true")
 				.defaultSuccessUrl("/online")
 				.usernameParameter("email")
 				.passwordParameter("password")
-				.and()
-				.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))	//?????????????
-				.logoutSuccessUrl("/").and().exceptionHandling()
-				.accessDeniedPage("/access-denied")
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+				.and().exceptionHandling().accessDeniedPage("/access-denied")
 				.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 		        .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
 	}
@@ -112,14 +113,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private Filter ssoFacebookFilter() {
 		OAuth2ClientAuthenticationProcessingFilter facebookFilter = new OAuth2ClientAuthenticationProcessingFilter(
 				"/login/facebook");
-		OAuth2RestTemplate facebookTemplate = new OAuth2RestTemplate(facebook(), oauth2ClientContext);
-		facebookFilter.setRestTemplate(facebookTemplate);
+		facebookFilter.setRestTemplate(new OAuth2RestTemplate(facebook(), oauth2ClientContext));
 		facebookFilter.setTokenServices(new UserInfoTokenServices(facebookResource().getUserInfoUri(),
 				facebook().getClientId()));
-//		UserInfoTokenServices tokenServices = new UserInfoTokenServices(facebookResource().getUserInfoUri(),
-//				facebook().getClientId());
-//		tokenServices.setRestTemplate(facebookTemplate);
-//		facebookFilter.setTokenServices(tokenServices);
+		facebookFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
+		    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+		        this.setDefaultTargetUrl("/contact");
+		        super.onAuthenticationSuccess(request, response, authentication);
+		    }
+		});
 		return facebookFilter;
 	}
 
@@ -157,9 +159,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private Filter ssoGoogleFilter() {
 	    OAuth2ClientAuthenticationProcessingFilter googleFilter = new OAuth2ClientAuthenticationProcessingFilter("/login/google");
-	    OAuth2RestTemplate googleTemplate = new OAuth2RestTemplate(google(), oauth2ClientContext);
-	    googleFilter.setRestTemplate(googleTemplate);
+	    googleFilter.setRestTemplate(new OAuth2RestTemplate(google(), oauth2ClientContext));
 	    googleFilter.setTokenServices(new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId()));
+	    googleFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
+		    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+		        this.setDefaultTargetUrl("/contact");
+		        super.onAuthenticationSuccess(request, response, authentication);
+		    }
+		});
 	    return googleFilter;
 	}
 	
