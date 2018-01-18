@@ -76,10 +76,15 @@
             padding: 25px;
         }
     </style>
+    <script> 
+        $(function () {
+            $("#header").load("signon.html");
+        });
+    </script>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
+    <!-- <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -91,7 +96,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <!-- <li><a href="#">Home</a></li> -->
+                    
                     <li>
                         <a href="#">O nas</a>
                     </li>
@@ -99,12 +104,12 @@
                         <a href="#">Punkty odbioru</a>
                     </li>
                     <li>
-                            <!-- <a href="contact.html" th:href="@{http://localhost:8080/contact}">Kontak1</a> -->
+                       
                         <a href="#">Kontakt</a>
                     </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Moje konto</a></li> -->
+
                     <li>
                         <a href="#">
                             <span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a>
@@ -130,12 +135,12 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a></li> -->
+
                 </ul>
             </div>
         </div>
-    </nav>
-
+    </nav> -->
+    <div id="header"></div>
     <div class="jumbotron main">
         <div class="container text-center">
             <h1>My Portfolio</h1>

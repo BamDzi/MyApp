@@ -87,9 +87,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		http.
 			authorizeRequests()
-				.antMatchers("/", "/login", "/registration", "/confirm", "/update").permitAll() //paths are configured to not require any authentication
-				.antMatchers("/admin/**").hasAuthority("ADMIN")	//require admin role
-				.anyRequest().authenticated()//All other paths must be authenticated
+//				.antMatchers("/", "/login", "/registration", "/confirm", "/update").permitAll() //paths are configured to not require any authentication
+				.antMatchers("/vendor/**").hasAuthority("ADMIN")	//require admin role
+//				.anyRequest().authenticated()//All other paths must be authenticated
+				.antMatchers("/basket", "/submit").authenticated()
+				.anyRequest().permitAll()
 				.and().formLogin().loginPage("/login")	//supported method 'POST' for request /login!!!!!!
      													//When a user successfully logs in, they will be redirected to the previously 
 	    												//requested page that required authentication.

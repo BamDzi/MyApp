@@ -114,10 +114,10 @@ public class LoginController {
 		return "redirect:/register";
 	}
 
-	@GetMapping("/admin")
-	public String home() {
-		return "admin/adminpage";
-	}
+//	@GetMapping("/vendor")
+//	public String home() {
+//		return "vendor/vendorpage";
+//	}
 	
 	@GetMapping("/access-denied")
 	public String denied() {
@@ -137,5 +137,20 @@ public class LoginController {
 	@GetMapping("contact")
 	public String contact() {
 		return "contact";
+	}
+	
+	@GetMapping("meat")
+	public String meat() {
+		return "meat";
+	}
+	
+	@GetMapping("basket")
+	public String basket() {
+		return "basket";
+	}
+	
+	@GetMapping("submit")
+	public String submit() {
+		return "submit";
 	}
 }

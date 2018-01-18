@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sprzedawca</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse visible-xs">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="#addProduct">Dodaj Produkt</a>
+                    </li>
+                    <li>
+                        <a href="#productList">Lista Produktów</a>
+                    </li>
+                    <li>
+                        <a href="#historyOfOrders">Historia Zakupów</a>
+                    </li>
+                    <li>
+                        <a href="#aboutMe">O Mnie</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-2 sidenav hidden-xs">
+                <h2>Logo</h2>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active">
+                        <a href="#addProduct">Dodaj Produkt</a>
+                    </li>
+                    <li>
+                        <a href="#productList">Lista Produktów</a>
+                    </li>
+                    <li>
+                        <a href="#historyOfOrders">Historia Zakupów</a>
+                    </li>
+                    <li>
+                        <a href="#aboutMe">O Mnie</a>
+                    </li>
+                </ul>
+                <br/>
+            </div>
+            <br/>
+
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h4>Wstaw zdjęcie</h4>
+                            <img src="cinqueterre.jpg" class="img-thumbnail" alt="Zdjęcie" />
+
+                        </div>
+
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="well">
+
+                            <form action="#" th:action="@{/addproduct}" th:object="${product}" method="post" class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <!-- <label>Nazwa Produktu</label> -->
+                                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa produktu:</label>
+                                    <input type="text" th:field="*{name}" placeholder="Nazwa produktu" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="quantity">Ilość:</label>
+                                    <input type="text" class="form-control" id="quantity" /> -->
+                                    <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="validation-message">Ilośćtest:</label>
+                                    <input type="text" th:field="*{quantity}" placeholder="Ilosc" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="purchasePrice">Cena za sztuke:</label>
+                                    <input type="text" class="form-control" id="purchasePrice" /> -->
+                                    <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="validation-message">Cena za sztuke:</label>
+                                    <input type="text" th:field="*{price}" placeholder="Cena za sztuke" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="description">Opis produktu:</label>
+                                    <input type="text" class="form-control" id="description" /> -->
+                                    <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="validation-message">Opis produktu:</label>
+                                    <input type="text" th:field="*{description}" placeholder="Opis produktu" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="component">Składniki:</label>
+                                    <input type="text" class="form-control" id="component" /> -->
+                                    <label th:if="${#fields.hasErrors('components')}" th:errors="*{components}" class="validation-message">Składniki:</label>
+                                    <input type="text" th:field="*{components}" placeholder="Składniki" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <!-- <label for="tips">Wskazówki:</label>
+                                    <input type="text" class="form-control" id="tips" /> -->
+                                    <label th:if="${#fields.hasErrors('tips')}" th:errors="*{tips}" class="validation-message">Wskazówki:</label>
+                                    <input type="text" th:field="*{tips}" placeholder="Wskazówki" class="form-control" />
+                                </div>
+
+                                <button type="submit" class="btn btn-default">Dodaj Produkt</button>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="productList" class="row">
+                    <div class="col-sm-12">
+                        <!-- <div class="seedstarterlist" th:unless="${#lists.isEmpty(allSeedStarters)}"> -->
+            
+                        <div class="well">
+                        <h4 th:text="#{title.list}">List of Products</h4>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th th:text="#{msg.id}" />
+                                        <th th:text="#{msg.name}" />
+                                        <th th:text="#{msg.price}" />
+                                        <th th:text="#{msg.quantity}" />
+                                        <th th:text="#{msg.description}" />
+                                        <th th:text="#{msg.components}" />
+                                        <th th:text="#{msg.tips}" />
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="product: ${products}">
+                                        <td th:text="${product.id}" />
+                                        <td th:text="${product.name}" />
+                                        <td th:text="${product.price}" />
+                                        <td th:text="${product.quantity}" />
+                                        <td th:text="${product.description}" />
+                                        <td th:text="${product.components}" />
+                                        <td th:text="${product.tips}" />
+                                        <!-- <td th:text="${#conversions.convert(student.percentage, 'Integer')}" /> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="productList" class="row">
+                    <div class="col-sm-12">
+                            
+    
+                                    <h2 th:text="#{title.list}">List of Products</h2>
+                                    
+                                    <table>
+                                      <thead>
+                                        <tr>
+                                          <th th:text="#{seedstarter.datePlanted}">Date Planted</th>
+                                          <th th:text="#{seedstarter.covered}">Covered</th>
+                                          <th th:text="#{seedstarter.type}">Type</th>
+                                          <th th:text="#{seedstarter.features}">Features</th>
+                                          <th th:text="#{seedstarter.rows}">Rows</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr th:each="sb : ${allSeedStarters}">
+                                          <td th:text="${{sb.datePlanted}}">13/01/2011</td>
+                                          <td th:text="#{|bool.${sb.covered}|}">yes</td>
+                                          <td th:text="#{|seedstarter.type.${sb.type}|}">Wireframe</td>
+                                          <td th:text="${#strings.arrayJoin(
+                                                           #messages.arrayMsg(
+                                                             #strings.arrayPrepend(sb.features,'seedstarter.feature.')),
+                                                           ', ')}">Electric Heating, Turf</td>
+                                          <td>
+                                            <table>
+                                              <tbody>
+                                                <tr th:each="row,rowStat : ${sb.rows}">
+                                                  <td th:text="${rowStat.count}">1</td>
+                                                  <td th:text="${row.variety.name}">Thymus Thymi</td>
+                                                  <td th:text="${row.seedsPerCell}">12</td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                       </div>
+                </div> -->
+                <div id="historyOfOrders" class="row">
+                    <div class="col-sm-12">
+                        <div class="well">
+                            <h4>Historia Zakupów</h4>
+                            <p>lista zleceń</p>
+                            <p>statystyki</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="aboutMe" class="row">
+                    <div class="col-sm-12">
+                        <div class="well">
+                            <h4>O mnie</h4>
+                            <p>Dane firmy</p>
+                            <p>Historia</p>
+                            <p>lista produktów</p>
+                            <p>zdjęcia i adresy sklepów stacjonarnych</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

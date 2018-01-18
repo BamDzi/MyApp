@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
 		user.setActive(false);
 		// Generate random 36-character string token for confirmation link
 		user.setConfirmationToken(UUID.randomUUID().toString());
-		// Role userRole = roleRepository.findByRole("ADMIN");
 		Role userRole = roleRepository.findByRole("USER");
 		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 		userRepository.save(user);
