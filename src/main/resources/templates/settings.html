@@ -3,146 +3,18 @@
 
 <head>
     <title>ustawienia</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-        }
-
-        .navbar {
-            /*overflow: hidden;*/
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-
-        .navbar a {
-            display: block;
-            color: #f2f2f2;
-            /*text-align: center;*/
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        .main {
-            margin-top: 50px;
-        }
-
-        .jumbotron {
-            margin-bottom: 10;
-        }
-
-        .btn-group button {
-            background-color: #4CAF50;
-            /* Green background */
-            border: 1px solid green;
-            /* Green border */
-            color: white;
-            /* White text */
-            padding: 10px 24px;
-            /* Some padding */
-            cursor: pointer;
-            /* Pointer/hand icon */
-            width: 100%;
-            /* Set a width if needed */
-            display: block;
-            /* Make the buttons appear below each other */
-        }
-
-        .btn-group button:not(:last-child) {
-            border-bottom: none;
-            /* Prevent double borders */
-        }
-
-        /* Add a background color on hover */
-
-        .btn-group button:hover {
-            background-color: lightgreen;
-        }
-
-        footer {
-            /* background-color: #555;
-      color: white;
-      padding: 15px;*/
-            background-color: #f2f2f2;
-            padding: 25px;
-        }
-    </style>
+    <div th:replace="default :: style"></div>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Logo</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <!-- <li><a href="#">Home</a></li> -->
-                    <li>
-                        <a href="#">O nas</a>
-                    </li>
-                    <li>
-                        <a href="#">Punkty odbioru</a>
-                    </li>
-                    <li>
-                        <a href="#">Kontakt</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Moje konto</a></li> -->
-                    <li>
-                        <a href="#">
-                            <span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="glyphicon glyphicon-user"></span> Witaj, nazwa użytkownika
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">Moje dane</a>
-                            </li>
-                            <li>
-                                <a href="#">Zamówienia</a>
-                            </li>
-                            <li>
-                                <a href="#">Przechowalnia</a>
-                            </li>
-                            <li role="presentation" class="divider"></li>
-                            <li>
-                                <a href="#">Wyloguj</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a></li> -->
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div th:replace="default :: head"></div>
 
-    <div class="jumbotron main">
-        <div class="container text-center">
-            <h1>My Portfolio</h1>
-            <p>Some text that represents "Me"...</p>
-        </div>
-    </div>
-
-    <div class="container">
+    <!-- <div class="container content">
         <ul class="nav nav-tabs">
             <li class="active">
                 <a data-toggle="tab" href="#home">Moje dane</a>
@@ -178,7 +50,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="email">Email:</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="email" value="user@gmail.com" name="email"/>
+                                    <input type="email" class="form-control" id="email" value="user@gmail.com" name="email" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -195,13 +67,13 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="pwd1">Stare hasło:</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="pwd1" placeholder="Wpisz stare hasło" name="pwd1"/>
+                                    <input type="password" class="form-control" id="pwd1" placeholder="Wpisz stare hasło" name="pwd1" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="pwd2">Nowe hasło:</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="pwd2" placeholder="Wpisz nowe hasło" name="pwd2"/>
+                                    <input type="password" class="form-control" id="pwd2" placeholder="Wpisz nowe hasło" name="pwd2" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -213,7 +85,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="pwd3">Potwierdź hasło:</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="pwd3" placeholder="Wpisz ponownie nowe hasło" name="pwd3"/>
+                                    <input type="password" class="form-control" id="pwd3" placeholder="Wpisz ponownie nowe hasło" name="pwd3" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -234,12 +106,39 @@
                 <p>Umieszczamy produkty do "obserwacji" albo do zamówienia w innym terminie</p>
             </div>
         </div>
-    </div>
-
-    <footer class="container-fluid text-center">
-        <p>Footer Text</p>
-        <p>Pomoc FAQ Regulamin Sprzedawcy</p>
-    </footer>
+    </div> -->
+    <div class="container">
+        <h2>Dynamic Tabs</h2>
+        <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+      
+        <ul class="nav nav-tabs nav-stacked">
+          <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+          <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+          <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+          <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+        </ul>
+      
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <h3>HOME</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <h3>Menu 1</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </div>
+          <div id="menu2" class="tab-pane fade">
+            <h3>Menu 2</h3>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+          </div>
+          <div id="menu3" class="tab-pane fade">
+            <h3>Menu 3</h3>
+            <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+          </div>
+        </div>
+      </div>
+      
+    <div th:replace="default :: footer"></div>
 </body>
 
 </html>

@@ -37,8 +37,8 @@ public class LoginController {
 	}*/
 
 	@GetMapping
-	public String login() {
-		return "login";
+	public String startPage() {
+		return "default";
 	}
 	
 	@GetMapping("registration")
@@ -97,15 +97,15 @@ public class LoginController {
 		return "confirm";
 	}
 
-	@GetMapping("update")
-	public String updatePersonForm(@ModelAttribute User user, @RequestParam String email) {
-
-		user = userService.findByEmail(email);
-		user.setActive(true);
-		userRepository.save(user);
-		
-		return "update";
-	}
+//	@GetMapping("update")
+//	public String updatePersonForm(@ModelAttribute User user, @RequestParam String email) {
+//
+//		user = userService.findByEmail(email);
+//		user.setActive(true);
+//		userRepository.save(user);
+//		
+//		return "update";
+//	}
 	
 	@GetMapping("delete/{id}")
 	public String delete(@PathVariable Long id, User user) {
@@ -114,19 +114,14 @@ public class LoginController {
 		return "redirect:/register";
 	}
 
-//	@GetMapping("/vendor")
-//	public String home() {
-//		return "vendor/vendorpage";
-//	}
-	
 	@GetMapping("/access-denied")
 	public String denied() {
 		return "denied";
 	}
 	
-	@GetMapping("online")
-	public String helloPage() {
-		return "online";
+	@GetMapping("settings")
+	public String settings() {
+		return "settings";
 	}
 	
 	@GetMapping("detail")
@@ -140,7 +135,7 @@ public class LoginController {
 	}
 	
 	@GetMapping("meat")
-	public String meat() {
+	public String meaten() {
 		return "meat";
 	}
 	
@@ -153,4 +148,20 @@ public class LoginController {
 	public String submit() {
 		return "submit";
 	}
+	
+	@GetMapping("default")
+	public String template() {
+		return "default";
+	}
+	
+	@GetMapping("test")
+	public String templorary() {
+		return "defaultold";
+	}
+	
+	@GetMapping("login")
+	public String login2() {
+		return "login";
+	}
+	
 }

@@ -57,9 +57,19 @@ public class ProductController {
 		model.addAttribute("products", productService.listAllProducts());
 	}
 	
-//	@ModelAttribute("allSeedStarters")
-//    public List<SeedStarter> populateSeedStarters() {
-//        return this.seedStarterService.findAll();
-//    }
+	@GetMapping("sausage")
+	public String sausage() {
+		return "sausage";
+	}
+	
+	@GetMapping("fish")
+	public String fish() {
+		return "fish";
+	}
+	
+	@GetMapping("dairy")
+	public String dairy() {
+		return "dairy_product";
+	}
 
 }
