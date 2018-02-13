@@ -1,4 +1,4 @@
-package pl.zajaczkowski.model;
+/*package pl.zajaczkowski.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,3 +59,4 @@ public class Address {
 
 	
 }
+*/

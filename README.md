@@ -10,9 +10,11 @@ Injection properties(settings location):
 -9 Parametryzowanie ścieżek ( https://www.youtube.com/watch?v=ZlUuV2Eiyd4&list=PLU2dl_1LV_STR4IV60K_6wKBJpVkIHEiY&index=9 )
 -14 Co jeszcze można dostać z zapytaniem ( https://www.youtube.com/watch?v=TZFozGsvqiY&list=PLU2dl_1LV_STR4IV60K_6wKBJpVkIHEiY&index=14 )
 
-BUGS (to improve) !!!
+BUGS (to improve) and ToDo !!!
 -messages_pl_PL.properties - no work
+-Create  Message Properties File For Validating Forms.
 -data audit (create, last modifying and by who)
+-Create  Custom Exception Classes.
 -modifying data by vendor	
 -Logging
 

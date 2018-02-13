@@ -3,6 +3,8 @@ package pl.zajaczkowski.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Vendor {
@@ -13,7 +15,9 @@ public class Vendor {
 	private String name;
 	private String nip;
 	private String phoneNumber;
-	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User userId;
 	/*@OneToOne
 	@JoinColumn(name = "addressId")
 	private Address address;
@@ -44,6 +48,9 @@ public class Vendor {
 	}
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public User getUserId() {
+		return userId;
 	}
 	
 }

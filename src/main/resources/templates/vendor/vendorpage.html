@@ -84,8 +84,8 @@
                                 <div class="form-group">
                                     <!-- <label for="quantity">Ilość:</label>
                                     <input type="text" class="form-control" id="quantity" /> -->
-                                    <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="validation-message">Ilośćtest:</label>
-                                    <input type="text" th:field="*{quantity}" placeholder="Ilosc" class="form-control" />
+                                    <label th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" class="validation-message">Ilośćtest:</label>
+                                    <input type="text" th:field="*{amount}" placeholder="Ilosc" class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <!-- <label for="purchasePrice">Cena za sztuke:</label>
@@ -142,7 +142,7 @@
                                         <td th:text="${product.id}" />
                                         <td th:text="${product.name}" />
                                         <td th:text="${product.price}" />
-                                        <td th:text="${product.quantity}" />
+                                        <td th:text="${product.amount}" />
                                         <td th:text="${product.description}" />
                                         <td th:text="${product.components}" />
                                         <td th:text="${product.tips}" />
@@ -207,7 +207,8 @@
                     <div class="col-sm-12">
                         <div class="well">
                             <h4>O mnie</h4>
-                            <p>Dane firmy</p>
+                            <p>Dane firmy(nip, telefon mail itd</p>
+                            <p>Adress</p>
                             <p>Historia</p>
                             <p>lista produktów</p>
                             <p>zdjęcia i adresy sklepów stacjonarnych</p>

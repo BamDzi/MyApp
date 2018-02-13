@@ -20,7 +20,6 @@ public class Product {
 	private String components;
 	private String tips;
 	
-//	private List<Comment> comments = new ArrayList<Comment>();
 	/*
 	 * @ManyToOne
 	 * 

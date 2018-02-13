@@ -1,5 +1,6 @@
 package pl.zajaczkowski.model;
 
+import java.util.Calendar;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,11 +21,6 @@ import org.springframework.data.annotation.Transient;
 @Entity
 @Table(name="user")
 public class User {
-
-
-//		private BigDecimal expenses;
-//		@OneToMany(mappedBy = "client")
-//		private List<OrderRegister> orders;
 		
 		@Id
 		@GeneratedValue
@@ -49,6 +45,8 @@ public class User {
 		private Set<Role> roles;
 		@Column(name = "confirmation_token")
 		private String confirmationToken;
+		@Column(name = "customer_since")
+		private Calendar customerSince = null;	
 
 		public Long getId() {
 			return id;
@@ -85,5 +83,11 @@ public class User {
 		}
 		public void setConfirmationToken(String confirmationToken) {
 			this.confirmationToken = confirmationToken;
+		}
+		public Calendar getCustomerSince() {
+			return customerSince;
+		}
+		public void setCustomerSince(Calendar customerSince) {
+			this.customerSince = customerSince;
 		}
 }

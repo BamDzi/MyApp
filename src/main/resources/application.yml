@@ -16,7 +16,7 @@ spring:
   jpa:                                            # = JPA / HIBERNATE
       showSql: true
       hibernate:
-        ddlAuto: update
+#        ddlAuto: create
         naming:
           strategy: org.hibernate.cfg.ImprovedNamingStrategy
       properties:
