@@ -14,7 +14,8 @@ public class Product {
 	private Long id;
 	private String name;
 	private BigDecimal price;				//cena zakupu
-	private double amount;				//ilość produktu
+//	private double amount;				//kwota
+	private double quantity;
 	private boolean inStock;
 	private String description;
 	private String components;
@@ -48,11 +49,11 @@ public class Product {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
-	public double getAmount() {
-		return amount;
+	public double getQuantity() {
+		return quantity;
 	}
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setQuantity(double quantity) {
+		this.quantity = quantity;
 	}
 	public boolean isInStock() {
 		return inStock;

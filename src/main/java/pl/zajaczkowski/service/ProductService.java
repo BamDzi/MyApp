@@ -17,7 +17,7 @@ public class ProductService {
 	public void saveProduct(Product product) {
 		product.setName(product.getName());
 		product.setPrice(product.getPrice());
-		product.setAmount(product.getAmount());
+		product.setQuantity(product.getQuantity());
 		product.setDescription(product.getDescription());
 		product.setComponents(product.getComponents());
 		product.setTips(product.getTips());

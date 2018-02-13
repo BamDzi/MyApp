@@ -139,9 +139,9 @@ public class LoginController {
 		return "meat";
 	}
 	
-	@GetMapping("basket")
-	public String basket() {
-		return "basket";
+	@GetMapping("cart")
+	public String cart() {
+		return "cart";
 	}
 	
 	@GetMapping("submit")
