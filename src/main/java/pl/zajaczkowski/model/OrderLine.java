@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class OrderLine {
@@ -13,7 +13,7 @@ public class OrderLine {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@OneToOne
+	@ManyToOne
 	private Product product;
     private Integer amount;
     private BigDecimal purchasePrice;

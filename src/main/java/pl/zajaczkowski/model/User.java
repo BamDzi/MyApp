@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
@@ -16,10 +17,13 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
 @Table(name="user")
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 		
 		@Id
@@ -46,7 +50,8 @@ public class User {
 		@Column(name = "confirmation_token")
 		private String confirmationToken;
 		@Column(name = "customer_since")
-		private Calendar customerSince = null;	
+		@CreatedDate
+		private Calendar customerSince;	
 
 		public Long getId() {
 			return id;

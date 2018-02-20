@@ -124,9 +124,9 @@ public class LoginController {
 		return "settings";
 	}
 	
-	@GetMapping("detail")
+	@GetMapping("viewProduct")
 	public String detail() {
-		return "detail";
+		return "viewProduct";
 	}
 	
 	@GetMapping("contact")

@@ -19,8 +19,8 @@ public class Orders {
 	private Long id;
 	private Calendar date;
 	@OneToOne
-	@JoinColumn(name = "customer")
-	private Customer customer;
+	@JoinColumn(name = "user")
+	private User user;
 	@OneToMany
 	private Set<OrderLine> orderLines = new LinkedHashSet<OrderLine>();
 	
@@ -36,13 +36,15 @@ public class Orders {
 	public void setDate(Calendar date) {
 		this.date = date;
 	}
-	public Customer getCustomer() {
-		return customer;
+	public User getUser() {
+		return user;
 	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
+	public void setOrderLines(Set<OrderLine> orderLines) {
+		this.orderLines = orderLines;
+	}
 	public Set<OrderLine> getOrderLines() {
 		return orderLines;
 	}
