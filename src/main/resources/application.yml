@@ -39,6 +39,7 @@ spring:
   queries:                                         # = Spring Security / Queries for AuthenticationManagerBuilder
     usersQuery: select email, password, active from user where email=?
     rolesQuery: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+#    rolesQuery: select email, role_id from user where email=?
 
 # ===============================
 # TOMCAT
@@ -82,6 +83,8 @@ google:
     userInfoUri: https://www.googleapis.com/userinfo/v2/me
     preferTokenInfo: false
 facebook:                                                 # = FACEBOOK
+#  appId: 233668646673605
+#  appSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
   client:
     clientId: 233668646673605
     clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d

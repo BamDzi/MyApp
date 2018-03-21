@@ -40,7 +40,20 @@
 			<a href="/login/google">click here</a>
 		</div>
 	</div>
+	<!-- <h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3> -->
+	<p th:text="'fromController: ' + ${username}" />
 	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</h1>
+	<form action="#" th:action="@{/createCategory}" th:object="${category}" method="post" class="form-horizontal" role="form">
+		<!-- <div class="form-group">
+		  
+			<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa produktu:</label>
+			<input type="text" th:field="*{name}" placeholder="Nazwa produktu" class="form-control" />
+		</div> -->
+		
+
+		<button type="submit" class="btn btn-default">Dodaj Kategorie</button>
+
+	</form>
 	<form th:action="@{/logout}" method="POST" >
 	<div class="container" ng-show="home.authenticated">
 		Logged in as: <span ng-bind="home.user"></span>

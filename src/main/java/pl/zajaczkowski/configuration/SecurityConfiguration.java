@@ -38,6 +38,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.social.facebook.api.Facebook;
+import org.springframework.social.facebook.api.impl.FacebookTemplate;
 import org.springframework.web.filter.CompositeFilter;
 
 import pl.zajaczkowski.model.User;
@@ -85,8 +87,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        .and().logout().logoutSuccessUrl("/").permitAll()
 	        .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 	        .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
-	  }
-*/
+	  }*/
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception { //defines which URL paths should be secured and which should not
 		
@@ -186,7 +188,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	     filter.setFilters(filters);
 	     return filter;
 	}
-
+	
+	
 }
 	
 

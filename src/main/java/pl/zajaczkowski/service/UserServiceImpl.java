@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import pl.zajaczkowski.model.Customer;
 import pl.zajaczkowski.model.Role;
 import pl.zajaczkowski.model.User;
 import pl.zajaczkowski.repository.RoleRepository;

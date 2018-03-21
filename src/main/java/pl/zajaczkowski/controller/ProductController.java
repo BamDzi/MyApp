@@ -4,35 +4,45 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.zajaczkowski.model.Category;
 import pl.zajaczkowski.model.Product;
+import pl.zajaczkowski.repository.CategoryRepository;
+import pl.zajaczkowski.repository.ProductRepository;
+import pl.zajaczkowski.service.CategoryService;
 import pl.zajaczkowski.service.ProductService;
 
 @Controller
+//@RequestMapping("/product")
+//@ControllerAdvice	
 public class ProductController {
-	
-//	private ProductRepository productRepository;
+
 	private ProductService productService;
-	
 //	@Autowired
-	public ProductController(ProductService productService) {
-//		this.productRepository = productRepository;
-		this.productService = productService;
-	}
+//	private CategoryRepository categoryRepository;
 	
+	public ProductController(ProductService productService) {
+		this.productService = productService;
+//		this.categoryRepository = categoryRepository;
+	}
+
 	@GetMapping("vendor")
 	public String showVendorPage(@ModelAttribute Product product) {
 		return "vendor/vendorpage";
 	}
 
 	@PostMapping("addproduct")
-	public String addProduct(@Valid Product product, BindingResult bindingResult, Model model) {
+	public String addProduct(@Valid Product product, BindingResult bindingResult, Model model) { //@Valid or @ModelAttribute Product product
 
 		Product productExists = productService.findProductByName(product.getName());
 		
@@ -48,28 +58,41 @@ public class ProductController {
 			productService.saveProduct(product);
 			model.addAttribute("successMessage", "Product has been added successfully");
 			model.addAttribute("product", new Product());
+			
+			
 		
 		return "redirect:/vendor";
 	}
 	
-	@ModelAttribute
-	public void listProducts(Model model) {
-		model.addAttribute("products", productService.listAllProducts());
+	@GetMapping("findAllProducts")
+	public List<Product> findAllProducts() {
+		return productService.listAllProducts();
 	}
 	
-	@GetMapping("sausage")
-	public String sausage() {
-		return "sausage";
+	@GetMapping("findProduct/{name}")
+	public Product findProductName(@PathVariable String name) {
+		return productService.findProductByName(name);
 	}
 	
-	@GetMapping("fish")
-	public String fish() {
-		return "fish";
-	}
+//	@ModelAttribute
+//	public void listProducts(Model model) {
+//		model.addAttribute("products", productService.listAllProducts());
+//	}
 	
-	@GetMapping("dairy")
-	public String dairy() {
-		return "dairy_product";
-	}
-
+//	@ModelAttribute
+//	public void listCategorys(Model model) {
+//		model.addAttribute("allCategorys", categoryRepository.findAll());
+//	}
+	
+	
+	
+	/*@ModelAttribute("productPrice1")
+	public double putPrice(Product product) {
+		product =
+	}*/
+	
+//	@ModelAttribute("allCategorys")
+//    public List<Category> allCategorys() {
+//        return categoryService.findAllCategorys();
+//    }
 }

@@ -14,9 +14,10 @@ BUGS (to improve) and ToDo !!!
 -messages_pl_PL.properties - no work
 -Create  Message Properties File For Validating Forms.
 -data audit (create, last modifying and by who)
--Create  Custom Exception Classes.
+-Exception Handling (Create  Custom Exception Classes).
 -modifying data by vendor	
 -Logging
+-make sql user
 
 Front-end:
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_responsive_form
@@ -28,3 +29,8 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_searchbar3
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_navbar_sticky
 https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sticky_header
 https://www.w3schools.com/bootstrap/bootstrap_filters.asp
+
+What is?
+@ControllerAdvice	-"global controller"
+@SessionAttribute
+@SessionAttributes

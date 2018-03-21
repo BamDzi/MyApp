@@ -5,16 +5,23 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import pl.zajaczkowski.model.Customer;
+import pl.zajaczkowski.model.Product;
 import pl.zajaczkowski.model.User;
+import pl.zajaczkowski.repository.CustomerRepository;
 import pl.zajaczkowski.repository.UserRepository;
 import pl.zajaczkowski.service.EmailService;
 import pl.zajaczkowski.service.UserService;
@@ -27,8 +34,11 @@ public class LoginController {
 	@Autowired
 	private EmailService emailService;
 	@Autowired
-	private UserRepository userRepository;
+	private CustomerRepository customerRepository;
 	
+	
+//	@Autowired
+//	private UserRepository userRepository;
 	/*@Autowired
 	public LoginController(UserService userService, EmailService emailService, UserRepository userRepository) {
 		this.userService = userService;
@@ -36,10 +46,6 @@ public class LoginController {
 		this.userRepository = userRepository;
 	}*/
 
-	@GetMapping
-	public String startPage() {
-		return "default";
-	}
 	
 	@GetMapping("registration")
 	public String registration(@ModelAttribute User user) {
@@ -90,28 +96,16 @@ public class LoginController {
 		if (user == null) { // No token found in DB
 			return "home";
 		}
+		Customer customer = new Customer();
 		user.setActive(true);
+		user.setCustomer(customer);
+		customer.setName(user.getEmail());
+//		customer.setUser(user);
+		customerRepository.save(customer);
 		userService.saveUser(user);
 		model.addAttribute("confirmationToken", user.getConfirmationToken());
 
 		return "confirm";
-	}
-
-//	@GetMapping("update")
-//	public String updatePersonForm(@ModelAttribute User user, @RequestParam String email) {
-//
-//		user = userService.findByEmail(email);
-//		user.setActive(true);
-//		userRepository.save(user);
-//		
-//		return "update";
-//	}
-	
-	@GetMapping("delete/{id}")
-	public String delete(@PathVariable Long id, User user) {
-		user = userService.findById(id);
-		userService.deleteUser(user);
-		return "redirect:/register";
 	}
 
 	@GetMapping("/access-denied")
@@ -119,49 +113,35 @@ public class LoginController {
 		return "denied";
 	}
 	
-	@GetMapping("settings")
-	public String settings() {
-		return "settings";
-	}
-	
-	@GetMapping("viewProduct")
-	public String detail() {
-		return "viewProduct";
-	}
-	
-	@GetMapping("contact")
-	public String contact() {
-		return "contact";
-	}
-	
-	@GetMapping("meat")
-	public String meaten() {
-		return "meat";
-	}
-	
-	@GetMapping("cart")
-	public String cart() {
-		return "cart";
-	}
-	
-	@GetMapping("submit")
-	public String submit() {
-		return "submit";
-	}
-	
-	@GetMapping("default")
-	public String template() {
-		return "default";
-	}
-	
-	@GetMapping("test")
-	public String templorary() {
-		return "defaultold";
-	}
-	
 	@GetMapping("login")
-	public String login2() {
+	public String login() {
 		return "login";
 	}
 	
+	@ModelAttribute("username")
+	public String userName() {
+		
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String name = auth.getName(); //get logged in username
+//		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//	      String name = user.getEmail();// getUsername(); //get logged in username
+
+
+		return name;
+	}
+	
+	/*@GetMapping("login")
+	public String login2(ModelMap model) {
+		
+		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	      String name = auth.getName(); //get logged in username
+//		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//	      String name = user.getEmail();// getUsername(); //get logged in username
+
+	      model.addAttribute("username", name);
+
+		return "login";
+	}*/
+
+		
 }

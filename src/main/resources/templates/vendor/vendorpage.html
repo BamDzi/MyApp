@@ -76,6 +76,7 @@
                         <div class="well">
 
                             <form action="#" th:action="@{/addproduct}" th:object="${product}" method="post" class="form-horizontal" role="form">
+                                <fieldset>
                                 <div class="form-group">
                                     <!-- <label>Nazwa Produktu</label> -->
                                     <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa produktu:</label>
@@ -90,8 +91,8 @@
                                 <div class="form-group">
                                     <!-- <label for="purchasePrice">Cena za sztuke:</label>
                                     <input type="text" class="form-control" id="purchasePrice" /> -->
-                                    <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="validation-message">Cena za sztuke:</label>
-                                    <input type="text" th:field="*{price}" placeholder="Cena za sztuke" class="form-control" />
+                                    <label th:if="${#fields.hasErrors('purchasePrice')}" th:errors="*{purchasePrice}" class="validation-message">Cena za sztuke:</label>
+                                    <input type="text" th:field="*{purchasePrice}" placeholder="Cena za sztuke" class="form-control" />
                                 </div>
                                 <div class="form-group">
                                     <!-- <label for="description">Opis produktu:</label>
@@ -111,13 +112,34 @@
                                     <label th:if="${#fields.hasErrors('tips')}" th:errors="*{tips}" class="validation-message">Wskazówki:</label>
                                     <input type="text" th:field="*{tips}" placeholder="Wskazówki" class="form-control" />
                                 </div>
+                                <div class="form-group">
+                                        <!-- <ul>
+                                                <li th:each="ty : ${allCategorys}">
+                                                  <input type="radio" th:field="*{category}" th:value="${ty}" />
+                                                  <label th:for="category" th:text="${category.name}">Wireframe</label>
+                                                </li>
+                                              </ul> -->
+                                        
+                                                <label for="category" th:text="#{msg.category}">Category</label>
+                                                <select th:field="*{category}">
+                                                  <option th:each="category : ${allCategorys}" 
+                                                          th:value="${category}"
+                                                          th:text="${category.name}">Wireframe</option>
+                                                          
+                                                </select>
+                                              
+                                </div>
 
                                 <button type="submit" class="btn btn-default">Dodaj Produkt</button>
-
+                            </fieldset>
                             </form>
-
                         </div>
                     </div>
+                </div>
+                <div class="well">
+                    <form action="#" th:action="@{/category/createCategory}" th:object="${category}" method="post" class="form-horizontal" role="form">
+                    <button type="submit" class="btn btn-default">Dodaj Kategorie</button>
+                </form>
                 </div>
                 <div id="productList" class="row">
                     <div class="col-sm-12">
@@ -141,7 +163,7 @@
                                     <tr th:each="product: ${products}">
                                         <td th:text="${product.id}" />
                                         <td th:text="${product.name}" />
-                                        <td th:text="${product.price}" />
+                                        <td th:text="${product.purchasePrice}" />
                                         <td th:text="${product.quantity}" />
                                         <td th:text="${product.description}" />
                                         <td th:text="${product.components}" />
