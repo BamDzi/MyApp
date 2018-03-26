@@ -1,5 +1,7 @@
 package pl.zajaczkowski.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -35,6 +37,8 @@ public class LoginController {
 	private EmailService emailService;
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+//	Principal principal;
 	
 	
 //	@Autowired
@@ -119,15 +123,19 @@ public class LoginController {
 	}
 	
 	@ModelAttribute("username")
-	public String userName() {
+	public String userName(Principal principal, HttpServletRequest request) {
 		
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	      String name = auth.getName(); //get logged in username
+//		String name = auth.getName(); //get logged in username
+		
 //		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //	      String name = user.getEmail();// getUsername(); //get logged in username
 
-
-		return name;
+//		principal = request.getUserPrincipal(); 
+//		  String name = principal.getName();  
+	       
+	      
+		return auth.getName();
 	}
 	
 	/*@GetMapping("login")

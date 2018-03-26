@@ -14,25 +14,3 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return bCryptPasswordEncoder;
 	}
 }
-
-/*@Configuration
-@EnableWebMvc
-@ComponentScan
-public class SpringWebConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
-	
-	private ApplicationContext applicationContext;
-
-	@Override
-	public void setApplicationContext(final ApplicationContext applicationContext) throws BeansException {
-		this.applicationContext = applicationContext;
-	}
-
-	@Override
-	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-		super.addResourceHandlers(registry);
-		registry.addResourceHandler("/images/**").addResourceLocations("/images/");
-	}
-	
-	
-
-}*/

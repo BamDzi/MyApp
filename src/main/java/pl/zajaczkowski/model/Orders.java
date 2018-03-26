@@ -60,4 +60,8 @@ public class Orders {
 		return orderLines;
 	}
 
+	public void setOrderLines(Set<OrderLine> orderLines) {
+		this.orderLines = orderLines;
+	}
+
 }
