@@ -3,7 +3,9 @@ package pl.zajaczkowski.configuration;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletException;
@@ -13,6 +15,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -40,13 +43,18 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.filter.CompositeFilter;
 
 import pl.zajaczkowski.model.User;
 
 @Configuration
+//@EnableOAuth2Sso
 @EnableOAuth2Client
 @EnableWebSecurity
+@RestController
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -95,7 +103,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.
 			authorizeRequests()
 //				.antMatchers("/", "/login", "/registration", "/confirm", "/update").permitAll() //paths are configured to not require any authentication
-				.antMatchers("/vendor/**").hasAuthority("ADMIN")	//require admin role
+				.antMatchers("/vendor/**").hasAuthority("VENDOR")	//require admin role
 //				.anyRequest().authenticated()//All other paths must be authenticated
 				.antMatchers("/basket", "/submit").authenticated()
 				.anyRequest().permitAll()
@@ -106,7 +114,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.defaultSuccessUrl("/online")
 				.usernameParameter("email")
 				.passwordParameter("password")
-				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll()
 				.and().exceptionHandling().accessDeniedPage("/access-denied")
 				.and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 		        .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class);
@@ -189,7 +197,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	     return filter;
 	}
 	
+//	@RequestMapping("/user")
+//	public Map<String, String> user(Principal principal) {
+//	  Map<String, String> map = new LinkedHashMap<>();
+//	  map.put("name", principal.getName());
+//	  return map;
+//	}
 	
+	 @RequestMapping("/user")
+	  public Principal user(Principal principal) {
+	    return principal;
+	  }
+	 
+	 @ModelAttribute("nameUser")
+	 public String nameUser(Principal principal) {
+		 return principal.getName();
+//		 return html(data.userAuthentication.details.name);
+	 }
+
 }
 	
 

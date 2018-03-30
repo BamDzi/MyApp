@@ -1,12 +1,13 @@
 package pl.zajaczkowski.controller;
 
-import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,12 @@ import pl.zajaczkowski.model.Customer;
 import pl.zajaczkowski.model.OrderLine;
 import pl.zajaczkowski.model.Orders;
 import pl.zajaczkowski.model.Product;
+import pl.zajaczkowski.model.User;
 import pl.zajaczkowski.repository.CustomerRepository;
 import pl.zajaczkowski.repository.OrderLineRepository;
 import pl.zajaczkowski.repository.OrdersRepository;
 import pl.zajaczkowski.service.ProductService;
+import pl.zajaczkowski.service.UserService;
 
 @Controller
 @RequestMapping("/cart")
@@ -30,13 +33,17 @@ public class CartController {
 	private ProductService productService;
 	private OrderLineRepository orderLineRepository;
 	private OrdersRepository ordersRepository;
-
+	private CustomerRepository customerRepository;
+	private UserService userService;
+	
 	public CartController(ProductService productService, OrderLineRepository orderLineRepository,
-			OrdersRepository ordersRepository) {
+			OrdersRepository ordersRepository, CustomerRepository customerRepository, UserService userService) {
 		super();
 		this.productService = productService;
 		this.orderLineRepository = orderLineRepository;
 		this.ordersRepository = ordersRepository;
+		this.customerRepository = customerRepository;
+		this.userService = userService;
 	}
 
 	@GetMapping()
@@ -50,27 +57,30 @@ public class CartController {
 		Product product = productService.findProductById(id);
 		OrderLine orderLine = new OrderLine(); // Cart cart = new Cart();
 		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("cart");
-		
+
 		if (list == null) {
 			list = new LinkedHashSet<OrderLine>();
 		}
 
+		boolean isExist = false;
+		
 		if (product != null) {
 			orderLine.setProduct(product);
 		}
 
-		boolean isExist = false;
-
 		for (OrderLine o : list) {
 			if (o.equals(orderLine)) {
 				o.setQuantity(o.getQuantity() + 1);
+				productService.quantityIncrease(product);
+				productService.saveProduct(product);
 				isExist = true;
 			}
 		}
+		
 		if (isExist == false) {
 
 			Long i = (long) (list.size() + 1);
-			
+
 			orderLine.setId(i);
 			orderLine.setPurchasePrice(product.getPurchasePrice());
 			orderLine.setQuantity(1);
@@ -142,6 +152,20 @@ public class CartController {
 	@GetMapping("submitOrder")
 	public String saveOrder(HttpSession session, Model model) {
 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userSession = auth.getName();
+		Customer customer = customerRepository.findByName(userSession);
+		if (customer == null) {
+			customer = new Customer();
+			User user = userService.findByEmail(userSession);
+			if (user != null) {
+				customer.setUser(user);
+			} else {
+				customer.setName(userSession);
+			}
+			customerRepository.save(customer);
+		}
+		
 		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("cart");
 		Orders order = new Orders();
 
@@ -149,11 +173,15 @@ public class CartController {
 			o.setId(null);
 		}
 
-		order.setOrderLines(list);
-
+		// order.setOrderLines(list);
+		order.setOrderLines(new LinkedHashSet<OrderLine>(list));
+		order.setCustomer(customer);
+		
 		orderLineRepository.save(list);
 		ordersRepository.save(order);
 
+//		productService.saveProduct(product);
+		
 		session.removeAttribute("cart");
 
 		return "redirect:/cart";

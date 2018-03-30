@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,12 +38,12 @@ public class ProductController {
 	}
 
 	@GetMapping("vendor")
-	public String showVendorPage(@ModelAttribute Product product) {
+	public String showVendorPage(Product product) {
 		return "vendor/vendorpage";
 	}
 
 	@PostMapping("addproduct")
-	public String addProduct(@Valid Product product, BindingResult bindingResult, Model model) { //@Valid or @ModelAttribute Product product
+	public String addProduct(@Valid Product product, BindingResult bindingResult, ModelMap model) { //@Valid or @ModelAttribute Product product
 
 		Product productExists = productService.findProductByName(product.getName());
 		
@@ -55,9 +56,11 @@ public class ProductController {
 			return "redirect:/vendor";
 		}
 		
+		
 			productService.saveProduct(product);
-			model.addAttribute("successMessage", "Product has been added successfully");
-			model.addAttribute("product", new Product());
+//			productService.saveProduct(new Product());
+//			model.addAttribute("successMessage", "Product has been added successfully");
+//			model.addAttribute("product", new Product());
 			
 			
 		
@@ -74,25 +77,5 @@ public class ProductController {
 		return productService.findProductByName(name);
 	}
 	
-//	@ModelAttribute
-//	public void listProducts(Model model) {
-//		model.addAttribute("products", productService.listAllProducts());
-//	}
 	
-//	@ModelAttribute
-//	public void listCategorys(Model model) {
-//		model.addAttribute("allCategorys", categoryRepository.findAll());
-//	}
-	
-	
-	
-	/*@ModelAttribute("productPrice1")
-	public double putPrice(Product product) {
-		product =
-	}*/
-	
-//	@ModelAttribute("allCategorys")
-//    public List<Category> allCategorys() {
-//        return categoryService.findAllCategorys();
-//    }
 }

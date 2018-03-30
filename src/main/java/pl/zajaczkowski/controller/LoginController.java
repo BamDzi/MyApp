@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.zajaczkowski.model.Customer;
 import pl.zajaczkowski.model.Product;
@@ -31,26 +32,15 @@ import pl.zajaczkowski.service.UserService;
 @Controller
 public class LoginController {
 	
-	@Autowired
 	private UserService userService;
-	@Autowired
 	private EmailService emailService;
-	@Autowired
-	private CustomerRepository customerRepository;
 	
-//	Principal principal;
-	
-	
-//	@Autowired
-//	private UserRepository userRepository;
-	/*@Autowired
-	public LoginController(UserService userService, EmailService emailService, UserRepository userRepository) {
+	public LoginController(UserService userService, EmailService emailService) {
+		super();
 		this.userService = userService;
 		this.emailService = emailService;
-		this.userRepository = userRepository;
-	}*/
+	}
 
-	
 	@GetMapping("registration")
 	public String registration(@ModelAttribute User user) {
 		return "registration";
@@ -83,10 +73,10 @@ public class LoginController {
 
 			emailService.sendEmail(registrationEmail);
 
-			model.addAttribute("confirmationMessage", "A confirmation e-mail has been sent to " + user.getEmail());
+//			model.addAttribute("confirmationMessage", "A confirmation e-mail has been sent to " + user.getEmail());
 
-			model.addAttribute("successMessage", "User has been registered successfully");
-			model.addAttribute("user", new User());
+//			model.addAttribute("successMessage", "User has been registered successfully");
+//			model.addAttribute("user", new User());
 
 		
 		return "confirm";
@@ -100,12 +90,7 @@ public class LoginController {
 		if (user == null) { // No token found in DB
 			return "home";
 		}
-		Customer customer = new Customer();
 		user.setActive(true);
-		user.setCustomer(customer);
-		customer.setName(user.getEmail());
-//		customer.setUser(user);
-		customerRepository.save(customer);
 		userService.saveUser(user);
 		model.addAttribute("confirmationToken", user.getConfirmationToken());
 
@@ -126,30 +111,6 @@ public class LoginController {
 	public String userName(Principal principal, HttpServletRequest request) {
 		
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String name = auth.getName(); //get logged in username
-		
-//		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//	      String name = user.getEmail();// getUsername(); //get logged in username
-
-//		principal = request.getUserPrincipal(); 
-//		  String name = principal.getName();  
-	       
-	      
 		return auth.getName();
-	}
-	
-	/*@GetMapping("login")
-	public String login2(ModelMap model) {
-		
-		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	      String name = auth.getName(); //get logged in username
-//		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//	      String name = user.getEmail();// getUsername(); //get logged in username
-
-	      model.addAttribute("username", name);
-
-		return "login";
-	}*/
-
-		
+	}		
 }

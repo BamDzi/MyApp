@@ -1,4 +1,4 @@
-package pl.zajaczkowski.model;
+/*package pl.zajaczkowski.model;
 
 import java.util.Set;
 
@@ -88,3 +88,4 @@ public class Vendor {
 	}
 	
 }
+*/

@@ -27,10 +27,10 @@ public class CustomerController {
 		
 	}
 	
-	@GetMapping("findCustomer/{name}")
-	public Customer findByName(@PathVariable String name) {
-		return customerRepository.findByName(name);
-	}
+//	@GetMapping("findCustomer/{name}")
+//	public Customer findByName(@PathVariable String name) {
+//		return customerRepository.findByName(name);
+//	}
 	
 	
 	

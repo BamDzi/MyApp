@@ -1,5 +1,6 @@
 package pl.zajaczkowski;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import pl.zajaczkowski.configuration.AuditorAwareImpl;
 @SpringBootApplication
 public class MyAppBetaApplication {
 
+	
 	public static void main(String[] args) {
 		SpringApplication.run(MyAppBetaApplication.class, args);
 	}
