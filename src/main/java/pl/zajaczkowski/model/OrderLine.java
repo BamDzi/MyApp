@@ -19,7 +19,7 @@ public class OrderLine {
 	private Product product = null;
 	private int quantity;
 	private BigDecimal purchasePrice = null;
-	private BigDecimal amount = null;
+	private BigDecimal amount;
 
 	public Long getId() {
 		return id;

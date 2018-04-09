@@ -1,5 +1,6 @@
 package pl.zajaczkowski.model;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class Orders {
 	@OneToMany
 	@JoinColumn(name = "order_Id")
 	private Set<OrderLine> orderLines;// = new LinkedHashSet<OrderLine>();
+	private BigDecimal total;
 
 	public Orders() {
 	}
@@ -68,6 +70,14 @@ public class Orders {
 
 	public void setOrderLines(Set<OrderLine> orderLines) {
 		this.orderLines = orderLines;
+	}
+	
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 
 }

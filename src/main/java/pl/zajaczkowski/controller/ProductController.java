@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.zajaczkowski.model.Category;
 import pl.zajaczkowski.model.Product;
+import pl.zajaczkowski.model.User;
 import pl.zajaczkowski.repository.CategoryRepository;
 import pl.zajaczkowski.repository.ProductRepository;
 import pl.zajaczkowski.service.CategoryService;
 import pl.zajaczkowski.service.ProductService;
+import pl.zajaczkowski.service.UserService;
 
 @Controller
 //@RequestMapping("/product")
@@ -29,6 +33,8 @@ import pl.zajaczkowski.service.ProductService;
 public class ProductController {
 
 	private ProductService productService;
+	@Autowired
+	private UserService userService;
 //	@Autowired
 //	private CategoryRepository categoryRepository;
 	
@@ -45,7 +51,14 @@ public class ProductController {
 	@PostMapping("addproduct")
 	public String addProduct(@Valid Product product, BindingResult bindingResult, ModelMap model) { //@Valid or @ModelAttribute Product product
 
-		Product productExists = productService.findProductByName(product.getName());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userSession = auth.getName();
+		
+		User vendor = userService.findByEmail(userSession);
+		
+//		Product productExists = productService.findProductByName(product.getName());
+		
+		Product productExists = productService.findProductByNameAndVendor(product.getName(), vendor);
 		
 		if (productExists != null) {
 			bindingResult.rejectValue("product", "error.product",
@@ -77,5 +90,33 @@ public class ProductController {
 		return productService.findProductByName(name);
 	}
 	
+	@GetMapping("meat")
+	public String meat() {
+		return "meat";
+	}
+	
+	@GetMapping("sausage")
+	public String sausage() {
+		return "sausage";
+	}
+	
+	@GetMapping("fish")
+	public String fish() {
+		return "fish";
+	}
+
+	@GetMapping("dairy")
+	public String dairy() {
+		return "dairy_product";
+	}
+
+
+	@ModelAttribute
+	public void listProductsNotNull(Model model) {
+		model.addAttribute("meatNotNull",productService.listProductByCategory(1));
+		model.addAttribute("dairyNotNull",productService.listProductByCategory(2));
+		model.addAttribute("fishNotNull",productService.listProductByCategory(3));
+		model.addAttribute("sausageNotNull",productService.listProductByCategory(4));
+	}
 	
 }

@@ -1,9 +1,10 @@
 spring:
   datasource:                                     # = DATA SOURCE
-    url: jdbc:mysql://172.17.0.2:3306/MyApp
+    url: jdbc:mysql://172.17.0.2:3306/MyApp?useUnicode=yes&characterEncoding=UTF-8
     username: root
     password: pass
     driverClassName: com.mysql.jdbc.Driver
+#    sqlScriptEncoding: UTF-8
     tomcat:
       maxWait: 10000
       initial-size: 7
@@ -95,3 +96,17 @@ facebook:                                                 # = FACEBOOK
     clientAuthenticationScheme: form
   resource:
     userInfoUri: https://graph.facebook.com/me
+    
+# Email (MailProperties)    
+
+#FROM  https://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#common-application-properties
+
+#spring.mail.default-encoding=UTF-8 # Default MimeMessage encoding.
+#spring.mail.host= # SMTP server host. For instance, `smtp.example.com`.
+#spring.mail.jndi-name= # Session JNDI name. When set, takes precedence over other mail settings.
+#spring.mail.password= # Login password of the SMTP server.
+#spring.mail.port= # SMTP server port.
+#spring.mail.properties.*= # Additional JavaMail session properties.
+#spring.mail.protocol=smtp # Protocol used by the SMTP server.
+#spring.mail.test-connection=false # Whether to test that the mail server is available on startup.
+#spring.mail.username= # Login user of the SMTP server.

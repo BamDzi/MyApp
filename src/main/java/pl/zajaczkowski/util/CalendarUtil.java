@@ -1,4 +1,4 @@
-package pl.zajaczkowski.util;
+/*package pl.zajaczkowski.util;
 
 import java.util.Calendar;
 
@@ -19,3 +19,4 @@ public class CalendarUtil {
 	        
 	    }
 }
+*/

@@ -21,21 +21,9 @@ public class CommonController {
 	}
 
 
-	@GetMapping("sausage")
-	public String sausage() {
-		return "sausage";
-	}
+	
 
-	@GetMapping("fish")
-	public String fish() {
-		return "fish";
-	}
-
-	@GetMapping("dairy")
-	public String dairy() {
-		return "dairy_product";
-	}
-
+	
 	@GetMapping("settings")
 	public String settings() {
 		return "settings";
@@ -60,10 +48,11 @@ public class CommonController {
 	public String template() {
 		return "default";
 	}
-
-	@GetMapping("test")
-	public String templorary() {
-		return "defaultold";
+	
+	@GetMapping("regulations")
+	public String regulations() {
+		return "regulations";
 	}
+
 
 }

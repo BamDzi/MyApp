@@ -8,85 +8,14 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-        }
-
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-
-        .navbar a {
-            /*float: left;*/
-            display: block;
-            color: #f2f2f2;
-            /*text-align: center;*/
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        .main {
-            margin-top: 100px;
-        }
-
-        .jumbotron {
-            margin-bottom: 10;
-        }
-
-        .btn-group button {
-            background-color: #4CAF50;
-            /* Green background */
-            border: 1px solid green;
-            /* Green border */
-            color: white;
-            /* White text */
-            padding: 10px 24px;
-            /* Some padding */
-            cursor: pointer;
-            /* Pointer/hand icon */
-            width: 100%;
-            /* Set a width if needed */
-            display: block;
-            /* Make the buttons appear below each other */
-        }
-
-        .btn-group button:not(:last-child) {
-            border-bottom: none;
-            /* Prevent double borders */
-        }
-
-        /* Add a background color on hover */
-
-        .btn-group button:hover {
-            background-color: lightgreen;
-        }
-
-        footer {
-            /* background-color: #555;
-      color: white;
-      padding: 15px;*/
-            background-color: #f2f2f2;
-            padding: 25px;
-        }
-    </style>
+    <div th:replace="default :: style"></div>
 </head>
 
 <body>
-   
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
+    <div th:replace="default :: head"></div>
 
-                <!-- <form action="/action_page.php"> -->
-                <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="form-horizontal"
+    <div class="container-fluid">
+        <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="form-horizontal"
                     role="form">
                     <h1 class="text-center">Rejestracja</h1>
                     <div class="form-group">
@@ -113,6 +42,100 @@
                     <span th:utext="${successMessage}"></span>
 
                 </form>
+    </div>
+    
+    <div th:replace="default :: footer"></div>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Rejestracja</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            margin-bottom: 0;
+            border-radius: 0;
+        }
+
+        .navbar a {
+       
+            display: block;
+            color: #f2f2f2;
+       
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .main {
+            margin-top: 100px;
+        }
+
+        .jumbotron {
+            margin-bottom: 10;
+        }
+
+        .btn-group button {
+            background-color: #4CAF50;
+       
+            border: 1px solid green;
+       
+            color: white;
+       
+            padding: 10px 24px;
+       
+            cursor: pointer;
+       
+            width: 100%;
+       
+            display: block;
+       
+        }
+
+        .btn-group button:not(:last-child) {
+            border-bottom: none;
+       
+        }
+
+       
+
+        .btn-group button:hover {
+            background-color: lightgreen;
+        }
+
+        footer {
+            
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+
+            
+                
             </div>
         </div>
     </div>
@@ -121,11 +144,6 @@
 
     <div th:replace="default :: footer"></div>
 
-    
-    <!-- <footer class="container-fluid text-center">
-        <p>Footer Text</p>
-        <p>Pomoc FAQ Regulamin Sprzedawcy</p>
-    </footer> -->
 </body>
 
-</html>
+</html> -->

@@ -12,6 +12,58 @@
 </head>
 
 <body>
+    <div th:replace="default :: head"></div>
+
+    <div class="container-fluid content">
+        <div class="row">
+            <div class="col-sm-2">
+                <div th:replace="default :: categoryList"></div>
+            </div>
+            <div class="col-sm-10">
+
+                <div class="row">
+                    <div th:each="prod:${dairyNotNull}">
+                        <div class="col-sm-3">
+                            <div class="card">
+                                    <img src="img_avatar2.png" alt="Avatar" style="width:100%" />
+                                <div class="well">
+
+                                    <p th:text="${prod.name}">name</p>
+                                    <p th:text="${prod.purchasePrice} + ' zł/szt'">purchase price</p>
+                                    <a href="cart.html" th:href="@{/cart/addOrderLine/(id=${prod.id})}" class="btn btn-default">Kosz</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+              
+                <br/>
+
+                <br/>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="default :: footer"></div>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>nabiał</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div th:replace="default :: style"></div>
+</head>
+
+<body>
    <div th:replace="default :: head"></div>
 
     <div class="container-fluid content">
@@ -141,4 +193,4 @@
     <div th:replace="default :: footer"></div>
 </body>
 
-</html>
+</html> -->

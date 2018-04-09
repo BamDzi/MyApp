@@ -108,7 +108,7 @@ public class LoginController {
 	}
 	
 	@ModelAttribute("username")
-	public String userName(Principal principal, HttpServletRequest request) {
+	public String userName() {
 		
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return auth.getName();

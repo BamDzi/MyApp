@@ -112,47 +112,43 @@
                                     <label th:if="${#fields.hasErrors('tips')}" th:errors="*{tips}" class="validation-message">Wskazówki:</label>
                                     <input type="text" th:field="*{tips}" placeholder="Wskazówki" class="form-control" />
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <label for="category" th:text="#{msg.category}">Type</label>
                                     <select th:field="*{category}">
                                       <option th:each="category : ${allCategorys}"  th:value="${category.id}" th:text="${category.name}">Wireframe</option>
                                     </select>
-                                  </div>
-                                  <!-- <div>
-                                    <label th:text="#{msg.category}">Features</label>
-                                    <ul>
-                                      <li th:each="category : ${allCategorys}">
-                                        <input type="checkbox" th:field="*{features}" th:value="${feat}" />
-                                        <label th:for="${#ids.prev('features')}" th:text="#{${'seedstarter.feature.' + feat}}">Electric Heating</label>
-                                      </li>
-                                      <li th:remove="all">
-                                        <input id="removed1" type="checkbox" /> <label for="removed1">Turf</label>
-                                      </li>
-                                    </ul>
                                   </div> -->
+                                  <div>
+                                    <ul>
+                                        <li th:each="ty : ${allCategorys}">
+                                          <input type="radio" th:field="*{category}" th:value="${ty.id}" />
+                                          <!-- <label th:for="${#ids.prev('category')}" th:text="${ty.name}">Wireframe</label> -->
+                                          <label th:for="${#ids.prev('category')}" th:text="${ty.name}">Wireframe</label>
+                                        </li>
+                                      </ul>
+                                  </div>
 
-                                <button type="submit" class="btn btn-default">Dodaj Produkt</button>
+                                  <button type="submit" class="btn btn-default">Dodaj Produkt</button>
                             
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="well">
-                    <form action="#" th:action="@{/category/createCategory}" th:object="${category}" method="post" class="form-horizontal" role="form">
-                    <button type="submit" class="btn btn-default">Dodaj Kategorie</button>
-                </form>
-                </div>
+                
                 <div id="productList" class="row">
                     <div class="col-sm-12">
                         <!-- <div class="seedstarterlist" th:unless="${#lists.isEmpty(allSeedStarters)}"> -->
             
                         <div class="well">
                         <h4 th:text="#{title.list}">List of Products</h4>
+                        <!-- <form action="#" th:action="@{/addproduct}" th:object="${product}" method="post" class="form-horizontal" role="form"> -->
+                            <!-- <div th:object="${product}"> -->
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th th:text="#{msg.id}" />
                                         <th th:text="#{msg.name}" />
+                                        <th th:text="#{msg.category}" />
                                         <th th:text="#{msg.price}" />
                                         <th th:text="#{msg.quantity}" />
                                         <th th:text="#{msg.description}" />
@@ -161,9 +157,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each="product: ${products}">
+                                    <tr th:each="product: ${allVendorProducts}">
                                         <td th:text="${product.id}" />
                                         <td th:text="${product.name}" />
+                                        <!-- <td>
+                                        <div th:object="{category}">
+                                            <p><span th:text="*{name}">Frederic Tomato</span></p>
+                                          </div>
+                                        </td> -->
+                                        <td th:text="${product.category}" />
                                         <td th:text="${product.purchasePrice}" />
                                         <td th:text="${product.quantity}" />
                                         <td th:text="${product.description}" />
@@ -173,6 +175,8 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <!-- </div> -->
+                        <!-- </form> -->
                         </div>
                     </div>
                 </div>

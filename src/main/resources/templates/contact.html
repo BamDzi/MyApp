@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <div th:replace="default :: style"></div> -->
     <style>
 body {margin:0;}
 
 .navbar {
-  /*overflow: hidden;*/
+  
   background-color: #333;
   position: fixed;
   top: 0;
@@ -23,7 +24,7 @@ body {margin:0;}
 .navbar a {
   display: block;
   color: #f2f2f2;
-  /*text-align: center;*/
+  
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
@@ -68,9 +69,7 @@ input[type=submit]:hover {
 }    
  
 footer {
-     /* background-color: #555;
-      color: white;
-      padding: 15px;*/
+     
       background-color: #f2f2f2;
       padding: 25px;
 }
@@ -78,7 +77,7 @@ footer {
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse">
+  <!-- <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -90,12 +89,12 @@ footer {
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <!-- <li><a href="#">Home</a></li> -->
+        
         <li><a href="#">O nas</a></li>
         <li><a href="#">Punkty odbioru</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <!-- <li><a href="#"><span class="glyphicon glyphicon-user"></span> Moje konto</a></li> -->
+        
         <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Witaj, nazwa użytkownika <span class="caret"></span></a>
@@ -107,7 +106,7 @@ footer {
             <li><a href="#">Wyloguj</a></li>
           </ul>
         </li>
-        <!-- <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a></li> -->
+        
       </ul>
     </div>
   </div>
@@ -118,7 +117,9 @@ footer {
     <h1>My Portfolio</h1>      
     <p>Some text that represents "Me"...</p>
   </div>
-</div>
+</div> -->
+
+<div th:replace="default :: head"></div>
 
 <div class="container">
   <form action="/action_page.php">
@@ -136,9 +137,10 @@ footer {
 
 </div><br/>
 
-<footer class="container-fluid text-center">
+<!-- <footer class="container-fluid text-center">
   <p>Footer Text</p>
   <p>Pomoc    FAQ     Regulamin    Sprzedawcy</p>
-</footer>
+</footer> -->
+<div th:replace="default :: footer"></div>
 </body>
 </html>

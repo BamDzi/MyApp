@@ -1,5 +1,6 @@
 package pl.zajaczkowski.controller;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -55,11 +56,15 @@ public class CartController {
 	public String addToCart(@RequestParam Integer id, HttpServletRequest request, HttpSession session, Model model) {
 
 		Product product = productService.findProductById(id);
+		BigDecimal productPrice = new BigDecimal("0.0");
+		productPrice = product.getPurchasePrice();
 		OrderLine orderLine = new OrderLine(); // Cart cart = new Cart();
-		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("cart");
+		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("orderLines");
+//		Set<Product> productsList = (Set<Product>) session.getAttribute("productsList");
 
 		if (list == null) {
 			list = new LinkedHashSet<OrderLine>();
+//			productsList = new LinkedHashSet<Product>();
 		}
 
 		boolean isExist = false;
@@ -71,24 +76,34 @@ public class CartController {
 		for (OrderLine o : list) {
 			if (o.equals(orderLine)) {
 				o.setQuantity(o.getQuantity() + 1);
-				productService.quantityIncrease(product);
-				productService.saveProduct(product);
+//				BigDecimal a = o.getAmount();
+//				BigDecimal b = productPrice + a;
+				o.setAmount(o.getAmount().add(productPrice));
 				isExist = true;
 			}
 		}
 		
 		if (isExist == false) {
 
-			Long i = (long) (list.size() + 1);
+			Long i = new Long(0);// = (long) (list.size() + 1);
+			
+			while(i == null) {
+				i++;
+			}
 
 			orderLine.setId(i);
-			orderLine.setPurchasePrice(product.getPurchasePrice());
+			
+			orderLine.setPurchasePrice(productPrice);
 			orderLine.setQuantity(1);
+			orderLine.setAmount(productPrice);
 			list.add(orderLine);
+//			product.setQuantity(product.getQuantity() - 1);
+//			productsList.add(product);
 		}
 
 		session = request.getSession();
-		session.setAttribute("cart", list);
+		session.setAttribute("orderLines", list);
+//		session.setAttribute("productsList", productsList);
 
 		return "redirect:/cart";
 	}
@@ -96,7 +111,7 @@ public class CartController {
 	@RequestMapping("/orderLine/remove")
 	public String removeOrderLine(@RequestParam Long id, HttpSession session) {
 
-		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("cart");
+		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("orderLines");
 
 		OrderLine temp = null;
 
@@ -116,11 +131,13 @@ public class CartController {
 	@RequestMapping("/orderLine/increase")
 	public String increaseOrderLine(@RequestParam Long id, HttpSession session) {
 
-		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("cart");
+		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("orderLines");
 
 		for (OrderLine o : list) {
 			if (o.getId() == id) {
+//			if (o.equals(id)) {
 				o.setQuantity(o.getQuantity() + 1);
+				o.setAmount(o.getAmount().add(o.getPurchasePrice()));
 			}
 		}
 
@@ -130,7 +147,7 @@ public class CartController {
 	@RequestMapping("/orderLine/decrease")
 	public String decreaseOrderLine(@RequestParam Long id, HttpSession session) {
 
-		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("cart");
+		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("orderLines");
 		OrderLine temp = null;
 
 		for (OrderLine o : list) {
@@ -166,7 +183,8 @@ public class CartController {
 			customerRepository.save(customer);
 		}
 		
-		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("cart");
+		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("orderLines");
+//		Set<Product> productsList = (Set<Product>) session.getAttribute("productsList");
 		Orders order = new Orders();
 
 		for (OrderLine o : list) {
@@ -180,15 +198,20 @@ public class CartController {
 		orderLineRepository.save(list);
 		ordersRepository.save(order);
 
+//		for(Product p : productsList) {
+//			productService.saveProduct(p);
+//		}
+		
 //		productService.saveProduct(product);
 		
-		session.removeAttribute("cart");
+		session.removeAttribute("orderLines");
+//		session.removeAttribute("productsList");
 
 		return "redirect:/cart";
 	}
 
 	@ModelAttribute("listOrderLine")
 	public Set<OrderLine> listOrderLine(HttpSession session) {
-		return (Set<OrderLine>) session.getAttribute("cart");
+		return (Set<OrderLine>) session.getAttribute("orderLines");
 	}
 }

@@ -25,6 +25,8 @@ public class ProductService {
 	private UserService userService;
 	@Autowired
 	private RoleRepository roleRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	public void saveProduct(Product product) {
 		
@@ -54,14 +56,52 @@ public class ProductService {
 	public Product findProductByName(String name) {
 		return productRepository.findProductByName(name);
 	}
+	
+	public Product findProductByNameAndVendor(String name, User vendor) {
+		return productRepository.findProductByNameAndVendor(name, vendor);
+	}
 
 	public List<Product> listAllProducts() {
 		return productRepository.findAll();
 	}
+	
+	public List<Product> listProductByCategory(Integer id) {
+		Category category = categoryRepository.findById(id);
+		return productRepository.findProductByCategoryAndQuantityNotNull(category);//  find(category);
+	}
+	
+	public final List<Product> listProductByVendor() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userSession = auth.getName();
+		
+		User vendor = userService.findByEmail(userSession);
 
-public void quantityIncrease(Product product) {
+		if(vendor == null) {
+			//return exit
+		}
+		
+		List<Product> productList = productRepository.findProductByVendor(vendor); 
+		
+		/*for(Product p : productList) {
+			
+		
+			p.getCategory() = category.getName();
+			
+			
+//			Category c = p.getCategory();
+//			c.getName();
+		}*/
+		return productList;
+	}
 	
-	product.setQuantity(product.getQuantity() - 1);
-	
-}
+	/*public List<Product> listAllProductsNotNull(Integer id) {
+		return productRepository.findByCategoryAndQuantityNotNull(id);
+	}*/
+
+//public void quantityIncrease(Product product) {
+//	
+//	product.setQuantity(product.getQuantity() - 1);
+//	
+//}
 }																																

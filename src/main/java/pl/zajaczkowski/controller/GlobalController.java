@@ -23,15 +23,16 @@ public class GlobalController {
 	private ProductService productService;
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@ModelAttribute
-	public void listProducts(Model model) {
-		model.addAttribute("products", productService.listAllProducts());
+	public void listAllProducts(Model model) {
+//		model.addAttribute("allProducts", productService.listAllProducts());
+		model.addAttribute("allVendorProducts", productService.listProductByVendor());
 	}
-	
-	  @ModelAttribute("allCategorys")
-	    public List<Category> listCategorys() {
-	      return categoryRepository.findAll();  
-	    }
+
+	@ModelAttribute("allCategorys")
+	public List<Category> listCategorys() {
+		return categoryRepository.findAll();
+	}
 
 }

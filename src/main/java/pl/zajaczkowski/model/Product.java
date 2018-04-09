@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -21,15 +23,17 @@ public class Product {
 	@Id
 	@GeneratedValue
 	private Integer id;
+//	@NotEmpty(message = "*Proszę wpisać nazwę produktu")
 	private String name;
 	@ManyToOne
+//	@NotNull(message = "*Proszę zaznaczyć kategorie")
 	private Category category;
+//	@NotNull(message = "*Proszę wprowadzić cenę produktu")
 	private BigDecimal purchasePrice;
-	private int quantity;
-	private boolean inStock = false;
-	private String description;
-	private String components;
-	private String tips;
+	private Integer quantity;
+	private String description = null;
+	private String components = null;
+	private String tips = null;
 	@CreatedDate
 	private Calendar additionDate;
 	@OneToOne
@@ -56,6 +60,14 @@ public class Product {
 		this.name = name;
 	}
 
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
 	public Category getCategory() {
 		return category;
 	}
@@ -70,22 +82,6 @@ public class Product {
 
 	public void setPurchasePrice(BigDecimal purchasePrice) {
 		this.purchasePrice = purchasePrice;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
-	public boolean isInStock() {
-		return inStock;
-	}
-
-	public void setInStock(boolean inStock) {
-		this.inStock = inStock;
 	}
 
 	public String getDescription() {
@@ -133,14 +129,12 @@ public class Product {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((additionDate == null) ? 0 : additionDate.hashCode());
-		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((components == null) ? 0 : components.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (inStock ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
-		result = prime * result + quantity;
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((tips == null) ? 0 : tips.hashCode());
 		return result;
 	}
@@ -159,11 +153,6 @@ public class Product {
 				return false;
 		} else if (!additionDate.equals(other.additionDate))
 			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
 		if (components == null) {
 			if (other.components != null)
 				return false;
@@ -179,8 +168,6 @@ public class Product {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (inStock != other.inStock)
-			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -191,7 +178,10 @@ public class Product {
 				return false;
 		} else if (!purchasePrice.equals(other.purchasePrice))
 			return false;
-		if (quantity != other.quantity)
+		if (quantity == null) {
+			if (other.quantity != null)
+				return false;
+		} else if (!quantity.equals(other.quantity))
 			return false;
 		if (tips == null) {
 			if (other.tips != null)
@@ -200,6 +190,7 @@ public class Product {
 			return false;
 		return true;
 	}
+
 
 
 }

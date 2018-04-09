@@ -30,7 +30,7 @@
 			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
 		</form>
 	</div>
-	<div class="container unauthenticated" ng-show="!home.authenticated">
+	<!-- <div class="container unauthenticated" ng-show="!home.authenticated">
 		<div>
 			With Facebook:
 			<a href="/login/facebook">click here</a>
@@ -39,37 +39,28 @@
 			With Google:
 			<a href="/login/google">click here</a>
 		</div>
-	</div>
+	</div> -->
 <br/>
 <br/>
 <br/>
+
 <div class="container unauthenticated">
-    With Facebook: <a href="/login/facebook">click here</a>
+	With Facebook: <a href="/login/facebook">zaloguj z facebook</a><br/>
+	With Google: <a href="/login/google">zaloguj z google</a>
 </div>
 <div class="container authenticated" style="display:none">
 	Logged in as: <span id="user"></span>
-	<!-- <div>
-		<button onClick="logout()" class="btn btn-primary">Logout</button>
-	  </div> -->
 </div>
+
 <br/>
 <br/>
 <br/>
 	<!-- <h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3> -->
 	<p th:text="'fromController: ' + ${username}" />
+	<!-- <h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3> -->
 	<p th:text="'fromController2: ' + ${nameUser}" />
 	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</h1>
-	<form action="#" th:action="@{/createCategory}" th:object="${category}" method="post" class="form-horizontal" role="form">
-		<!-- <div class="form-group">
-		  
-			<label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa produktu:</label>
-			<input type="text" th:field="*{name}" placeholder="Nazwa produktu" class="form-control" />
-		</div> -->
-		
-
-		<button type="submit" class="btn btn-default">Dodaj Kategorie</button>
-
-	</form>
+	
 	<form th:action="@{/logout}" method="POST" >
 	<div class="container" ng-show="home.authenticated">
 		Logged in as: <span ng-bind="home.user"></span>
@@ -97,7 +88,7 @@
 </script>
 
 	
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		angular.module("app", []).controller("home",
 			function ($http, $location) {
 				var self = this;
@@ -118,7 +109,7 @@
 				 	});
 				 };
 			});
-	</script>
+	</script> -->
 </body>
 
 </html>

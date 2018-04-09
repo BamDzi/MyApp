@@ -12,7 +12,7 @@
 		<style>
 			body {
 				margin: 0;
-				
+
 			}
 
 			.navbar {
@@ -86,6 +86,14 @@
 				padding: 10px;
 			}
 		</style>
+		<script type="text/javascript">
+			$.get("/user", function (data) {
+				$("#user").html(data.userAuthentication.details.name);
+				$(".unauthenticated").hide()
+				$(".authenticated").show()
+			});
+
+		</script>
 	</div>
 </head>
 
@@ -114,10 +122,25 @@
 								<span class="glyphicon glyphicon-shopping-cart"></span> Kosz
 							</a>
 						</li>
-						<li class="dropdown">
+						<li>
+							<div class="container unauthenticated">
+								With Facebook:
+								<a href="/login/facebook">zaloguj z facebook</a>
+								<br/> With Google:
+								<a href="/login/google">zaloguj z google</a>
+							</div>
+							<div class="container authenticated" style="background-color: aqua; display:none">
+								Witaj:
+								<span id="user"></span>
+							</div>
+						</li>
+						<!-- <li>
+							<span class="glyphicon glyphicon-log-in"></span> Logowanie/Rejestracja
+						</li> -->
+						<!-- <li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-								<span class="glyphicon glyphicon-user"></span> Witaj, nazwa użytkownika
-								<!-- <span class="glyphicon glyphicon-log-in"></span> Logowanie/Rejestracja -->
+								<span class="glyphicon glyphicon-user"></span>
+								<span th:text="'Witaj ' + ${username}"></span>
 								<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
@@ -135,7 +158,7 @@
 									<a href="#">Wyloguj</a>
 								</li>
 							</ul>
-						</li>
+						</li> -->
 						<!-- <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a></li> -->
 					</ul>
 				</div>
@@ -162,20 +185,20 @@
 						</div>
 					</a>
 					<a href="sausage.html" th:href="@{/sausage}">
-					<div class="well well-sm">
-						<h1>Wędliny</h1>
-					</div>
-				</a>
-				<a href="dairy_product.html" th:href="@{/dairy}">
-					<div class="well well-sm">
-						<h1>Nabiał</h1>
-					</div>
-				</a>
-				<a href="fish.html" th:href="@{/fish}">
-					<div class="well well-sm">
-						<h1>Ryby</h1>
-					</div>
-				</a>
+						<div class="well well-sm">
+							<h1>Wędliny</h1>
+						</div>
+					</a>
+					<a href="dairy_product.html" th:href="@{/dairy}">
+						<div class="well well-sm">
+							<h1>Nabiał</h1>
+						</div>
+					</a>
+					<a href="fish.html" th:href="@{/fish}">
+						<div class="well well-sm">
+							<h1>Ryby</h1>
+						</div>
+					</a>
 				</div>
 			</div>
 			<div class="col-sm-10">
@@ -253,11 +276,13 @@
 		</div>
 	</div>
 
+
+
 	<footer th:fragment="footer" class="container-fluid text-center">
 		<p>Footer Text</p>
 		<p>Pomoc </p>
 		<p>FAQ</p>
-		<p>Regulamin</p>
+		<a href="regulations.html" th:href="@{/regulations}">Regulamin</a>
 		<p>Forma płatności(PayU)</p>
 		<p>Lista Sprzedawców</p>
 		<a href="#">O nas</a>
