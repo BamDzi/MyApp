@@ -73,11 +73,16 @@ public class CartController {
 			orderLine.setProduct(product);
 		}
 
+		if (list.contains(orderLine)) {
+			System.out.println("Zwiera");
+			System.out.println("Zwiera");
+			System.out.println("Zwiera");
+			System.out.println("Zwiera");
+		}
+		
 		for (OrderLine o : list) {
 			if (o.equals(orderLine)) {
 				o.setQuantity(o.getQuantity() + 1);
-//				BigDecimal a = o.getAmount();
-//				BigDecimal b = productPrice + a;
 				o.setAmount(o.getAmount().add(productPrice));
 				isExist = true;
 			}
@@ -85,20 +90,25 @@ public class CartController {
 		
 		if (isExist == false) {
 
-			Long i = new Long(0);// = (long) (list.size() + 1);
-			
-			while(i == null) {
-				i++;
+//			Long i = (long) (list.size());
+		
+			if (list.isEmpty()) {
+				orderLine.setId(1L);
 			}
-
-			orderLine.setId(i);
+			
+			Long temp = null;
+			for (OrderLine o : list) {
+				temp = o.getId();
+			}
+			
+			if (list.isEmpty() == false) {
+			orderLine.setId(temp + 1);
+			}
 			
 			orderLine.setPurchasePrice(productPrice);
 			orderLine.setQuantity(1);
 			orderLine.setAmount(productPrice);
 			list.add(orderLine);
-//			product.setQuantity(product.getQuantity() - 1);
-//			productsList.add(product);
 		}
 
 		session = request.getSession();

@@ -135,7 +135,7 @@
                     <tbody>
                         <tr th:each="orderLine: ${listOrderLine}">
                             <td th:text="${orderLine.id}" />
-                            <td th:text="${orderLine.product}" />
+                            <td th:text="${orderLine.product.name}" />
                             <td th:text="${orderLine.purchasePrice}" />
                             <td th:text="${orderLine.quantity}" />
                             <td th:text="${orderLine.amount}" />
