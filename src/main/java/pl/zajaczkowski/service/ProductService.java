@@ -81,7 +81,7 @@ public class ProductService {
 			//return exit
 		}
 		
-		List<Product> productList = productRepository.findProductByVendor(vendor); 
+//		List<Product> productList = productRepository.findProductByVendor(vendor); 
 		
 		/*for(Product p : productList) {
 			
@@ -92,7 +92,8 @@ public class ProductService {
 //			Category c = p.getCategory();
 //			c.getName();
 		}*/
-		return productList;
+//		return productList;
+		return productRepository.findProductByVendor(vendor);
 	}
 	
 	/*public List<Product> listAllProductsNotNull(Integer id) {

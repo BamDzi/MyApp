@@ -20,13 +20,9 @@ public class CommonController {
 		return "default";
 	}
 
-
-	
-
-	
-	@GetMapping("settings")
-	public String settings() {
-		return "settings";
+	@GetMapping("customer")
+	public String customer() {
+		return "customer";
 	}
 
 	@GetMapping("viewProduct")

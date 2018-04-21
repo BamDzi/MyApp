@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.zajaczkowski.model.Category;
 import pl.zajaczkowski.model.Product;
 import pl.zajaczkowski.repository.CategoryRepository;
+import pl.zajaczkowski.repository.OrdersRepository;
+import pl.zajaczkowski.service.OrdersService;
 import pl.zajaczkowski.service.ProductService;
 
 @ControllerAdvice
@@ -23,7 +25,9 @@ public class GlobalController {
 	private ProductService productService;
 	@Autowired
 	private CategoryRepository categoryRepository;
-
+	@Autowired
+	private OrdersService ordersService;
+	
 	@ModelAttribute
 	public void listAllProducts(Model model) {
 //		model.addAttribute("allProducts", productService.listAllProducts());
@@ -35,4 +39,8 @@ public class GlobalController {
 		return categoryRepository.findAll();
 	}
 
+	@ModelAttribute
+	public void listOrders(Model model) {
+		model.addAttribute("allOrders", ordersService.ListAllOrders());
+	}
 }

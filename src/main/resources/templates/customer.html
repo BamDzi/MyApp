@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>ustawienia</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div th:replace="default :: style"></div>
+  
+    <script type="text/javascript">
+        $.get("/user", function (data) {
+            $("#user").html(data.userAuthentication.details.name);
+            $(".unauthenticated").hide()
+            $(".authenticated").show()
+        });
+    </script>
+</head>
+
+<body>
+    <div th:replace="default :: head"></div>
+
+    <div class="container">
+        <h2>Dynamic Tabs</h2>
+        <p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a
+            unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
+
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#home">Home</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#menu1">Menu 1</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#menu2">Menu 2</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#menu3">Menu 3</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h3>HOME</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                    magna aliqua.</p>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th th:text="#{msg.id}" />
+                            <th th:text="Data" />
+                            <th th:text="Klient" />
+                            <th th:text="Total" />
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="order: ${allOrders}">
+                            <td th:text="${order.id}" />
+                            <td th:text="${#calendars.format(order.date,'dd MMM yyyy')}" />
+                            <td th:text="${order.customer.name}" />
+                            <td th:text="${order.total}" />
+                            <td>
+                                <a href="orderLines.html" th:href="@{/order/details(id=${order.id})}">view</a>
+                              </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h3>Menu 2</h3>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <h3>Menu 3</h3>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div th:replace="default :: footer"></div>
+</body>
+
+</html>

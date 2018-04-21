@@ -20,9 +20,9 @@ public class Customer {
 		@Id
 		@GeneratedValue
 	    private Long id;
-	    private String name = null;
+	    private String name;
 	    @CreatedDate
-	    private Calendar customerSince = null;
+	    private Calendar customerSince;
 	    @Transient				//adnotacja sprawia że pole nie zapisuje się w bazie danych
 	    private int phoneNumber;
 	    @OneToOne

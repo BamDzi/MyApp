@@ -10,6 +10,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -22,11 +23,11 @@ public class Orders {
 
 	@Id
 	@GeneratedValue
-	private Long id = null;
+	private Long id;
 	@CreatedDate
 	private Calendar date = null;
-	@OneToOne
-	private Customer customer = null;
+	@ManyToOne
+	private Customer customer;
 	@OneToMany
 	@JoinColumn(name = "order_Id")
 	private Set<OrderLine> orderLines;// = new LinkedHashSet<OrderLine>();
