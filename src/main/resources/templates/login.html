@@ -3,18 +3,81 @@
 
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<div th:replace="home :: style"></div>
+
+	<style>
+		hr.style1 {
+			border-top: 1px solid #8c8b8b;
+		}
+
+		.btn-google {
+			background: #dd4b39;
+		}
+
+		.btn-facebook {
+			background: #3B5998;
+		}
+	</style>
+
 </head>
 
 <body>
-	<form th:action="@{/registration}" method="get">
-		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-	</form>
 
-	<div class="container">
+	<div th:replace="home :: head"></div>
+
+	<div class="content">
+		<div class="main-1">
+			<div class="container">
+				<div class="login-page">
+					<div class="account_grid">
+						<div class="col-md-6 login-left">
+							<h3>REJESTRACJA</h3>
+							<p>W celu utworzenia nowego użytkownika, niezbędne będzie wypełnienie jedynie trzech pól w formularzu rejestracyjnym.</p>
+							<a class="acount-btn" href="registration.html" th:href="@{/registration}">Zarejestruj</a>
+						</div>
+						<div class="col-md-6 login-right">
+							<h3>LOGOWANIE</h3>
+							<p>Jeśli jesteś zarejestrowany, proszę wprowadzić email i hasło</p>
+							<!-- <form th:action="@{/login}" method="POST" class="form-signin"> -->
+							<form	action="#" th:action="@{/login}" th:object="${user}" method="post">
+								<div>
+									<span>Adres Email
+										<!-- <label>*</label> -->
+									</span>
+									<input type="text" id="email" name="email" class="form-control" />
+								</div>
+								<div>
+									<span>Hasło
+										<!-- <label>*</label> -->
+									</span>
+									<input type="password" id="password" name="password" class="form-control" />
+								</div>
+								<div align="center" th:if="${param.error}">
+										<p style="font-size: 20; color: #FF1C19;">Nieprawidłowy email albo hasło, proszę sprubować jeszcze raz</p>
+									</div>
+								<input type="submit" value="Zaloguj" />
+								<a class="forgot" href="#">Zapomniałeś hasło?</a>
+							</form>
+							<hr/>
+							<!-- <hr class="style1" /> -->
+							<a class="acount-btn btn-google" href="/login/google"> Zaloguj się przez Google </a>
+							<br/>
+							<br/>
+							<a class="acount-btn btn-facebook" href="/login/facebook">Zaloguj się przez Facebook</a>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- login -->
+	<!-- </div> -->
+
+	
+
+	<!-- <div class="container">
 		<img th:src="@{/images/logo.jpeg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
 		<form th:action="@{/login}" method="POST" class="form-signin">
 			<h3 class="form-signin-heading" th:text="Welcome"></h3>
@@ -29,7 +92,7 @@
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
 		</form>
-	</div>
+	</div> -->
 	<!-- <div class="container unauthenticated" ng-show="!home.authenticated">
 		<div>
 			With Facebook:
@@ -40,34 +103,38 @@
 			<a href="/login/google">click here</a>
 		</div>
 	</div> -->
-<br/>
-<br/>
-<br/>
+	<br/>
+	<br/>
+	<br/>
 
-<div class="container unauthenticated">
-	With Facebook: <a href="/login/facebook">zaloguj z facebook</a><br/>
-	With Google: <a href="/login/google">zaloguj z google</a>
-</div>
-<div class="container authenticated" style="display:none">
-	Logged in as: <span id="user"></span>
-</div>
+	<div class="container unauthenticated">
+		With Facebook:
+		<a href="/login/facebook">zaloguj z facebook</a>
+		<br/> With Google:
+		<a href="/login/google">zaloguj z google</a>
+	</div>
+	<div class="container authenticated" style="display:none">
+		Logged in as:
+		<span id="user"></span>
+	</div>
 
-<br/>
-<br/>
-<br/>
+	<br/>
+	<br/>
+	<br/>
 	<!-- <h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3> -->
 	<p th:text="'fromController: ' + ${username}" />
 	<!-- <h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3> -->
 	<p th:text="'fromController2: ' + ${nameUser}" />
 	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</h1>
-	
-	<form th:action="@{/logout}" method="POST" >
-	<div class="container" ng-show="home.authenticated">
-		Logged in as: <span ng-bind="home.user"></span>
-		<div>
-			<button ng-click="home.logout()" class="btn btn-primary">Logout</button>
+
+	<form th:action="@{/logout}" method="POST">
+		<div class="container" ng-show="home.authenticated">
+			Logged in as:
+			<span ng-bind="home.user"></span>
+			<div>
+				<button ng-click="home.logout()" class="btn btn-primary">Logout</button>
+			</div>
 		</div>
-	</div>
 	</form>
 	<!-- <div class="container authenticated">
 		Logged in as:
@@ -77,39 +144,19 @@
 		</div>
 	</div> -->
 	<!-- <script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script> -->
-	
+
 	<script type="text/javascript">
-		$.get("/user", function(data) {
+		$.get("/user", function (data) {
 			$("#user").html(data.userAuthentication.details.name);
 			$(".unauthenticated").hide()
 			$(".authenticated").show()
 		});
-  
-</script>
 
-	
-	<!-- <script type="text/javascript">
-		angular.module("app", []).controller("home",
-			function ($http, $location) {
-				var self = this;
-				$http.get("/user").success(function (data) {
-					self.user = data.userAuthentication.details.name;
-					self.authenticated = true;
-				}).error(function () {
-					self.user = "N/A";
-					self.authenticated = false;
-				});
- 				 self.logout = function() {
-				 	$http.post('/logout', {}).success(function() {
-				 		self.authenticated = false;
-				 		$location.path("/");
-				 	}).error(function(data) {
-				 		console.log("Logout failed")
-				 		self.authenticated = false;
-				 	});
-				 };
-			});
-	</script> -->
+	</script>
+
+
+	<div th:replace="home :: footer"></div>
+
 </body>
 
 </html>

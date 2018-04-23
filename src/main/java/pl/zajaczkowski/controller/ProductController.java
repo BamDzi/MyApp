@@ -114,9 +114,9 @@ public class ProductController {
 	@ModelAttribute
 	public void listProductsNotNull(Model model) {
 		model.addAttribute("meatNotNull",productService.listProductByCategory(1));
-		model.addAttribute("dairyNotNull",productService.listProductByCategory(2));
-		model.addAttribute("fishNotNull",productService.listProductByCategory(3));
-		model.addAttribute("sausageNotNull",productService.listProductByCategory(4));
+		model.addAttribute("dairyNotNull",productService.listProductByCategory(3));
+		model.addAttribute("fishNotNull",productService.listProductByCategory(4));
+		model.addAttribute("sausageNotNull",productService.listProductByCategory(2));
 	}
 	
 }

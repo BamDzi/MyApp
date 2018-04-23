@@ -3,16 +3,66 @@
 
 <head>
     <title>Rejestracja</title>
-    <meta charset="utf-8" />
+
+    <div th:replace="home :: style"></div>
+
+    <!-- <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <div th:replace="default :: style"></div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 
 <body>
-    <div th:replace="default :: head"></div>
+    <div th:replace="home :: head"></div>
+
+<!-- registration -->
+<div class="main-1">
+		<div class="container">
+			<div class="register">
+		  	  <form> 
+				 <div class="register-top-grid">
+					<h3>REJESTRACJA</h3>
+					 <!-- <div class="wow fadeInLeft" data-wow-delay="0.4s">
+						<span>First Name<label>*</label></span>
+						<input type="text" /> 
+					 </div>
+					 <div class="wow fadeInRight" data-wow-delay="0.4s">
+						<span>Last Name<label>*</label></span>
+						<input type="text" /> 
+					 </div> -->
+					 <div class="wow fadeInRight" data-wow-delay="0.4s">
+						 <span>Email Address<label>*</label></span>
+						 <input type="text" /> 
+					 </div>
+					 <div class="clearfix"> </div>
+					   <!-- <a class="news-letter" href="#">
+						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
+					   </a> -->
+					 </div>
+				     <div class="register-bottom-grid">
+						    <h3>LOGIN INFORMATION</h3>
+							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
+								<span>Password<label>*</label></span>
+								<input type="text" />
+							 </div>
+							 <div class="wow fadeInRight" data-wow-delay="0.4s">
+								<span>Confirm Password<label>*</label></span>
+								<input type="text" />
+							 </div>
+					 </div>
+				</form>
+				<div class="clearfix"> </div>
+				<div class="register-but">
+				   <form>
+					   <input type="submit" value="submit" />
+					   <div class="clearfix"> </div>
+				   </form>
+				</div>
+		   </div>
+		 </div>
+	</div>
+<!-- registration -->
 
     <div class="container-fluid">
         <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="form-horizontal"
@@ -44,106 +94,7 @@
                 </form>
     </div>
     
-    <div th:replace="default :: footer"></div>
+    <div th:replace="home :: footer"></div>
 </body>
 
 </html>
-
-<!-- <!DOCTYPE html>
-<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <title>Rejestracja</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        body {
-            margin: 0;
-        }
-
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-
-        .navbar a {
-       
-            display: block;
-            color: #f2f2f2;
-       
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
-
-        .main {
-            margin-top: 100px;
-        }
-
-        .jumbotron {
-            margin-bottom: 10;
-        }
-
-        .btn-group button {
-            background-color: #4CAF50;
-       
-            border: 1px solid green;
-       
-            color: white;
-       
-            padding: 10px 24px;
-       
-            cursor: pointer;
-       
-            width: 100%;
-       
-            display: block;
-       
-        }
-
-        .btn-group button:not(:last-child) {
-            border-bottom: none;
-       
-        }
-
-       
-
-        .btn-group button:hover {
-            background-color: lightgreen;
-        }
-
-        footer {
-            
-            background-color: #f2f2f2;
-            padding: 25px;
-        }
-    </style>
-</head>
-
-<body>
-   
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-
-            
-                
-            </div>
-        </div>
-    </div>
-    <br/>
-    <br/>
-
-    <div th:replace="default :: footer"></div>
-
-</body>
-
-</html> -->

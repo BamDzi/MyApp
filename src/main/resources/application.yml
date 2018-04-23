@@ -40,6 +40,11 @@ spring:
   queries:                                         # = Spring Security / Queries for AuthenticationManagerBuilder
     usersQuery: select email, password, active from user where email=?
     rolesQuery: select u.email, r.role from user u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?
+#  mvc:
+#    static-path-pattern: /resources/static/**
+#  resources:
+#    static-locations: resources/**
+        
 #    rolesQuery: select email, role_id from user where email=?
 
 # ===============================

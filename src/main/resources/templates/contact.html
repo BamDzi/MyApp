@@ -1,146 +1,60 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Kontakt</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!-- <div th:replace="default :: style"></div> -->
-    <style>
-body {margin:0;}
+  <title>Kontakt</title>
 
-.navbar {
-  
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  margin-bottom: 0;
-  border-radius: 0;
-}
+  <div th:replace="home :: style"></div>
 
-.navbar a {
-  display: block;
-  color: #f2f2f2;
-  
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.main {
-  margin-top: 50px;
-}
-
-.jumbotron {
-      margin-bottom: 10;
-    }
-
-input[type=text], select, textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    resize: vertical;
-}
-
-input[type=submit] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #45a049;
-}
-
-.container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}    
- 
-footer {
-     
-      background-color: #f2f2f2;
-      padding: 25px;
-}
-</style>
 </head>
 
 <body>
-  <!-- <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        
-        <li><a href="#">O nas</a></li>
-        <li><a href="#">Punkty odbioru</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-        <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Kosz</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Witaj, nazwa użytkownika <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Moje dane</a></li>
-            <li><a href="#">Zamówienia</a></li>
-            <li><a href="#">Przechowalnia</a></li>
-            <li role="presentation" class="divider"></li>
-            <li><a href="#">Wyloguj</a></li>
-          </ul>
-        </li>
-        
-      </ul>
+
+  <div th:replace="home :: head"></div>
+
+  <div class="content">
+    <!--start-contact-->
+    <!--contact-->
+    <div class="content">
+      <div class="contact">
+        <div class="container">
+          <h2>Napisz do nas</h2>
+          <div class="google-map">
+            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d424396.3176723366!2d150.92243255000002!3d-33.7969235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b129838f39a743f%3A0x3017d681632a850!2sSydney+NSW%2C+Australia!5e0!3m2!1sen!2sin!4v1431587453420"></iframe> -->
+            <iframe src="https://www.google.pl/maps/@54.307927,18.5930318,16.5z"></iframe>
+          </div>
+          <div class="contact-grids">
+            <div class="col-md-6 contact-left">
+              <p>Jakiś tam tekst o nas</p>
+              <address>
+                <p>Nazwa firmy</p>
+                <p>ulica</p>
+                <p>kod i miasto</p>
+                <p>Telephone : +1 800 603 6035</p>
+                <p>E-mail :
+                  <a href="mailto:example@mail.com">example@mail.com</a>
+                </p>
+              </address>
+            </div>
+            <div class="col-md-6 contact-right">
+              <form>
+                <h5>imie</h5>
+                <input type="text" />
+                <h5>adres email</h5>
+                <input type="text" />
+                <h5>wiadomość</h5>
+                <textarea></textarea>
+                <input type="submit" value="wyślij" />
+              </form>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
 
-<div class="jumbotron main">
-  <div class="container text-center">
-    <h1>My Portfolio</h1>      
-    <p>Some text that represents "Me"...</p>
-  </div>
-</div> -->
-
-<div th:replace="default :: head"></div>
-
-<div class="container">
-  <form action="/action_page.php">
-    <label for="fname">E-mail</label>
-    <input type="text" id="e-mail" name="email" placeholder="Twój e-mail..."/>
-
-    <label for="lname">Temat wiadomości</label>
-    <input type="text" id="subject" name="lastname" placeholder="Napisz temat..."/>
-
-    <label for="subject">Treść wiadomości</label>
-    <textarea id="text" name="subject" placeholder="Napisz wiadomość..." style="height:200px"></textarea>
-
-    <input type="submit" class="navbar-right" value="Wyślij"/>
-  </form>
-
-</div><br/>
-
-<!-- <footer class="container-fluid text-center">
-  <p>Footer Text</p>
-  <p>Pomoc    FAQ     Regulamin    Sprzedawcy</p>
-</footer> -->
-<div th:replace="default :: footer"></div>
+  <div th:replace="home :: footer"></div>
 </body>
+
 </html>

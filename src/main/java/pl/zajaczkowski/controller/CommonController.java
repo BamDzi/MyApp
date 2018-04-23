@@ -15,10 +15,11 @@ public class CommonController {
 	@Autowired
 	private ProductService productService;
 
-	@GetMapping
+	@GetMapping("/")
 	public String startPage() {
-		return "default";
+		return "home";
 	}
+	
 
 	@GetMapping("customer")
 	public String customer() {
@@ -49,6 +50,10 @@ public class CommonController {
 	public String regulations() {
 		return "regulations";
 	}
-
+	
+	@GetMapping("products")
+	public String products() {
+		return "products";
+	}
 
 }

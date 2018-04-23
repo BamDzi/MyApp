@@ -111,7 +111,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      													//When a user successfully logs in, they will be redirected to the previously 
 	    												//requested page that required authentication.
 //				.failureUrl("/login?error=true")
-				.defaultSuccessUrl("/online")
+				.defaultSuccessUrl("/")
 				.usernameParameter("email")
 				.passwordParameter("password")
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/").permitAll()
@@ -135,7 +135,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				facebook().getClientId()));
 		facebookFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
 		    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-		        this.setDefaultTargetUrl("/contact");
+		        this.setDefaultTargetUrl("/");
 		        super.onAuthenticationSuccess(request, response, authentication);
 		    }
 		});
@@ -180,7 +180,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    googleFilter.setTokenServices(new UserInfoTokenServices(googleResource().getUserInfoUri(), google().getClientId()));
 	    googleFilter.setAuthenticationSuccessHandler(new SimpleUrlAuthenticationSuccessHandler() {
 		    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-		        this.setDefaultTargetUrl("/contact");
+		        this.setDefaultTargetUrl("/");
 		        super.onAuthenticationSuccess(request, response, authentication);
 		    }
 		});
