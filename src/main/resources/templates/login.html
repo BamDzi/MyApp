@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 	<title>Login</title>
-
-	<div th:replace="home :: style"></div>
+	<meta charset="utf-8" />
+	<!-- <div th:replace="home :: style"></div> -->
 
 	<style>
 		hr.style1 {
@@ -45,13 +45,13 @@
 									<span>Adres Email
 										<!-- <label>*</label> -->
 									</span>
-									<input type="text" id="email" name="email" class="form-control" />
+									<input type="text" id="email" name="email" />
 								</div>
 								<div>
 									<span>Hasło
 										<!-- <label>*</label> -->
 									</span>
-									<input type="password" id="password" name="password" class="form-control" />
+									<input type="password" id="password" name="password" />
 								</div>
 								<div align="center" th:if="${param.error}">
 										<p style="font-size: 20; color: #FF1C19;">Nieprawidłowy email albo hasło, proszę sprubować jeszcze raz</p>
@@ -61,10 +61,10 @@
 							</form>
 							<hr/>
 							<!-- <hr class="style1" /> -->
-							<a class="acount-btn btn-google" href="/login/google"> Zaloguj się przez Google </a>
+							<a class="acount-btn btn-google" href="/login/google"><i class="fa fa-google fa-fw"></i>Zaloguj się przez Google </a>
 							<br/>
 							<br/>
-							<a class="acount-btn btn-facebook" href="/login/facebook">Zaloguj się przez Facebook</a>
+							<a class="acount-btn btn-facebook" href="/login/facebook"><i class="fa fa-facebook fa-fw"></i>Zaloguj się przez Facebook</a>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
@@ -72,37 +72,9 @@
 			</div>
 		</div>
 	</div>
-	<!-- login -->
-	<!-- </div> -->
 
-	
-
-	<!-- <div class="container">
-		<img th:src="@{/images/logo.jpeg}" class="img-responsive center-block" width="300" height="300" alt="Logo" />
-		<form th:action="@{/login}" method="POST" class="form-signin">
-			<h3 class="form-signin-heading" th:text="Welcome"></h3>
-			<br />
-			<input type="text" id="email" name="email" th:placeholder="Email" class="form-control" />
-			<br />
-			<input type="password" th:placeholder="Password" id="password" name="password" class="form-control" />
-			<br />
-
-			<div align="center" th:if="${param.error}">
-				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
-		</form>
-	</div> -->
-	<!-- <div class="container unauthenticated" ng-show="!home.authenticated">
-		<div>
-			With Facebook:
-			<a href="/login/facebook">click here</a>
-		</div>
-		<div>
-			With Google:
-			<a href="/login/google">click here</a>
-		</div>
-	</div> -->
+	<!-- Zalogowany jako:
+		<span id="user"></span>
 	<br/>
 	<br/>
 	<br/>
@@ -118,45 +90,18 @@
 		<span id="user"></span>
 	</div>
 
+
 	<br/>
 	<br/>
 	<br/>
-	<!-- <h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3> -->
+
 	<p th:text="'fromController: ' + ${username}" />
-	<!-- <h3>Hello, <span th:text="${facebookProfile.name}">Some User</span>!</h3> -->
-	<p th:text="'fromController2: ' + ${nameUser}" />
-	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</h1>
 
-	<form th:action="@{/logout}" method="POST">
-		<div class="container" ng-show="home.authenticated">
-			Logged in as:
-			<span ng-bind="home.user"></span>
-			<div>
-				<button ng-click="home.logout()" class="btn btn-primary">Logout</button>
-			</div>
-		</div>
-	</form>
-	<!-- <div class="container authenticated">
-		Logged in as:
-		<span id="user"></span>
-		<div>
-			<button onClick="logout()" class="btn btn-primary">Logout</button>
-		</div>
-	</div> -->
-	<!-- <script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script> -->
-
-	<script type="text/javascript">
-		$.get("/user", function (data) {
-			$("#user").html(data.userAuthentication.details.name);
-			$(".unauthenticated").hide()
-			$(".authenticated").show()
-		});
-
-	</script>
+	<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</h1> -->
 
 
-	<div th:replace="home :: footer"></div>
 
+	
 </body>
 
 </html>

@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      
     <head>
-        <title>Hello World!</title>
+        <title>Użytkownik aktywowany</title>
+        <meta charset="utf-8" />
     </head>
     <body>
-       <!--  <h1>Hello world!</h1> -->
-       <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</h1>
-       <p>Udało Ci się zarejstrować</p>
-       <p>Na maila dostaniesz link aktywacyjny konto.</p>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+            <div th:replace="home :: head"></div>
+    
+       <div class="container">
+       
+       <h1 th:inline="text">Witaj, [[${#httpServletRequest.remoteUser}]]</h1>
+       <hr/>
+
+       <p>Twoje konto zostało aktywowane, możesz teraz zalogować się na to konto.</p>
+       <p>Życzymy udanych zakupów</p>
+       
         
+
+    </div>
+        <!-- <div th:replace="home :: footer"></div> -->
     </body>
 </html>

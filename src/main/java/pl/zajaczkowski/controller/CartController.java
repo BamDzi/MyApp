@@ -52,6 +52,11 @@ public class CartController {
 		return "cart";
 	}
 
+	@GetMapping("submit")
+	public String submit() {
+		return "submit";
+	}
+	
 	@RequestMapping("/addOrderLine")
 	public String addToCart(@RequestParam Integer id, HttpServletRequest request, HttpSession session, Model model) {
 

@@ -65,8 +65,8 @@ public class ProductService {
 		return productRepository.findAll();
 	}
 	
-	public List<Product> listProductByCategory(Integer id) {
-		Category category = categoryRepository.findById(id);
+	public List<Product> listProductByCategory(String name) {
+		Category category = categoryRepository.findByName(name);
 		return productRepository.findProductByCategoryAndQuantityNotNull(category);//  find(category);
 	}
 	
@@ -96,13 +96,4 @@ public class ProductService {
 		return productRepository.findProductByVendor(vendor);
 	}
 	
-	/*public List<Product> listAllProductsNotNull(Integer id) {
-		return productRepository.findByCategoryAndQuantityNotNull(id);
-	}*/
-
-//public void quantityIncrease(Product product) {
-//	
-//	product.setQuantity(product.getQuantity() - 1);
-//	
-//}
 }																																

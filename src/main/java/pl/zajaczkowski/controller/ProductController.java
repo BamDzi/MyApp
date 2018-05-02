@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.zajaczkowski.model.Category;
 import pl.zajaczkowski.model.Product;
@@ -90,33 +91,11 @@ public class ProductController {
 		return productService.findProductByName(name);
 	}
 	
-	@GetMapping("meat")
-	public String meat() {
-		return "meat";
-	}
-	
-	@GetMapping("sausage")
-	public String sausage() {
-		return "sausage";
-	}
-	
-	@GetMapping("fish")
-	public String fish() {
-		return "fish";
+	@GetMapping("products")
+	public String products(@RequestParam String name, Model model) {
+		model.addAttribute("productsNotNull",productService.listProductByCategory(name));
+		model.addAttribute("category", name);
+		return "products";
 	}
 
-	@GetMapping("dairy")
-	public String dairy() {
-		return "dairy_product";
-	}
-
-
-	@ModelAttribute
-	public void listProductsNotNull(Model model) {
-		model.addAttribute("meatNotNull",productService.listProductByCategory(1));
-		model.addAttribute("dairyNotNull",productService.listProductByCategory(3));
-		model.addAttribute("fishNotNull",productService.listProductByCategory(4));
-		model.addAttribute("sausageNotNull",productService.listProductByCategory(2));
-	}
-	
 }

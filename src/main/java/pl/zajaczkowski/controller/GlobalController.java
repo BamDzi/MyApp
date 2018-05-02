@@ -29,7 +29,7 @@ public class GlobalController {
 	private OrdersService ordersService;
 	
 	@ModelAttribute
-	public void listAllProducts(Model model) {
+	public void listProducts(Model model) {
 //		model.addAttribute("allProducts", productService.listAllProducts());
 		model.addAttribute("allVendorProducts", productService.listProductByVendor());
 	}
@@ -41,6 +41,7 @@ public class GlobalController {
 
 	@ModelAttribute
 	public void listOrders(Model model) {
-		model.addAttribute("allOrders", ordersService.ListAllOrders());
+		model.addAttribute("allOrders", ordersService.listAllOrders());
+		model.addAttribute("ordersByCustomer", ordersService.listOrdersByCustomer());
 	}
 }

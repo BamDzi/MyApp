@@ -1,59 +1,95 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>potwierdzenie</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <div th:replace="default :: style"></div>
+    <title>Potwierdzenie</title>
+    <meta charset="utf-8" />
+   
 </head>
 
 <body>
-    <div th:replace="default :: head"></div>
+    <div th:replace="home :: head"></div>
 
     <div class="container">
-        <h1>Twój koszyk</h1>
+        <h2>Moje zakupy</h2>
         <hr/>
-        <p>Lista produktów</p>
-        <p>nazwa + cena jednostkowa + ilość + wartość zakupu(suma) + button usuń z kosza(mała ikona śmietnika)</p>
-        <br/>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th th:text="#{msg.id}" />
+                    <th th:text="#{msg.name}" />
+                    <th th:text="#{msg.price}" />
+                    <th th:text="#{msg.quantity}" />
+                    <th th:text="#{msg.amount}" />
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="orderLine: ${listOrderLine}">
+                    <td th:text="${orderLine.id}" />
+                    <td th:text="${orderLine.product.name}" />
+                    <td th:text="${orderLine.purchasePrice}" />
+                    <td th:text="${orderLine.quantity}" />
+                    <td th:text="${orderLine.amount}" />
+                </tr>
+            </tbody>
+        </table>
 
-        <h1>Odbiór w</h1>
         <hr/>
-        <p>Miejsce odbioru (nazwa i adres)</p>
-        <p>data i godzina dostępności zamówienia w punkcie odbioru</p>
+        <hr/>
+        <hr/>
 
-        <h1>Produkty</h1>
+        <h2>Odbiór w:</h2>
         <hr/>
-        <p>Lista produktów w ramce</p>
-        <p>Do zapłaty</p>
-        <br/>
-        <hr/>
-        <p>sdfasdfads</p>
 
         <form>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optradio" />Żabka Habenda (Gdańsk ul.Żabkowa 1) (adres ma odnośnik do mapy)</label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optradio" />Żabka Borkowo (Borkowo ul.Żabkowa 2)</label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="optradio" />dostawa do domu (koszt taxi)</label>
+            </div>
+        </form>
+        <br/>
+
+        <hr/>
+        <hr/>
+        <hr/>
+
+        <h2>Podsumowanie kosztów</h2>
+        <label>Wartość koszyka: <span id="simpleCart_quantity">0</span></label>
+        <p>Wartość koszyka</p>
+        <p>Koszt dostawy</p>
+        <p>Razem do zapłaty</p>
+
+
+        <!-- <form>
             <label class="checkbox-inline bottom-right">
                 <input type="checkbox" value=""/>Option 1
             </label>
-        </form>
-
-        <!-- <div class="checkbox bottom-right"> -->
+        </form> -->
+        <hr/>
+        <hr/>
+        <hr/>
+<!-- <div class="clearfix"></div> -->
         <label>
-            <input type="checkbox" name="remember"/> Akceptuję
-            <a href="">regulamin</a>
+            <input type="checkbox" name="remember" /> Akceptuję
+            <a href="regulations" th:href="@{/regulations}">regulamin</a>
         </label>
-        <!-- </div>   -->
-
-        <button type="button" class="btn btn-default">Powrót do koszyka</button>
-        <button type="button" class="btn btn-success navbar-right">Potwierdzam zamówienie</button>
+        <div class="clearfix"></div>
+        <!-- <div class="clearfix"> </div> -->
+        <a href="cart.html" th:href="@{/cart/submitOrder}" class="btn btn-green">Zamawiam i płacę</a>
+        <a href="home.html" th:href="@{/cart}" class="btn btn-white navbar-right">Powrót do koszyka</a>
 
     </div>
     <br/>
 
-    <div th:replace="default :: footer"></div>
+    <div th:replace="home :: footer"></div>
 
 </body>
 

@@ -9,5 +9,6 @@ import pl.zajaczkowski.model.Category;
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
 	Category findById(Integer id);
+	Category findByName(String name);
 	List<Category> findAll();
 }

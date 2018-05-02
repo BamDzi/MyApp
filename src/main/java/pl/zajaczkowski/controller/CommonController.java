@@ -1,10 +1,12 @@
 package pl.zajaczkowski.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.zajaczkowski.model.Product;
 import pl.zajaczkowski.service.ProductService;
@@ -12,38 +14,28 @@ import pl.zajaczkowski.service.ProductService;
 @Controller
 public class CommonController {
 
-	@Autowired
-	private ProductService productService;
+//	@Autowired
+//	private ProductService productService;
 
-	@GetMapping("/")
+	@GetMapping
+//	@RequestMapping("/")
 	public String startPage() {
 		return "home";
 	}
 	
-
-	@GetMapping("customer")
+	@GetMapping("settings")
 	public String customer() {
-		return "customer";
+		return "settings";
 	}
 
-	@GetMapping("viewProduct")
+	@GetMapping("single")
 	public String detail() {
-		return "viewProduct";
+		return "single";
 	}
 
 	@GetMapping("contact")
 	public String contact() {
 		return "contact";
-	}
-
-	@GetMapping("submit")
-	public String submit() {
-		return "submit";
-	}
-
-	@GetMapping("default")
-	public String template() {
-		return "default";
 	}
 	
 	@GetMapping("regulations")
@@ -51,9 +43,9 @@ public class CommonController {
 		return "regulations";
 	}
 	
-	@GetMapping("products")
-	public String products() {
-		return "products";
+	@GetMapping("ordersList")
+	public String ordersList() {
+		return "ordersList";
 	}
 
 }

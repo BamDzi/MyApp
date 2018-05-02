@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista zamówień</title>
+    <meta charset="utf-8" />
+    
+</head>
+
+<body>
+<div th:replace="home :: head"></div>
+<div class="container">
+       <h2>Lista zamówień</h2>
+        <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th th:text="#{msg.id}" />
+                        <th th:text="Data" />
+                        <th th:text="Total" />
+                        <!-- <th th:text="Szczegóły zamówienia" /> -->
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="order: ${allOrders}">
+                        <td th:text="${order.id}" />
+                        <td th:text="${#calendars.format(order.date,'dd MMM yyyy')}" />
+                        <!-- <td th:text="${order.customer.name}" /> -->
+                        <td th:text="${order.total}" />
+                        <!-- <td th:text="$"/> -->
+                        <td>
+                            <a href="orderLines.html" th:href="@{/order/details(id=${order.id})}">view</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+</div>
+
+<div th:replace="home :: footer"></div>
+</body>
+</html>

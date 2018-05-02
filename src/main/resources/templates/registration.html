@@ -1,100 +1,85 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Rejestracja</title>
+	<title>Rejestracja</title>
+	<meta charset="utf-8" />
 
-    <div th:replace="home :: style"></div>
+	<div th:replace="home :: style"></div>
 
-    <!-- <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 </head>
 
 <body>
-    <div th:replace="home :: head"></div>
+	<div th:replace="home :: head"></div>
 
-<!-- registration -->
-<div class="main-1">
+	<!-- registration -->
+	<div class="main-1">
 		<div class="container">
 			<div class="register">
-		  	  <form> 
-				 <div class="register-top-grid">
-					<h3>REJESTRACJA</h3>
-					 <!-- <div class="wow fadeInLeft" data-wow-delay="0.4s">
-						<span>First Name<label>*</label></span>
-						<input type="text" /> 
-					 </div>
-					 <div class="wow fadeInRight" data-wow-delay="0.4s">
-						<span>Last Name<label>*</label></span>
-						<input type="text" /> 
-					 </div> -->
-					 <div class="wow fadeInRight" data-wow-delay="0.4s">
-						 <span>Email Address<label>*</label></span>
-						 <input type="text" /> 
-					 </div>
-					 <div class="clearfix"> </div>
-					   <!-- <a class="news-letter" href="#">
-						 <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up for Newsletter</label>
-					   </a> -->
-					 </div>
-				     <div class="register-bottom-grid">
-						    <h3>LOGIN INFORMATION</h3>
-							 <div class="wow fadeInLeft" data-wow-delay="0.4s">
-								<span>Password<label>*</label></span>
-								<input type="text" />
-							 </div>
-							 <div class="wow fadeInRight" data-wow-delay="0.4s">
-								<span>Confirm Password<label>*</label></span>
-								<input type="text" />
-							 </div>
-					 </div>
-				</form>
-				<div class="clearfix"> </div>
-				<div class="register-but">
-				   <form>
-					   <input type="submit" value="submit" />
-					   <div class="clearfix"> </div>
-				   </form>
-				</div>
-		   </div>
-		 </div>
-	</div>
-<!-- registration -->
-
-    <div class="container-fluid">
-        <form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post" class="form-horizontal"
-                    role="form">
-                    <h1 class="text-center">Rejestracja</h1>
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <input type="email" th:field="*{email}" placeholder="Email" class="form-control" />
-                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="col-sm-9">
-                            <input type="password" th:field="*{password}" placeholder="Password" class="form-control" />
-                            <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-						<div class="col-sm-9">
-							<button type="submit" class="btn btn-primary btn-block">Register
-								User</button>
+				<form autocomplete="off" action="#" th:action="@{/registration}" th:object="${user}" method="post">
+					<div class="register-top-grid">
+						<h3>REJESTRACJA</h3>
+						<div class="wow fadeInLeft" data-wow-delay="0.4s">
+							<span>Adres Email
+								<!-- <label>*</label> -->
+							</span>
+							<input type="email" th:field="*{email}" />
+							<!-- <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label> -->
 						</div>
+
+						<!-- <a href="#"> -->
+						<!-- <a class="news-letter" href="#">
+						 <label class="checkbox"><input type="checkbox" name="checkbox" checked="" /><i> </i>Sign Up for Newsletter</label>
+					   </a> -->
+						<!-- <br/>
+						<br/>-->
+						<!-- <div class="clearfix"> </div> 
+						<div class="clearfix"> </div>  -->
+						
 					</div>
+					<div class="register-bottom-grid">
+						<!-- <h3>LOGIN INFORMATION</h3> -->
+						<div class="wow fadeInRight" data-wow-delay="0.4s">
+								<span>Hasło
+									<!-- <label>*</label> -->
+								</span>
+								<input type="password" th:field="*{password}" />
+								<!-- <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label> -->
+							</div>
+							<div class="wow fadeInLeft" data-wow-delay="0.4s">
+								<span>Powtórz Hasło
+									<!-- <label>*</label> -->
+								</span>
+								<input type="password" th:field="*{password}" />
+									<!-- <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label> -->
+							</div>
+							<div class="wow fadeInLeft">
+									<label class="checkbox">
+											<input type="checkbox" name="checkbox" />
+											<!-- <a href="#">regulamin</a> -->
+										<!-- </label> -->
+										<i> </i> Akceptuję <a class="forgot" href="regulations.html">regulamin</a>
+									</label> 
+									
 
-                    <span th:utext="${successMessage}"></span>
+							</div>
+							<input type="submit" value="Zarejestruj" />
+							<div class="clearfix"> </div>
+							
+							<!-- <a class="news-letter" href="regulations.html"> -->
+								
+							<!-- </a> -->
+							
+					</div>
+				</form>
+			</div>
+		</div>
 
-                </form>
-    </div>
-    
-    <div th:replace="home :: footer"></div>
+	</div>
+
+	<!-- registration -->
+
+	<div th:replace="home :: footer"></div>
 </body>
 
 </html>
