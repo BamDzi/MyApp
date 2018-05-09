@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org"
-      
-    <head>
-        <title>Użytkownik aktywowany</title>
-        <meta charset="utf-8" />
-    </head>
-    <body>
-            <div th:replace="home :: head"></div>
-    
-       <div class="container">
-       
-       <h1 th:inline="text">Witaj, [[${#httpServletRequest.remoteUser}]]</h1>
-       <hr/>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
-       <p>Twoje konto zostało aktywowane, możesz teraz zalogować się na to konto.</p>
-       <p>Życzymy udanych zakupów</p>
-       
-        
+<head>
+    <title>Użytkownik aktywowany</title>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div th:replace="home :: head"></div>
+
+    <div class="container">
+
+        <h1 th:inline="text">Witaj, [[${#httpServletRequest.remoteUser}]]</h1>
+        <hr/>
+
+        <p>Twoje konto zostało aktywowane, możesz teraz zalogować się na to konto.</p>
+        <p>Życzymy udanych zakupów</p>
+
+
 
     </div>
-        <!-- <div th:replace="home :: footer"></div> -->
-    </body>
+    <!-- <div th:replace="home :: footer"></div> -->
+</body>
+
 </html>

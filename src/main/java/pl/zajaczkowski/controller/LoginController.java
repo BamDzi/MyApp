@@ -114,4 +114,24 @@ public class LoginController {
 		 Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		return auth.getName();
 	}		
+	
+	
+//	@RequestMapping("/user")
+//	public Map<String, String> user(Principal principal) {
+//	  Map<String, String> map = new LinkedHashMap<>();
+//	  map.put("name", principal.getName());
+//	  return map;
+//	}
+	
+//	 @RequestMapping("/user")
+//	  public Principal user(Principal principal) {
+//	    return principal;
+//	  }
+//	 
+//	 @ModelAttribute("nameUser")
+//	 public String nameUser(Principal principal) {
+//		 return principal.getName();
+////		 return html(data.userAuthentication.details.name);
+//	 }
+
 }

@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Sprzedawca</title>
+    <title>Strona sprzedawcy</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    
 </head>
 
 <body>
+        <div th:replace="home :: head"></div>
     <nav class="navbar navbar-inverse visible-xs">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -20,12 +16,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Logo</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        <a href="#addProduct">Dodaj Produkt</a>
+                        <a href="addProduct.html" th:href="@{/addproduct}">Dodaj Produkt</a>
                     </li>
                     <li>
                         <a href="#productList">Lista Produktów</a>
@@ -43,10 +38,9 @@
     <div class="container-fluid">
         <div class="row content">
             <div class="col-sm-2 sidenav hidden-xs">
-                <h2>Logo</h2>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="active">
-                        <a href="#addProduct">Dodaj Produkt</a>
+                        <a href="addProduct.html" th:href="@{/addproduct}">Dodaj Produkt</a>
                     </li>
                     <li>
                         <a href="#productList">Lista Produktów</a>
@@ -63,83 +57,11 @@
             <br/>
 
             <div class="col-sm-10">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="well">
-                            <h4>Wstaw zdjęcie</h4>
-                            <img src="cinqueterre.jpg" class="img-thumbnail" alt="Zdjęcie" />
-
-                        </div>
-
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="well">
-
-                            <form action="#" th:action="@{/addproduct}" th:object="${product}" method="post" class="form-horizontal" role="form">
-                               
-                                <div class="form-group">
-                                    <!-- <label>Nazwa Produktu</label> -->
-                                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa produktu:</label>
-                                    <input type="text" th:field="*{name}" placeholder="Nazwa produktu" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <!-- <label for="quantity">Ilość:</label>
-                                    <input type="text" class="form-control" id="quantity" /> -->
-                                    <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="validation-message">Ilośćtest:</label>
-                                    <input type="text" th:field="*{quantity}" placeholder="Ilosc" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <!-- <label for="purchasePrice">Cena za sztuke:</label>
-                                    <input type="text" class="form-control" id="purchasePrice" /> -->
-                                    <label th:if="${#fields.hasErrors('purchasePrice')}" th:errors="*{purchasePrice}" class="validation-message">Cena za sztuke:</label>
-                                    <input type="text" th:field="*{purchasePrice}" placeholder="Cena za sztuke" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <!-- <label for="description">Opis produktu:</label>
-                                    <input type="text" class="form-control" id="description" /> -->
-                                    <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="validation-message">Opis produktu:</label>
-                                    <input type="text" th:field="*{description}" placeholder="Opis produktu" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <!-- <label for="component">Składniki:</label>
-                                    <input type="text" class="form-control" id="component" /> -->
-                                    <label th:if="${#fields.hasErrors('components')}" th:errors="*{components}" class="validation-message">Składniki:</label>
-                                    <input type="text" th:field="*{components}" placeholder="Składniki" class="form-control" />
-                                </div>
-                                <div class="form-group">
-                                    <!-- <label for="tips">Wskazówki:</label>
-                                    <input type="text" class="form-control" id="tips" /> -->
-                                    <label th:if="${#fields.hasErrors('tips')}" th:errors="*{tips}" class="validation-message">Wskazówki:</label>
-                                    <input type="text" th:field="*{tips}" placeholder="Wskazówki" class="form-control" />
-                                </div>
-                                <!-- <div>
-                                    <label for="category" th:text="#{msg.category}">Type</label>
-                                    <select th:field="*{category}">
-                                      <option th:each="category : ${allCategorys}"  th:value="${category.id}" th:text="${category.name}">Wireframe</option>
-                                    </select>
-                                  </div> -->
-                                  <div>
-                                    <ul>
-                                        <li th:each="ty : ${allCategorys}">
-                                          <input type="radio" th:field="*{category}" th:value="${ty.id}" />
-                                          <!-- <label th:for="${#ids.prev('category')}" th:text="${ty.name}">Wireframe</label> -->
-                                          <label th:for="${#ids.prev('category')}" th:text="${ty.name}">Wireframe</label>
-                                        </li>
-                                      </ul>
-                                  </div>
-
-                                  <button type="submit" class="btn btn-default">Dodaj Produkt</button>
-                            
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
                 <div id="productList" class="row">
                     <div class="col-sm-12">
                         <!-- <div class="seedstarterlist" th:unless="${#lists.isEmpty(allSeedStarters)}"> -->
             
-                        <div class="well">
+                        <!-- <div class="well"> -->
                         <h4 th:text="#{title.list}">List of Products</h4>
                         <!-- <form action="#" th:action="@{/addproduct}" th:object="${product}" method="post" class="form-horizontal" role="form"> -->
                             <!-- <div th:object="${product}"> -->
@@ -169,7 +91,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
                 
@@ -197,7 +119,7 @@
             </div>
         </div>
     </div>
-
+    <div th:replace="home :: footer"></div>
 </body>
 
 </html>

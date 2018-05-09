@@ -30,7 +30,7 @@ public class Orders {
 	private Customer customer;
 	@OneToMany
 	@JoinColumn(name = "order_Id")
-	private Set<OrderLine> orderLines;// = new LinkedHashSet<OrderLine>();
+	private Set<OrderLine> orderLines;  // = new LinkedHashSet<OrderLine>();
 	private BigDecimal total;
 
 	public Orders() {

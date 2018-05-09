@@ -105,7 +105,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //				.antMatchers("/", "/login", "/registration", "/confirm", "/update").permitAll() //paths are configured to not require any authentication
 				.antMatchers("/vendor/**").hasAuthority("VENDOR")	//require admin role
 //				.anyRequest().authenticated()//All other paths must be authenticated
-				.antMatchers("/basket", "/submit").authenticated()
+				.antMatchers("/cart", "/submit").authenticated()
 				.anyRequest().permitAll()
 				.and().formLogin().loginPage("/login")	//supported method 'POST' for request /login!!!!!!
      													//When a user successfully logs in, they will be redirected to the previously 
@@ -196,24 +196,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	     filter.setFilters(filters);
 	     return filter;
 	}
-	
-//	@RequestMapping("/user")
-//	public Map<String, String> user(Principal principal) {
-//	  Map<String, String> map = new LinkedHashMap<>();
-//	  map.put("name", principal.getName());
-//	  return map;
-//	}
-	
-	 @RequestMapping("/user")
-	  public Principal user(Principal principal) {
-	    return principal;
-	  }
-	 
-	 @ModelAttribute("nameUser")
-	 public String nameUser(Principal principal) {
-		 return principal.getName();
-//		 return html(data.userAuthentication.details.name);
-	 }
 
 }
 	

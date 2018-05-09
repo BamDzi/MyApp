@@ -5,7 +5,8 @@
 	<title>Strona główna</title>
 	<meta charset="utf-8" />
 	<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
-	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" /> -->
+	<link th:href="@{/css/style.css}" rel="stylesheet" />
 	<link th:href="@{/css/owl.carousel.css}" rel="stylesheet" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -46,8 +47,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<a class="list" href="settings.html" th:href="@{/settings}">Moje dane</a>
 									</li>
 									<li class="dromenu" style="border-right:none;border-left:none;">
-											<a class="list" href="ordersList.html" th:href="@{/ordersList}">Lista zakupów</a>
-										</li>
+										<a class="list" href="ordersList.html" th:href="@{/ordersList}">Lista zakupów</a>
+									</li>
+									<li class="dromenu" style="border-right:none;border-left:none;">
+										<a class="list" href="login.html" th:href="@{/login}">Login</a>
+									</li>
 									<li class="dromenu" style="border-right:none;">
 										<a class="list1" th:href="@{/logout}">Wyloguj się</a>
 									</li>
@@ -96,7 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="collapse navbar-collapse" id="myNavbar">
 								<ul class="nav navbar-nav">
 									<li>
-										<a href="home.html" th:href="@{/}">Home</a>
+										<a href="aboutUs.html" th:href="@{/aboutus}" style="color: black">O nas</a>
 									</li>
 									<li>
 										<a href="products.html" th:href="@{/products?name=Mięso}">Mięso</a>
@@ -122,7 +126,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="search-box">
 						<div id="sb-search" class="sb-search">
 							<form>
-								<input class="sb-search-input" placeholder="Enter your search term..." type="search" name="search" id="search" />
+								<input class="sb-search-input" placeholder="Znajdź produkt..." type="search" name="search" id="search" />
 								<input class="sb-search-submit" type="submit" value="" />
 								<span class="sb-icon-search"> </span>
 							</form>
@@ -146,31 +150,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="container">
 			<h3>Polecane produkty</h3>
 			<div class="gallery-grids">
-				
-					<div class="col-md-3 gallery-grid ">
-							<a href="products.html">
-								<img src="images/g1.png" class="img-responsive" alt="" />
-								<!-- <div class="gallery-info">
+
+				<div class="col-md-3 gallery-grid ">
+					<a href="products.html">
+						<img src="images/g1.png" class="img-responsive" alt="" />
+						<!-- <div class="gallery-info">
 									<div class="quick">
 										<p>
 											<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> view</p>
 									</div>
 								</div> -->
-							</a>
-							<div class="product-info simpleCart_shelfItem">
-								<div class="product-info-cust prt_name">
-									<h4>Product #1</h4>
-									<span class="item_price">$187.95</span>
-				
-									<input type="text" class="item_quantity" value="1" />
-									<input type="button" class="item_add items" value="+" />
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-				
-				
-							<div class="clearfix"></div>
+					</a>
+					<div class="product-info simpleCart_shelfItem">
+						<div class="product-info-cust prt_name">
+							<h4>Product #1</h4>
+							<span class="item_price">$187.95</span>
+
+							<input type="text" class="item_quantity" value="1" />
+							<input type="button" class="item_add items" value="+" />
+							<div class="clearfix"> </div>
 						</div>
+					</div>
+
+
+					<div class="clearfix"></div>
+				</div>
 
 				<div class="col-md-3 gallery-grid">
 					<a href="products.html">

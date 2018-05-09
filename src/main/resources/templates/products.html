@@ -30,8 +30,8 @@
 						<h4 th:text="${prod.name}">Product name</h4>
 						<span class="item_price" th:text="${prod.purchasePrice} + ' zł/szt'">$187.95</span>
 
-						<input type="text" class="item_quantity" value="1" />
-						<input type="button" class="item_add items" value="+" />
+						<!-- <input type="text" class="item_quantity" value="1" />
+						<input type="button" class="item_add items" value="+" /> -->
 						<a href="cart.html" th:href="@{/cart/addOrderLine/(id=${prod.id})}" class="item_add items">Kosz</a>
 						<div class="clearfix"> </div>
 					</div>

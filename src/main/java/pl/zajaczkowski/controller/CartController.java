@@ -36,7 +36,7 @@ public class CartController {
 	private OrdersRepository ordersRepository;
 	private CustomerRepository customerRepository;
 	private UserService userService;
-	
+
 	public CartController(ProductService productService, OrderLineRepository orderLineRepository,
 			OrdersRepository ordersRepository, CustomerRepository customerRepository, UserService userService) {
 		super();
@@ -52,11 +52,6 @@ public class CartController {
 		return "cart";
 	}
 
-	@GetMapping("submit")
-	public String submit() {
-		return "submit";
-	}
-	
 	@RequestMapping("/addOrderLine")
 	public String addToCart(@RequestParam Integer id, HttpServletRequest request, HttpSession session, Model model) {
 
@@ -65,26 +60,27 @@ public class CartController {
 		productPrice = product.getPurchasePrice();
 		OrderLine orderLine = new OrderLine(); // Cart cart = new Cart();
 		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("orderLines");
-//		Set<Product> productsList = (Set<Product>) session.getAttribute("productsList");
+		// Set<Product> productsList = (Set<Product>)
+		// session.getAttribute("productsList");
 
 		if (list == null) {
 			list = new LinkedHashSet<OrderLine>();
-//			productsList = new LinkedHashSet<Product>();
+			// productsList = new LinkedHashSet<Product>();
 		}
 
 		boolean isExist = false;
-		
+
 		if (product != null) {
 			orderLine.setProduct(product);
 		}
 
-		if (list.contains(orderLine)) {
-			System.out.println("Zwiera");
-			System.out.println("Zwiera");
-			System.out.println("Zwiera");
-			System.out.println("Zwiera");
-		}
-		
+//		if (list.contains(orderLine)) {
+//			System.out.println("Zwiera");
+//			System.out.println("Zwiera");
+//			System.out.println("Zwiera");
+//			System.out.println("Zwiera");
+//		}
+
 		for (OrderLine o : list) {
 			if (o.equals(orderLine)) {
 				o.setQuantity(o.getQuantity() + 1);
@@ -92,24 +88,24 @@ public class CartController {
 				isExist = true;
 			}
 		}
-		
+
 		if (isExist == false) {
 
-//			Long i = (long) (list.size());
-		
+			// Long i = (long) (list.size());
+
 			if (list.isEmpty()) {
 				orderLine.setId(1L);
 			}
-			
+
 			Long temp = null;
 			for (OrderLine o : list) {
 				temp = o.getId();
 			}
-			
+
 			if (list.isEmpty() == false) {
-			orderLine.setId(temp + 1);
+				orderLine.setId(temp + 1);
 			}
-			
+
 			orderLine.setPurchasePrice(productPrice);
 			orderLine.setQuantity(1);
 			orderLine.setAmount(productPrice);
@@ -118,7 +114,7 @@ public class CartController {
 
 		session = request.getSession();
 		session.setAttribute("orderLines", list);
-//		session.setAttribute("productsList", productsList);
+		// session.setAttribute("productsList", productsList);
 
 		return "redirect:/cart";
 	}
@@ -150,7 +146,7 @@ public class CartController {
 
 		for (OrderLine o : list) {
 			if (o.getId() == id) {
-//			if (o.equals(id)) {
+				// if (o.equals(id)) {
 				o.setQuantity(o.getQuantity() + 1);
 				o.setAmount(o.getAmount().add(o.getPurchasePrice()));
 			}
@@ -180,47 +176,53 @@ public class CartController {
 
 		return "redirect:/cart";
 	}
+	
+	@GetMapping("submit")
+	public String submit() {
+		return "submit";
+	}
 
-	@GetMapping("submitOrder")
-	public String saveOrder(HttpSession session, Model model) {
+	@GetMapping("order")
+	public String saveOrder(HttpSession session) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userSession = auth.getName();
 		Customer customer = customerRepository.findByName(userSession);
-		if (customer == null) {
-			customer = new Customer();
+		if(customer == null) {
 			User user = userService.findByEmail(userSession);
-			if (user != null) {
-				customer.setUser(user);
-			} else {
+			if(user == null) {
+				customer = new Customer();
 				customer.setName(userSession);
+				customerRepository.save(customer);
 			}
-			customerRepository.save(customer);
+			if(user != null) {
+				customer = customerRepository.findByUser(user);
+				if(customer == null) {
+					customer = new Customer();
+					customer.setUser(user);
+					customerRepository.save(customer);
+				}
+			}
 		}
 		
 		Set<OrderLine> list = (Set<OrderLine>) session.getAttribute("orderLines");
-//		Set<Product> productsList = (Set<Product>) session.getAttribute("productsList");
+		
 		Orders order = new Orders();
-
+		BigDecimal totalOrder = new BigDecimal("0.0");
+		
 		for (OrderLine o : list) {
 			o.setId(null);
+			totalOrder = totalOrder.add(o.getAmount());
+			
 		}
-
-		// order.setOrderLines(list);
+		order.setTotal(totalOrder);
 		order.setOrderLines(new LinkedHashSet<OrderLine>(list));
 		order.setCustomer(customer);
-		
+
 		orderLineRepository.save(list);
 		ordersRepository.save(order);
 
-//		for(Product p : productsList) {
-//			productService.saveProduct(p);
-//		}
-		
-//		productService.saveProduct(product);
-		
 		session.removeAttribute("orderLines");
-//		session.removeAttribute("productsList");
 
 		return "redirect:/cart";
 	}

@@ -12,6 +12,13 @@ public class CategoryService {
 
 	private CategoryRepository categoryRepository;
 
+	
+	public CategoryService(CategoryRepository categoryRepository) {
+		super();
+		this.categoryRepository = categoryRepository;
+	}
+
+
 	public List<Category> findAllCategorys() {
 		return categoryRepository.findAll();
 	}

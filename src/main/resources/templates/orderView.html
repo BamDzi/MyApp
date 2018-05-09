@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Szczegóły zamówienia</title>
+    <meta charset="utf-8" />
+    
+</head>
+
+<body>
+<div th:replace="home :: head"></div>
+<div class="container">
+       <h2>Zamówienie nr: ...</h2>
+       <table class="table table-striped">
+        <thead>
+            <tr>
+                <th th:text="#{msg.id}" />
+                <th th:text="#{msg.name}" />
+                <th th:text="#{msg.price}" />
+                <th th:text="#{msg.quantity}" />
+                <th th:text="#{msg.amount}" />
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="orderLine: ${listMyOrderLine}">
+                <td th:text="${orderLine.id}" />
+                <td th:text="${orderLine.product.name}" />
+                <td th:text="${orderLine.purchasePrice}" />
+                <td th:text="${orderLine.quantity}" />
+                <td th:text="${orderLine.amount}" />
+            </tr>
+        </tbody>
+    </table>
+
+            <p>całkowita wartość zamówienia</p>
+            <p>dostarczon do żabki...</p>
+            <p>data zakupu</p>
+            <p>data dostarczenia</p>
+</div>
+
+<div th:replace="home :: footer"></div>
+</body>
+</html>

@@ -29,71 +29,83 @@ import pl.zajaczkowski.service.ProductService;
 import pl.zajaczkowski.service.UserService;
 
 @Controller
-//@RequestMapping("/product")
-//@ControllerAdvice	
+// @RequestMapping("/product")
 public class ProductController {
 
 	private ProductService productService;
-	@Autowired
 	private UserService userService;
-//	@Autowired
-//	private CategoryRepository categoryRepository;
-	
-	public ProductController(ProductService productService) {
+	private CategoryRepository categoryRepository;
+
+	public ProductController(ProductService productService, UserService userService,
+			CategoryRepository categoryRepository) {
+		super();
 		this.productService = productService;
-//		this.categoryRepository = categoryRepository;
+		this.userService = userService;
+		this.categoryRepository = categoryRepository;
 	}
 
 	@GetMapping("vendor")
-	public String showVendorPage(Product product) {
+	public String showVendorPage(@ModelAttribute Product product, Model model) {
+		model.addAttribute("allVendorProducts", productService.listProductByVendor());
+//		model.addAttribute("allCategorys", categoryRepository.findAll());
 		return "vendor/vendorpage";
 	}
+	
+	@GetMapping("addproduct")
+	public String addProduct(@ModelAttribute Product product, Model model) {
+		model.addAttribute("allCategorys", categoryRepository.findAll());
+		return "vendor/addProduct";
+	}
+
+	// @ModelAttribute()
+	// public List<Category> listCategorys() {
+	// return ;
+	// }
 
 	@PostMapping("addproduct")
-	public String addProduct(@Valid Product product, BindingResult bindingResult, ModelMap model) { //@Valid or @ModelAttribute Product product
+	public String addProduct(@Valid Product product, BindingResult bindingResult, ModelMap model) { // @Valid or
+																									// @ModelAttribute
+																									// Product product
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userSession = auth.getName();
-		
+
 		User vendor = userService.findByEmail(userSession);
-		
-//		Product productExists = productService.findProductByName(product.getName());
-		
+
+		// Product productExists = productService.findProductByName(product.getName());
+
 		Product productExists = productService.findProductByNameAndVendor(product.getName(), vendor);
-		
+
 		if (productExists != null) {
 			bindingResult.rejectValue("product", "error.product",
 					"There is already a product registered with the name provided");
 		}
-		
+
 		if (bindingResult.hasErrors()) {
-			return "redirect:/vendor";
+			return "redirect:/addproduct";
 		}
-		
-		
-			productService.saveProduct(product);
-//			productService.saveProduct(new Product());
-//			model.addAttribute("successMessage", "Product has been added successfully");
-//			model.addAttribute("product", new Product());
-			
-			
-		
-		return "redirect:/vendor";
+
+		productService.saveProduct(product);
+		// productService.saveProduct(new Product());
+		// model.addAttribute("successMessage", "Product has been added successfully");
+		// model.addAttribute("product", new Product());
+
+		return "redirect:/addproduct";
 	}
-	
-	@GetMapping("findAllProducts")
-	public List<Product> findAllProducts() {
-		return productService.listAllProducts();
-	}
-	
+
+	// @GetMapping("findAllProducts")
+	// public List<Product> findAllProducts() {
+	// return productService.listAllProducts();
+	// }
+
 	@GetMapping("findProduct/{name}")
 	public Product findProductName(@PathVariable String name) {
 		return productService.findProductByName(name);
 	}
-	
+
 	@GetMapping("products")
 	public String products(@RequestParam String name, Model model) {
-		model.addAttribute("productsNotNull",productService.listProductByCategory(name));
+		model.addAttribute("productsNotNull", productService.listProductByCategory(name));
 		model.addAttribute("category", name);
 		return "products";
 	}

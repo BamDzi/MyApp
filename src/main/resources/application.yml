@@ -43,7 +43,7 @@ spring:
 #  mvc:
 #    static-path-pattern: /resources/static/**
 #  resources:
-#    static-locations: resources/**
+#    static-locations: classpath:/resources/static/
         
 #    rolesQuery: select email, role_id from user where email=?
 
