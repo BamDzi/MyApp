@@ -70,6 +70,26 @@ public class ProductService {
 		return productRepository.findProductByCategoryAndQuantityNotNull(category);//  find(category);
 	}
 	
+	public final List<Product> listProductByVendorAndQuantityNotNull() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userSession = auth.getName();
+		
+		User vendor = userService.findByEmail(userSession);
+		
+		return productRepository.findProductByVendorAndQuantityNotNull(vendor);
+	}
+	
+public final List<Product> listProductByVendorAndQuantityNull() {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String userSession = auth.getName();
+		
+		User vendor = userService.findByEmail(userSession);
+		
+		return productRepository.findProductByVendorAndQuantityNull(vendor);
+	}
+
 	public final List<Product> listProductByVendor() {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

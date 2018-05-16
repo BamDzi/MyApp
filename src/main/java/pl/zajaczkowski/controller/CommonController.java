@@ -59,11 +59,6 @@ public class CommonController {
 		return "settings";
 	}
 
-	@GetMapping("single")
-	public String detail() {
-		return "single";
-	}
-
 	@GetMapping("contact")
 	public String contact() {
 		return "contact";
@@ -78,4 +73,10 @@ public class CommonController {
 	public String aboutUs() {
 		return "aboutUs";
 	}
+	
+	@GetMapping("infoVendor")
+	public String infoVendor() {
+		return "infoVendor";
+	}
+	
 }

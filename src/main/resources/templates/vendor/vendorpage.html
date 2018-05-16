@@ -1,123 +1,168 @@
 <!DOCTYPE html>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Strona sprzedawcy</title>
     <meta charset="utf-8" />
-    
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" /> -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/owl.carousel.css}" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Swim Wear Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+    <!-- cart -->
+    <script src="js/simpleCart.min.js"> </script>
+    <!-- cart -->
+    <script type="text/javascript">
+        $.get("/user", function (data) {
+            $("#user").html(data.userAuthentication.details.name);
+            // $(".unauthenticated").hide()
+            // $(".authenticated").show()
+        });
+
+    </script>
+
 </head>
 
 <body>
-        <div th:replace="home :: head"></div>
-    <nav class="navbar navbar-inverse visible-xs">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a href="addProduct.html" th:href="@{/addproduct}">Dodaj Produkt</a>
-                    </li>
-                    <li>
-                        <a href="#productList">Lista Produktów</a>
-                    </li>
-                    <li>
-                        <a href="#historyOfOrders">Historia Zakupów</a>
-                    </li>
-                    <li>
-                        <a href="#aboutMe">O Mnie</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row content">
-            <div class="col-sm-2 sidenav hidden-xs">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="active">
-                        <a href="addProduct.html" th:href="@{/addproduct}">Dodaj Produkt</a>
-                    </li>
-                    <li>
-                        <a href="#productList">Lista Produktów</a>
-                    </li>
-                    <li>
-                        <a href="#historyOfOrders">Historia Zakupów</a>
-                    </li>
-                    <li>
-                        <a href="#aboutMe">O Mnie</a>
-                    </li>
-                </ul>
-                <br/>
-            </div>
-            <br/>
+    <header th:fragment="head">
+        <div class="header">
+            <div class="header-top">
+                <div class="container">
+                    <div class="top-right">
+                        <ul>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Witaj,
+                                    <span id="user"></span>
+                                </a>
+                                <ul class="dropdown-menu">
 
-            <div class="col-sm-10">
-                <div id="productList" class="row">
-                    <div class="col-sm-12">
-                        <!-- <div class="seedstarterlist" th:unless="${#lists.isEmpty(allSeedStarters)}"> -->
-            
-                        <!-- <div class="well"> -->
-                        <h4 th:text="#{title.list}">List of Products</h4>
-                        <!-- <form action="#" th:action="@{/addproduct}" th:object="${product}" method="post" class="form-horizontal" role="form"> -->
-                            <!-- <div th:object="${product}"> -->
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th th:text="#{msg.id}" />
-                                        <th th:text="#{msg.name}" />
-                                        <th th:text="#{msg.category}" />
-                                        <th th:text="#{msg.price}" />
-                                        <th th:text="#{msg.quantity}" />
-                                        <th th:text="#{msg.description}" />
-                                        <th th:text="#{msg.components}" />
-                                        <th th:text="#{msg.tips}" />
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr th:each="product: ${allVendorProducts}">
-                                        <td th:text="${product.id}" />
-                                        <td th:text="${product.name}" />
-                                        <td th:text="${product.category.name}" />
-                                        <td th:text="${product.purchasePrice}" />
-                                        <td th:text="${product.quantity}" />
-                                        <td th:text="${product.description}" />
-                                        <td th:text="${product.components}" />
-                                        <td th:text="${product.tips}" />
-                                    </tr>
-                                </tbody>
-                            </table>
-                        <!-- </div> -->
+                                    <li class="dromenu" style="border-right:none;border-left:none;">
+                                        <a class="list" href="settings.html" th:href="@{/settings}">Moje dane</a>
+                                    </li>
+                                    <li class="dromenu" style="border-right:none;border-left:none;">
+                                        <a class="list" href="ordersList.html" th:href="@{/ordersList}">Lista zakupów</a>
+                                    </li>
+                                    <li class="dromenu" style="border-right:none;border-left:none;">
+                                        <a class="list" href="login.html" th:href="@{/login}">Login</a>
+                                    </li>
+                                    <li class="dromenu" style="border-right:none;">
+                                        <a class="list1" th:href="@{/logout}">Wyloguj się</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
-                
-                <div id="historyOfOrders" class="row">
-                    <div class="col-sm-12">
-                        <div class="well">
-                            <h4>Historia Zakupów</h4>
-                            <p>lista zleceń</p>
-                            <p>statystyki</p>
+            </div>
+            <div class="header-bottom">
+                <div class="container">
+                    <div class="content white">
+                        <nav class="navbar navbar-default" role="navigation">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <h1 class="navbar-brand">
+                                    <a href="default.html" th:href="@{/}">hala</a>
+                                </h1>
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav">
+                                    <li>
+                                        <a href="vendorpage.html" th:href="@{/vendor}">Produkty</a>
+                                    </li>
+                                    <!-- <li>
+                                        <a href="addProduct.html" th:href="@{/vendor/addproduct}">Dodaj nowy</a>
+                                    </li> -->
+                                    <li>
+                                        <a href="history.html" th:href="@{/vendor/history}">Historia i Statystyki</a>
+                                    </li>
+                                    <li>
+                                        <a href="aboutVendor.html" th:href="@{/vendor/info_of_vendor}">O sprzedawcy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="search-box">
+                        <div id="sb-search" class="sb-search">
+                            <form>
+                                <input class="sb-search-input" placeholder="Znajdź produkt..." type="search" name="search" id="search" />
+                                <input class="sb-search-submit" type="submit" value="" />
+                                <span class="sb-icon-search"> </span>
+                            </form>
                         </div>
                     </div>
-                </div>
-                <div id="aboutMe" class="row">
-                    <div class="col-sm-12">
-                        <div class="well">
-                            <h4>O mnie</h4>
-                            <p>Dane firmy(nip, telefon mail itd</p>
-                            <p>Adress</p>
-                            <p>Historia</p>
-                            <p>lista produktów</p>
-                            <p>zdjęcia i adresy sklepów stacjonarnych</p>
-                        </div>
-                    </div>
+
+                    <script src="js/classie.js"></script>
+                    <script src="js/uisearch.js"></script>
+                    <script>
+                        new UISearch(document.getElementById('sb-search'));
+                    </script>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
+    </header>
+
+    <div class="container">
+     
+                <a href="newProduct.html" th:href="@{/vendor/newproduct}" class="btn btn-default">Nowy produkt</a>
+                
+                <br/>
+                <br/>
+                <a href="archiveProducts.html" th:href="@{/vendor/archiveproducts}" class="btn btn-default navbar-right">Produkty wycofane</a>
+                <h4 th:text="#{title.list}">List of Products</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th th:text="#{msg.id}" />
+                    <th th:text="#{msg.name}" />
+                    <th th:text="#{msg.category}" />
+                    <th th:text="#{msg.price}" />
+                    <th th:text="#{msg.quantity}" />
+                    <th th:text="#{msg.description}" />
+                    <th th:text="#{msg.components}" />
+                    <th th:text="#{msg.tips}" />
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product: ${allVendorProducts}">
+                    <td th:text="${product.id}" />
+                    <td th:text="${product.name}" />
+                    <td th:text="${product.category.name}" />
+                    <td th:text="${product.purchasePrice}" />
+                    <td th:text="${product.quantity}" />
+                    <td th:text="${product.description}" />
+                    <td th:text="${product.components}" />
+                    <td th:text="${product.tips}" />
+                    <td>
+                        <a href="editProduct.html" th:href="@{/vendor/product/edit(id=${product.id})}" class="btn btn-default">Edytuj</a>
+                    </td>
+                    <td>
+                        <a href="vendorpage.html" th:href="@{/vendor/product/remove(id=${product.id})}" class="btn" style="color: red">Wycofaj produkt</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+
+
+        <!-- </div> -->
+        <!-- </div> -->
     </div>
     <div th:replace="home :: footer"></div>
 </body>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edytuj produkt</title>
+    <meta charset="utf-8" />
+    
+</head>
+
+<body>
+        <div th:replace="vendor/vendorpage :: head"></div>
+        <div class="container">
+            <div class="col-sm-4">
+                    <!-- <div class="well"> -->
+                        <h4>Wstaw zdjęcie</h4>
+                        <img src="cinqueterre.jpg" class="img-thumbnail" alt="Zdjęcie" />
+
+                    <!-- </div> -->
+
+                </div>
+                <div class="col-sm-8">    
+            <form action="#" th:action="@{/vendor/product/edit}" th:object="${product}" method="post" class="form-horizontal" role="form">
+                         
+
+                <input th:field="*{id}" type="hidden" />
+                <!-- <input th:if="${product.id}" type="hidden" th:field="*{id}" /> -->
+
+                <div class="form-group">
+                    <!-- <label>Nazwa Produktu</label> -->
+                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa produktu:</label>
+                    <input type="text" th:field="*{name}" placeholder="Nazwa produktu" class="form-control" readonly="readonly"/>
+                </div>
+                <div class="form-group">
+                    <!-- <label for="quantity">Ilość:</label>
+                    <input type="text" class="form-control" id="quantity" /> -->
+                    <label th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="validation-message">Ilośćtest:</label>
+                    <input type="text" th:field="*{quantity}" placeholder="Podaj ilość produktu" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <!-- <label for="purchasePrice">Cena za sztuke:</label>
+                    <input type="text" class="form-control" id="purchasePrice" /> -->
+                    <label th:if="${#fields.hasErrors('purchasePrice')}" th:errors="*{purchasePrice}" class="validation-message">Cena za sztuke:</label>
+                    <input type="text" th:field="*{purchasePrice}" placeholder="Cena za sztuke" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <!-- <label for="description">Opis produktu:</label>
+                    <input type="text" class="form-control" id="description" /> -->
+                    <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="validation-message">Opis produktu:</label>
+                    <input type="text" th:field="*{description}" placeholder="Opis produktu" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <!-- <label for="component">Składniki:</label>
+                    <input type="text" class="form-control" id="component" /> -->
+                    <label th:if="${#fields.hasErrors('components')}" th:errors="*{components}" class="validation-message">Składniki:</label>
+                    <input type="text" th:field="*{components}" placeholder="Składniki" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <!-- <label for="tips">Wskazówki:</label>
+                    <input type="text" class="form-control" id="tips" /> -->
+                    <label th:if="${#fields.hasErrors('tips')}" th:errors="*{tips}" class="validation-message">Wskazówki:</label>
+                    <input type="text" th:field="*{tips}" placeholder="Wskazówki" class="form-control" />
+                </div>
+                <!-- <div>
+                    <label for="category" th:text="#{msg.category}">Type</label>
+                    <select th:field="*{category}">
+                      <option th:each="category : ${allCategorys}"  th:value="${category.id}" th:text="${category.name}">Wireframe</option>
+                    </select>
+                  </div> -->
+                  <div>
+                    <ul>
+                        <li th:each="ty : ${allCategorys}">
+                          <input type="radio" th:field="*{category}" th:value="${ty.id}" />
+                          <!-- <label th:for="${#ids.prev('category')}" th:text="${ty.name}">Wireframe</label> -->
+                          <label th:for="${#ids.prev('category')}" th:text="${ty.name}">Wireframe</label>
+                        </li>
+                      </ul>
+                  </div>
+
+                  <button type="submit" class="btn btn-default">Zatwierdź</button>
+            
+            </form>
+            </div>
+    </div>
+        <div th:replace="home :: footer"></div>
+</body>
+
+</html>

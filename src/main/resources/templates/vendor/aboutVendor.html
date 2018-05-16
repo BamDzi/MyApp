@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>O sprzedawcy</title>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+    <div th:replace="vendor/vendorpage :: head"></div>
+    <div class="container">
+
+        <div class="col-sm-4">
+            <!-- <div class="well"> -->
+            <h4>Wstaw zdjęcie</h4>
+            <img src="cinqueterre.jpg" class="img-thumbnail" alt="Zdjęcie" />
+
+            <!-- </div> -->
+
+        </div>
+        <div class="col-sm-8">
+            <!-- <form action="#" th:action="@{/vendor/info_of_vendor}" th:object="${vendor}" method="post" enctype="multipart/form-data" class="form-horizontal" role="form"> -->
+                <form action="#" th:action="@{/vendor/info_of_vendor}" th:object="${vendor}" method="post" class="form-horizontal" role="form">
+
+                <!-- <label th:field="*{id}" hidden="hidden" />  -->
+                <!-- <input type="text" th:field="*{user}" /> -->
+
+                <!-- <input th:field="*{newProduct}" type="hidden" />
+                <input th:if="${productForm.newProduct}" type="text"
+                   th:field="*{code}" />  
+                <th:block th:if="${!productForm.newProduct}">   
+                     <span th:utext="${productForm.code}"></span>   
+                     <input type="hidden" th:field="*{code}" />                                       
+                </th:block>    -->
+
+                <input th:field="*{user}" type="hidden" />
+                <input th:if="${vendor.user}" type="hidden" th:field="*{id}" />  
+                <!-- <th:block th:if="${!vendor.user}">   
+                     <span th:utext="${vendor.id}"></span>   
+                     <input type="hidden" th:field="*{id}" />                                       
+                </th:block>    -->
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa sprzedawcy: </label>
+                    <input type="text" th:field="*{name}" placeholder="Nazwa" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('nip')}" th:errors="*{nip}" class="validation-message">Nip:</label>
+                    <input type="text" th:field="*{nip}" placeholder="Nip" class="form-control" />
+                </div> 
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="validation-message">Nr.tel:</label>
+                    <input type="text" th:field="*{phoneNumber}" placeholder="Numer telefonu" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message">Opis produktu:</label>
+                    <input type="text" th:field="*{email}" placeholder="email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('zipCode')}" th:errors="*{zipCode}" class="validation-message">Kod pocztowy:</label>
+                    <input type="text" th:field="*{zipCode}" placeholder="Kod pocztowy" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('locality')}" th:errors="*{locality}" class="validation-message">Miejscowość:</label>
+                    <input type="text" th:field="*{locality}" placeholder="Miejscowość" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="validation-message">Ulica:</label>
+                    <input type="text" th:field="*{street}" placeholder="Ulica" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}" class="validation-message">Nr.:</label>
+                    <input type="text" th:field="*{streetNumber}" placeholder="Numer lokalu" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('introduction')}" th:errors="*{introduction}" class="validation-message">O sobie:</label>
+                    <!-- <input type="text" th:field="*{introduction}" placeholder="O sobie" class="form-control" /> -->
+                    <textarea class="form-control" rows="5" th:field="*{introduction}"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-default">Zatwierdź</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="container">
+        <!-- <div class="gallery"> -->
+
+
+    </div>
+
+    <!-- </div> -->
+    <div th:replace="home :: footer"></div>
+</body>
+
+</html>

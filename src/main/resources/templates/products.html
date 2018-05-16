@@ -22,12 +22,13 @@
 		<br/>
 		<div th:each="prod:${productsNotNull}">
 			<div class="col-md-3 gallery-grid ">
-				<a href="products.html">
+					<a href="single.html" th:href="@{/single(id=${prod.id})}">
 					<img src="images/g1.png" class="img-responsive" alt="" />
 				</a>
 				<div class="product-info simpleCart_shelfItem">
 					<div class="product-info-cust prt_name">
 						<h4 th:text="${prod.name}">Product name</h4>
+						<!-- <input type="text" th:value="${prod.name}"/> -->
 						<span class="item_price" th:text="${prod.purchasePrice} + ' zł/szt'">$187.95</span>
 
 						<!-- <input type="text" class="item_quantity" value="1" />

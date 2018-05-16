@@ -2,9 +2,9 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Detal</title>
+    <title>Szczegóły produktu</title>
     <meta charset="utf-8" />
-    
+
 </head>
 
 <body>
@@ -12,79 +12,80 @@
     <div th:replace="home :: head"></div>
 
     <div class="container">
+        <div th:each="prod:${productDetail}">
             <div class="row">
                 <div class="col-md-6 single-grid">
                     <!-- <div class="flexslider"> -->
-                        <div style="align-items: center">
+                    <div style="align-items: center">
                         <img src="images/m2.jpg" class="img-responsive" />
-    
+
                     </div>
                 </div>
                 <div class="col-md-6 single-grid">
-                    <h3>Obey Wasted Years Camo Zip Bandeau Bikini Top</h3>
-                    <p>Condition New With the boom of the swimwear market, there are so many places providing swimming costumes
-                        that you may not know where to look first. If you want to facilitate your search, drop in at our one-stop
-                        store, and you’ll be able to equip yourself properly for water activities.</p>
-    
+                    <!-- <h3>Obey Wasted Years Camo Zip Bandeau Bikini Top</h3> -->
+                    <h3 th:text="${prod.name}">Product name</h3>
+						<!-- <span class="item_price" th:text="${prod.purchasePrice} + ' zł/szt'">$187.95</span> -->
+
+                        <p><span th:text="${prod.description}"></span></p>
+                    <!-- <p>Condition New With the boom of the swimwear market, there are so many places providing swimming costumes
+                        that you may not know where to look first. If you want to facilitate your search, drop in at our
+                        one-stop store, and you’ll be able to equip yourself properly for water activities.</p> -->
+
                     <div class="galry">
                         <div class="prices">
-                            <h5 class="item_price">95.00zł</h5>
+                            <h5 class="item_price" th:text="${prod.purchasePrice} + ' zł/szt'">95.00zł</h5>
                         </div>
-    
+
                         <div class="clearfix"></div>
                     </div>
                     <p class="qty"> Qty : </p>
                     <input min="1" type="number" id="quantity" name="quantity" value="1" class="form-control input-small" />
                     <div class="btn_form">
-                        <a href="#" class="add-cart item_add">Do kosza</a>
+                        <!-- <a href="#" class="add-cart item_add">Do kosza</a> -->
+                        <a href="cart.html" th:href="@{/cart/addOrderLine/(id=${prod.id})}" class="add-cart item_add">Do kosza</a>
                     </div>
                     <div class="tag">
                         <p>Kategoria :
-                            <a href="#"> Bikinis </a>
+                                <a href="products.html" th:href="@{/products(name=${prod.category.name})}"><span th:text="${prod.category.name}"></span></a>
+                            <!-- <a href="#"> Bikinis </a> -->
                         </p>
                     </div>
                 </div>
                 <div class="clearfix"> </div>
-
-                <div class="row">
-                        <!-- single-grid -->
-                    <div class="col-sm-12">
-    
-                        <br/>
-                        <h3>Opis produktu</h3>
-                        <hr/>
-    
-                        <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                            nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                            ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <br/>
-    
-                        <h4>Składniki:</h4>
-                        <p>Mięso, chemia, schab, woda</p>
-                        <br/>
-    
-                        <h4>Wskazówki</h4>
-                        <p>najlepie spożyć przed... przechowywać</p>
-                        <br/>
-    
-                        <h4>Producent/Vendor</h4>
-                        <p>Samopomoc Żukowo</p>
-                        <br/>
-    
-    
-    
-    </div>
-    
-    
-    
-    
-                    </div>
-                </div>
-    
             </div>
+            <div class="row">
+                <!-- single-grid -->
+                <div class="col-sm-12">
+
+                    <br/>
+                    <!-- <h4>Opis produktu</h4>
+                    <p><span th:text="${prod.description}"></span></p>
+                    <hr/> -->
+
+                    <h4>Składniki</h4>
+                    <span th:text="${prod.components}"></span>
+                    <hr/>
+
+                    <h4>Wskazówki</h4>
+                    <span th:text="${prod.tips}"></span>
+                    <hr/>
+
+                    <h4>Sprzedawca</h4>
+                    <a href="infoVendor.html" th:href="@{/infoVendor}"><span th:text="${prod.vendor.email}"></span></a>
+                    
+                    <hr/>
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
 
 
     <!-- <div class="container-fluid content">

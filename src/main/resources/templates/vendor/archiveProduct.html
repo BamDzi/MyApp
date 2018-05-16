@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Produkty wycofane</title>
+    <meta charset="utf-8" />
+
+</head>
+
+<body>
+    <div th:replace="vendor/vendorpage :: head"></div>
+    <div class="container">
+
+            <h4 th:text="#{title.nullProducts}">List of Products</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th th:text="#{msg.id}" />
+                        <th th:text="#{msg.name}" />
+                        <th th:text="#{msg.category}" />
+                        <th th:text="#{msg.price}" />
+                        <th th:text="#{msg.quantity}" />
+                        <th th:text="#{msg.description}" />
+                        <th th:text="#{msg.components}" />
+                        <th th:text="#{msg.tips}" />
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product: ${allVendorNullProducts}">
+                        <td th:text="${product.id}" />
+                        <td th:text="${product.name}" />
+                        <td th:text="${product.category.name}" />
+                        <td th:text="${product.purchasePrice}" />
+                        <td th:text="${product.quantity}" />
+                        <td th:text="${product.description}" />
+                        <td th:text="${product.components}" />
+                        <td th:text="${product.tips}" />
+                        <td>
+                            <a href="editProduct.html" th:href="@{/vendor/product/edit(id=${product.id})}" class="btn btn-default">Przywróć</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+    <div th:replace="home :: footer"></div>
+</body>
+
+</html>

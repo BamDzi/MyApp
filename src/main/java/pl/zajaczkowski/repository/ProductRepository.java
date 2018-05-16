@@ -19,6 +19,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 	List<Product> findByQuantityNotNull();
 	List<Product> findProductByCategoryAndQuantityNotNull(Category category);
 	List<Product> findProductByVendor(User user);
+	List<Product> findProductByVendorAndQuantityNotNull(User user);
+	List<Product> findProductByVendorAndQuantityNull(User user);
 	
     
 
