@@ -122,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 
                 <br/>
                 <br/>
-                <a href="archiveProducts.html" th:href="@{/vendor/archiveproducts}" class="btn btn-default navbar-right">Produkty wycofane</a>
+                <a href="archiveProducts.html" th:href="@{/vendor/archive_products}" class="btn btn-default navbar-right">Produkty wycofane</a>
                 <h4 th:text="#{title.list}">List of Products</h4>
         <table class="table table-striped">
             <thead>
@@ -138,7 +138,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="product: ${allVendorProducts}">
+                <tr th:each="product: ${allVendorActiveProducts}">
                     <td th:text="${product.id}" />
                     <td th:text="${product.name}" />
                     <td th:text="${product.category.name}" />

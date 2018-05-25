@@ -3,25 +3,18 @@ package pl.zajaczkowski.model;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
-
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
-public class Vendor {
+public class VendorAudit {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-	@OneToOne
-	private User user;
+	private Long vendorId;
+	private String action;
 	private String name;
 	private String nip;
 	private String phoneNumber;
@@ -32,121 +25,84 @@ public class Vendor {
 	private String streetNumber;
 	@Lob
 	private String introduction;
-	@CreatedDate
-	private Calendar createdDate;
-	@LastModifiedDate
-	private Calendar lastModifiedDate;
+	private Calendar changeDate;
 	
-//	@OneToOne
-//	@JoinColumn(name = "image_Id")
-//	@Transient
-//	private Image image;
-//	public Vendor() {
-//		
-//	}
-
-	public String getName() {
-		return name;
-	}
-
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	public Long getVendorId() {
+		return vendorId;
+	}
+	public void setVendorId(Long vendorId) {
+		this.vendorId = vendorId;
+	}
+	public String getName() {
+		return name;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getNip() {
 		return nip;
 	}
-
 	public void setNip(String nip) {
 		this.nip = nip;
 	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
-	public String getZipCode() {
-		return zipCode;
-	}
-
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
-	}
-
-	public String getLocality() {
-		return locality;
-	}
-
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	public String getStreetNumber() {
-		return streetNumber;
-	}
-
-	public void setStreetNumber(String streetNumber) {
-		this.streetNumber = streetNumber;
-	}
-
-	public String getIntroduction() {
-		return introduction;
-	}
-
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public Calendar getCreatedDate() {
-		return createdDate;
+	public String getZipCode() {
+		return zipCode;
 	}
-
-	public void setCreatedDate(Calendar createdDate) {
-		this.createdDate = createdDate;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
-
-	public Calendar getLastModifiedDate() {
-		return lastModifiedDate;
+	public String getLocality() {
+		return locality;
 	}
-
-	public void setLastModifiedDate(Calendar lastModifiedDate) {
-		this.lastModifiedDate = lastModifiedDate;
+	public void setLocality(String locality) {
+		this.locality = locality;
 	}
-
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public String getStreetNumber() {
+		return streetNumber;
+	}
+	public void setStreetNumber(String streetNumber) {
+		this.streetNumber = streetNumber;
+	}
+	public String getIntroduction() {
+		return introduction;
+	}
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
+	}
+	public Calendar getChangeDate() {
+		return changeDate;
+	}
+	public void setChangeDate(Calendar changeDate) {
+		this.changeDate = changeDate;
+	}
+	public String getAction() {
+		return action;
+	}
+	public void setAction(String action) {
+		this.action = action;
+	}	
 }

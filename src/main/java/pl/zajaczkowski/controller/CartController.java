@@ -220,9 +220,9 @@ public class CartController {
 		order.setCustomer(customer);
 
 		orderLineRepository.save(list);
-		ordersRepository.save(order);
-
 		session.removeAttribute("orderLines");
+		
+		ordersRepository.save(order);
 
 		return "redirect:/cart";
 	}

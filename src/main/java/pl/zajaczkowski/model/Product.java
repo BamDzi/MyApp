@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -23,25 +24,30 @@ public class Product {
 	@Id
 	@GeneratedValue
 	private Integer id;
-//	@NotEmpty(message = "*Proszę wpisać nazwę produktu")
+	private boolean active = true;
+	@NotEmpty(message = "*Proszę wpisać nazwę produktu")
+	// @NotNull
 	private String name;
 	@ManyToOne
-//	@NotNull(message = "*Proszę zaznaczyć kategorie")
+	@NotNull(message = "*Proszę zaznaczyć kategorie")
 	private Category category;
-//	@NotNull(message = "*Proszę wprowadzić cenę produktu")
+	@NotNull(message = "*Proszę wprowadzić cenę produktu")
 	private BigDecimal purchasePrice;
+//	@Transient
 	private Integer quantity;
 	private String description = null;
 	private String components = null;
 	private String tips = null;
-	@CreatedDate
-	private Calendar additionDate;
 	@OneToOne
 	private User vendor;
+	@CreatedDate
+	private Calendar createdDate;
+	@LastModifiedDate
+	private Calendar lastModifiedDate;
 
 	// @OneToOne
 	// @JoinColumn(name = "image_Id")
-//	@Transient
+	// @Transient
 	// private Image image;
 
 	public Integer getId() {
@@ -50,6 +56,14 @@ public class Product {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public String getName() {
@@ -63,7 +77,6 @@ public class Product {
 	public Integer getQuantity() {
 		return quantity;
 	}
-
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
@@ -108,14 +121,6 @@ public class Product {
 		this.tips = tips;
 	}
 
-	public Calendar getAdditionDate() {
-		return additionDate;
-	}
-
-	public void setAdditionDate(Calendar additionDate) {
-		this.additionDate = additionDate;
-	}
-
 	public User getVendor() {
 		return vendor;
 	}
@@ -124,18 +129,38 @@ public class Product {
 		this.vendor = vendor;
 	}
 
+	public Calendar getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Calendar createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Calendar getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+
+	public void setLastModifiedDate(Calendar lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((additionDate == null) ? 0 : additionDate.hashCode());
+		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((components == null) ? 0 : components.hashCode());
+		result = prime * result + ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((lastModifiedDate == null) ? 0 : lastModifiedDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((tips == null) ? 0 : tips.hashCode());
+		result = prime * result + ((vendor == null) ? 0 : vendor.hashCode());
 		return result;
 	}
 
@@ -148,15 +173,22 @@ public class Product {
 		if (getClass() != obj.getClass())
 			return false;
 		Product other = (Product) obj;
-		if (additionDate == null) {
-			if (other.additionDate != null)
+		if (active != other.active)
+			return false;
+		if (category == null) {
+			if (other.category != null)
 				return false;
-		} else if (!additionDate.equals(other.additionDate))
+		} else if (!category.equals(other.category))
 			return false;
 		if (components == null) {
 			if (other.components != null)
 				return false;
 		} else if (!components.equals(other.components))
+			return false;
+		if (createdDate == null) {
+			if (other.createdDate != null)
+				return false;
+		} else if (!createdDate.equals(other.createdDate))
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -167,6 +199,11 @@ public class Product {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (lastModifiedDate == null) {
+			if (other.lastModifiedDate != null)
+				return false;
+		} else if (!lastModifiedDate.equals(other.lastModifiedDate))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -188,9 +225,14 @@ public class Product {
 				return false;
 		} else if (!tips.equals(other.tips))
 			return false;
+		if (vendor == null) {
+			if (other.vendor != null)
+				return false;
+		} else if (!vendor.equals(other.vendor))
+			return false;
 		return true;
 	}
 
-
+	 
 
 }

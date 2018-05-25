@@ -15,20 +15,121 @@
 
             <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Historia produktów</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Historia Zakupów</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Historia zmiany o sprzedawcy</a></li>
+                    <li><a data-toggle="tab" href="#menu2">Historia Zakupów</a></li>
                    
                   </ul>
                 
                   <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                      <br/>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                     <!-- <h4 th:text="#{title.list}">List of Products</h4> -->
+                     <h4>Audyt zmian w kategori produkty</h4>
+                     <table class="table table-striped">
+                         <thead>
+                             <tr>
+                                 <th th:text="#{msg.id}" />
+                                 <th th:text="#{msg.name}" />
+                                 <th th:text="#{msg.category}" />
+                                 <th th:text="#{msg.price}" />
+                                 <th th:text="#{msg.quantity}" />
+                                 <th th:text="#{msg.description}" />
+                                 <th th:text="#{msg.components}" />
+                                 <th th:text="#{msg.tips}" />
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr th:each="product: ${productAudit}">
+                                 <td th:text="${product.id}" />
+                                 <td th:text="${product.productName}" />
+                                 <td th:text="${product.action}" />
+                                 <td th:text="${product.purchasePrice}" />
+                                 <td th:text="${product.description}" />
+                                 <td th:text="${product.components}" />
+                                 <td th:text="${product.tips}" />
+                                 <td th:text="${product.changeDate}" />
+                                 <!-- <td>
+                                     <a href="editProduct.html" th:href="@{/vendor/product/edit(id=${product.id})}" class="btn btn-default">Edytuj</a>
+                                 </td>
+                                 <td>
+                                     <a href="vendorpage.html" th:href="@{/vendor/product/remove(id=${product.id})}" class="btn" style="color: red">Wycofaj produkt</a>
+                                 </td> -->
+                             </tr>
+                         </tbody>
+                     </table>
                     </div>
                     <div id="menu1" class="tab-pane fade">
                     <br/>
-                      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <h4>Audyt zmian sprzedawcy</h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th th:text="#{msg.id}" />
+                                <th th:text="#{msg.name}" />
+                                <th th:text="#{msg.category}" />
+                                <th th:text="#{msg.price}" />
+                                <th th:text="#{msg.quantity}" />
+                                <th th:text="#{msg.description}" />
+                                <th th:text="#{msg.components}" />
+                                <th th:text="#{msg.tips}" />
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="vendor: ${vendorAudit}">
+                                <td th:text="${vendor.id}" />
+                                <td th:text="${vendor.name}" />
+                                <td th:text="${vendor.action}" />
+                                <td th:text="${vendor.nip}" />
+                                <td th:text="${vendor.phoneNumber}" />
+                                <td th:text="${vendor.email}" />
+                                <td th:text="${vendor.zipCode}" />
+                                <td th:text="${vendor.locality}" />
+                                <!-- <td>
+                                    <a href="editProduct.html" th:href="@{/vendor/product/edit(id=${product.id})}" class="btn btn-default">Edytuj</a>
+                                </td>
+                                <td>
+                                    <a href="vendorpage.html" th:href="@{/vendor/product/remove(id=${product.id})}" class="btn" style="color: red">Wycofaj produkt</a>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
                     </div>
-                    
+                    <div id="menu2" class="tab-pane fade">
+                      <br/>
+                      <h4>Historia Zakupów</h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th th:text="#{msg.id}" />
+                                <th th:text="#{msg.name}" />
+                                <th th:text="#{msg.category}" />
+                                <th th:text="#{msg.price}" />
+                                <th th:text="#{msg.quantity}" />
+                                <th th:text="#{msg.description}" />
+                                <th th:text="#{msg.components}" />
+                                <th th:text="#{msg.tips}" />
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="oL: ${allOrderLine}">
+                                <td th:text="${oL.id}" />
+                                <td th:text="${oL.product.name}" />
+                                <td th:text="${oL.quantity}" />
+                                <td th:text="${oL.purchasePrice}" />
+                                <td th:text="${oL.amount}" />
+                                <!-- <td th:text="${oL.email}" />
+                                <td th:text="${oL.zipCode}" />
+                                <td th:text="${oL.locality}" /> -->
+                                <!-- <td>
+                                    <a href="editProduct.html" th:href="@{/vendor/product/edit(id=${product.id})}" class="btn btn-default">Edytuj</a>
+                                </td>
+                                <td>
+                                    <a href="vendorpage.html" th:href="@{/vendor/product/remove(id=${product.id})}" class="btn" style="color: red">Wycofaj produkt</a>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                      </div>
                   </div>
             <h4></h4>
             <p>lista zleceń</p>

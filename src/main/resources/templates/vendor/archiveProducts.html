@@ -2,7 +2,7 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Dodaj produkt</title>
+    <title>produkty wycofane</title>
     <meta charset="utf-8" />
 
 </head>
@@ -36,7 +36,7 @@
                         <td th:text="${product.components}" />
                         <td th:text="${product.tips}" />
                         <td>
-                            <a href="editProduct.html" th:href="@{/vendor/product/edit(id=${product.id})}" class="btn btn-default">Przywróć</a>
+                            <a href="editProduct.html" th:href="@{/vendor/send_to_active(id=${product.id})}" class="btn btn-default">Przywróć</a>
                         </td>
                     </tr>
                 </tbody>

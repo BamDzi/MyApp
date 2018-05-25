@@ -22,7 +22,7 @@
                            
                 <div class="form-group">
                     <!-- <label>Nazwa Produktu</label> -->
-                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message">Nazwa produktu:</label>
+                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:text="${productExists}" class="validation-message">Nazwa produktu:</label>
                     <input type="text" th:field="*{name}" placeholder="Nazwa produktu" class="form-control" />
                 </div>
                 <div class="form-group">

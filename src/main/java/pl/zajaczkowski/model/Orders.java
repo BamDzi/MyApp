@@ -2,17 +2,16 @@ package pl.zajaczkowski.model;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -22,8 +21,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 public class Orders {
 
 	@Id
-	@GeneratedValue
-	private Long id;
+	@GeneratedValue//(strategy=GenerationType.AUTO)
+	private Long id = null;
 	@CreatedDate
 	private Calendar date = null;
 	@ManyToOne

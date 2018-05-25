@@ -35,18 +35,18 @@ public class ProductService {
 		String userSession = auth.getName();
 		User user = userService.findByEmail(userSession);
 		
-		
-		product.setName(product.getName());
-		product.setPurchasePrice(product.getPurchasePrice());
-		product.setQuantity(product.getQuantity());
-		product.setDescription(product.getDescription());
-		product.setComponents(product.getComponents());
-		product.setTips(product.getTips());
-		product.setCategory(product.getCategory());
 		product.setVendor(user);
 		
 		productRepository.save(product);
-		
+	}
+	
+	public void save(Product product) {
+		productRepository.save(product);
+	}
+	
+	
+	public void updateProduct(Product product) {
+//		productRepository.setProductInfoById(purchasePrice, quantity, description, components, tips, category, id);
 	}
 	
 	public Product findProductById(Integer id) {
@@ -67,17 +67,17 @@ public class ProductService {
 	
 	public List<Product> listProductByCategory(String name) {
 		Category category = categoryRepository.findByName(name);
-		return productRepository.findProductByCategoryAndQuantityNotNull(category);//  find(category);
+		return productRepository.findProductByCategoryAndQuantityNotNullAndActiveTrue(category);//  find(category);
 	}
 	
-	public final List<Product> listProductByVendorAndQuantityNotNull() {
+	public final List<Product> listProductByVendorAndActiveTrue() {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String userSession = auth.getName();
 		
 		User vendor = userService.findByEmail(userSession);
 		
-		return productRepository.findProductByVendorAndQuantityNotNull(vendor);
+		return productRepository.findProductByVendorAndActiveTrue(vendor);
 	}
 	
 public final List<Product> listProductByVendorAndQuantityNull() {
@@ -89,6 +89,15 @@ public final List<Product> listProductByVendorAndQuantityNull() {
 		
 		return productRepository.findProductByVendorAndQuantityNull(vendor);
 	}
+public final List<Product> listProductByVendorAndActiveFalse() {
+	
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	String userSession = auth.getName();
+	
+	User vendor = userService.findByEmail(userSession);
+	
+	return productRepository.findProductByVendorAndActiveFalse(vendor);
+}
 
 	public final List<Product> listProductByVendor() {
 		
